@@ -16,7 +16,7 @@ define('DEFAULT_IMAGE_HOMEPAGE', '');
 
 class DataController extends Controller
 {
-    
+    //These 4 Calendar are public so far. No Worries.
     const SWING_TAIWAN_COURSE_CALENDAR_ID = '04huqev84k4egbau4viug9q8vg@group.calendar.google.com';
     const TAIWAN_SWING_CALENDAR_REGULAR   = 'du5ncgcem4duked6jui8p1g5as@group.calendar.google.com'; //Regular Events
     const TAIWAN_SWING_CALENDAR_SPECIAL   = 'k89l8gcv9l19k5aafaolmn2d38@group.calendar.google.com'; //Special Events
