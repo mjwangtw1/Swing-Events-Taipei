@@ -1,15 +1,16 @@
 <?php
 
 /* setup for Heroku */
-$url = parse_url(getenv("DATABASE_URL"));
+// include(base_path().'/_conf/heroku_database.php');
 
-$host =     $url["host"];
-$username = $url["user"];
-$password = $url["pass"];
-$database = substr($url["path"],1);
+// $url = parse_url(getenv($heroku_database_url));
+
+// $host =     $url["host"];
+// $username = $url["user"];
+// $password = $url["pass"];
+// $database = substr($url["path"],1);
 
 /* setup for Heroku */
-
 
 return [
 
@@ -24,7 +25,7 @@ return [
     |
     */
 
-    'fetch' => PDO::FETCH_CLASS,
+    'fetch' => PDO::FETCH_ASSOC,
 
     /*
     |--------------------------------------------------------------------------
@@ -37,8 +38,8 @@ return [
     |
     */
 
-    /* 'default' => env('DB_CONNECTION', 'mysql'), */
-    'default' => 'pgsql',
+    'default' => env('DB_CONNECTION', 'mysql'), 
+    //'default' => 'pgsql',
 
     /*
     |--------------------------------------------------------------------------
@@ -94,16 +95,16 @@ return [
 
 	
 	/* setting for Heroku */
-	'pgsql' => [
-		'driver' => 'pgsql',
-		'host' => $host,
-		'database' => $database,
-		'username' => $username,
-		'password' => $password,
-		'charset' => 'utf8',
-		'prefix' => '',
-   		'schema' => 'public',
-	],
+	// 'pgsql' => [
+	// 	'driver' => 'pgsql',
+	// 	'host' => $host,
+	// 	'database' => $database,
+	// 	'username' => $username,
+	// 	'password' => $password,
+	// 	'charset' => 'utf8',
+	// 	'prefix' => '',
+ //   		'schema' => 'public',
+	// ],
 
 
     ],

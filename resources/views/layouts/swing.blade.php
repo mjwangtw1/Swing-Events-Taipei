@@ -7,7 +7,7 @@
     <title>Swing Events Taipei</title>
 
     <!-- CSS -->
-    <link rel="stylesheet" href="{{ URL::asset('css/swing.css', TRUE) }}">
+    <link rel="stylesheet" href="{{ URL::asset('css/swing.css') }}">
 
     @yield('header_css')
 
@@ -16,10 +16,10 @@
     @yield('content')
 
     <!-- JS --> 
-    <script src="{{ URL::asset('js/public/jquery/dist/jquery.js', TRUE) }}"></script>
-    <script src="{{ URL::asset('js/public/what-input/what-input.js', TRUE) }}"></script>
-    <script src="{{ URL::asset('js/public/foundation-sites/dist/foundation.js', TRUE) }}"></script>
-    <script src="{{ URL::asset('js/custom/swing.js', TRUE) }}"></script>
+    <script src="{{ URL::asset('js/public/jquery/dist/jquery.js') }}"></script>
+    <script src="{{ URL::asset('js/public/what-input/what-input.js') }}"></script>
+    <script src="{{ URL::asset('js/public/foundation-sites/dist/foundation.js') }}"></script>
+    <script src="{{ URL::asset('js/custom/swing.js') }}"></script>
 
     <!-- GA Section-->
     <script>
