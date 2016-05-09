@@ -171,7 +171,7 @@ $weekday['tw'] = ['周日', '周一','周二','周三','周四','周五','周六
 
             <div class="swing_intro row hide-for-small show-for-medium">
                 <h4>
-                    Blues 最棒惹 ! 起來嗨！
+                    Blues 最棒惹 ! 起來嗨！ 通通起來嗨 !
                 </h4>
             <!--     <p>
                     Swing dance (搖擺舞)是一種復古舞蹈，源於 1930 年代的美國。它充滿了樂趣，而且保證跳完後你一定開心得闔不攏嘴！
