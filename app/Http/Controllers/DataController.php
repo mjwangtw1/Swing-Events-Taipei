@@ -292,4 +292,10 @@ class DataController extends Controller
         return $img_url;
     }
 
+    public function log()
+    {
+        return view('logs');
+    }
+
+
 }

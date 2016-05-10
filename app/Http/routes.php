@@ -39,6 +39,9 @@ Route::get('/blues', 'DataController@blues'); // List Events within this week
 Route::get('/now', 'DataController@now');   // List whatever happened Today.
 Route::get('/event/{calendarId}/{eventId}/{typeId}', 'DataController@event'); //List Specific Event with Detailed Info
 
+Route::get('/log', 'DataController@log'); //Check to see logs
+
+
 //for MDFH-- Mockup places
 Route::get('/sample/event_detail', 'DataController@event_detail');
 Route::get('/sample/home', 'DataController@sample');
