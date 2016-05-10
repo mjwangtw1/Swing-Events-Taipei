@@ -32,6 +32,7 @@ class DataController extends Controller
     private $_event_type = 
         ['swing_regular', 'swing_special', 'blues'];
 
+    private $_blues_file_path = '';
 
     public function __construct()
     { 
@@ -39,6 +40,7 @@ class DataController extends Controller
 
         $this->_date_today = Carbon::today();
         $this->_date_next_week = $this->_date_today->addweeks(1);
+        $this->_blues_file_path = base_path() . '/_conf/blues_data.php';
     }
 
 
@@ -197,12 +199,28 @@ class DataController extends Controller
           'timeMax' => $this->_date_next_week->format('c')
         );
 
-        //0 -> TS Regular | 1 -> TS Special | 2 -> Blues Event
-        //Swing Regular Calendar
-        // $calendarId = Self::TAIWAN_SWING_CALENDAR_REGULAR; //Swing Calendar.
-        // $taiwan_swing_regular_info = $calendar->get_events($calendarId, $optParams);
-        // $data[0]['events']        = $taiwan_swing_regular_info['modelData']['items'];
-        // $data[0]['calendarId'] = Self::TAIWAN_SWING_CALENDAR_REGULAR;
+        //Blues Calendar
+        $calendarId = Self::TAIPEI_BLUES_EVENTS_CALENDAR; //Swing Calendar.
+        $taiwan_swing_special_info = $calendar->get_events($calendarId, $optParams);
+        $data[2]['events']        = $taiwan_swing_special_info['modelData']['items'];
+        $data[2]['calendarId'] = Self::TAIPEI_BLUES_EVENTS_CALENDAR;
+
+        return view('blues', compact('data'));
+    }
+
+
+    public function sync() //Fetch and create data
+    {
+        $calendar = new GoogleCalendar;
+    
+        //Parameters : Events within this week 
+        $optParams = array(
+          'maxResults' => 40,
+          'orderBy' => 'startTime',
+          'singleEvents' => TRUE,
+          'timeMin' => date('c'),
+          'timeMax' => $this->_date_next_week->format('c')
+        );
 
         //Blues Calendar
         $calendarId = Self::TAIPEI_BLUES_EVENTS_CALENDAR; //Swing Calendar.
@@ -210,16 +228,49 @@ class DataController extends Controller
         $data[2]['events']        = $taiwan_swing_special_info['modelData']['items'];
         $data[2]['calendarId'] = Self::TAIPEI_BLUES_EVENTS_CALENDAR;
 
-        //Special Events we Enlarge to 1 months
-        //$optParams['timeMin'] = $this->_current_time->subdays(20)->format('c'); //FIXME: remove this later
+        //$file_path = base_path() . '/_conf/blues_data.php';
 
-        // $optParams['maxResults'] = 1; //We just fetch ONE special events;
-        // $optParams['timeMax'] = $this->_current_time->addweeks(5)->format('c'); //Fetch the coming 3 weeks events.    
-        // //Swing Calendar - Special
-        // $calendarId = Self::TAIWAN_SWING_CALENDAR_SPECIAL; //Swing Calendar.
-        // $taiwan_swing_special_info = $calendar->get_events($calendarId, $optParams);
-        // $special['events'] = $taiwan_swing_special_info['modelData']['items'];
-        // $special['calendarId'] = Self::TAIWAN_SWING_CALENDAR_SPECIAL;
+        if (is_file($this->_blues_file_path) && file_exists($this->_blues_file_path))
+        {
+            //Then file exists. kill that file
+            unlink($this->_blues_file_path);
+            return 'File deleted';
+        }
+        else
+        {
+            // file_put_contents($this->_blues_file_path, $data);
+            // $fp = fopen($this->_blues_file_path, 'w');
+            // fwrite($fp, print_r($data, TRUE));
+            // fclose($fp);
+
+            file_put_contents($this->_blues_file_path, '<?php $data = ' . var_export($data, true) . ';');
+            return 'File written';
+        }
+
+    }
+
+    public function check_data()
+    {
+        if (is_file($this->_blues_file_path) && file_exists($this->_blues_file_path))
+        {
+            include($this->_blues_file_path);
+
+            var_dump($data);
+            //return $data;
+        }
+        else
+        {
+            return 'No file found!';
+        }
+    }
+
+
+    public function blues_from_file() //This one reads blues from file directly
+    {
+        if (is_file($this->_blues_file_path) && file_exists($this->_blues_file_path))
+        {
+            include($this->_blues_file_path); //Read the file and use the $data array right away.
+        }
 
         return view('blues', compact('data'));
     }

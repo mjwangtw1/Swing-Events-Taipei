@@ -39,6 +39,15 @@ Route::get('/blues', 'DataController@blues'); // List Events within this week
 Route::get('/now', 'DataController@now');   // List whatever happened Today.
 Route::get('/event/{calendarId}/{eventId}/{typeId}', 'DataController@event'); //List Specific Event with Detailed Info
 
+
+//Backend - for coding purpose
+Route::get('/sync', 'DataController@sync'); //Sync file and create local files.
+Route::get('/read', 'DataController@check_data'); //Sync file and create local files.
+
+
+Route::get('/blues2', 'DataController@blues_from_file'); //Sync file and create local files.
+
+
 Route::get('/log', 'DataController@log'); //Check to see logs
 
 
