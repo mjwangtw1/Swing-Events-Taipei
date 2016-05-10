@@ -107,7 +107,7 @@ class DataController extends Controller
         return view('course', compact('data'));
     }
 
-    //This one List specific Event with Detialed Info.
+    //This one List specific Event with Detailed Info.
     public function event($calendarId, $eventId, $typeId)
     {   
         //Event part
@@ -237,11 +237,11 @@ class DataController extends Controller
         $taiwan_swing_special_info = $calendar->get_events($calendarId, $optParams);
         $data[2]['events']        = $taiwan_swing_special_info['modelData']['items'];
         $data[2]['calendarId'] = Self::TAIPEI_BLUES_EVENTS_CALENDAR;
+
+        //These 2 below are needed. just to export.
         $blues_data[2]['events']        = $taiwan_swing_special_info['modelData']['items'];
         $blues_data[2]['calendarId'] = Self::TAIPEI_BLUES_EVENTS_CALENDAR;
 
-        //Special Events we Enlarge to 1 months
-        //$optParams['timeMin'] = $this->_current_time->subdays(20)->format('c'); //FIXME: remove this later
 
         $optParams['maxResults'] = 1; //We just fetch ONE special events;
         $optParams['timeMax'] = $this->_current_time->addweeks(5)->format('c'); //Fetch the coming 3 weeks events.    
@@ -297,6 +297,7 @@ class DataController extends Controller
         return 'File written at [' . $gen_time . ']';
     }
 
+
     public function check_and_delete_static_files()
     {
         if (is_file($this->_blues_file_path) && file_exists($this->_blues_file_path))
@@ -308,7 +309,6 @@ class DataController extends Controller
         {
             unlink($this->_swing_file_path); 
         }
-
     }
 
     public function check_data()
@@ -333,10 +333,8 @@ class DataController extends Controller
         }
         else
         {
-            //Here should Call API and 
+            //Here should Call API. Still working on it.
         }
-        // var_dump($data);
-        // var_dump($special);
 
         return view('home', compact('data','special'));
     }
@@ -419,7 +417,6 @@ class DataController extends Controller
     {
         return view('sample.event_detail');
     }
-
 
     //TESTING purpose.
     public function test()
