@@ -208,7 +208,6 @@ class DataController extends Controller
         return view('blues', compact('data'));
     }
 
-
     public function sync() //Fetch and create data
     {
         $calendar = new GoogleCalendar;
@@ -228,25 +227,16 @@ class DataController extends Controller
         $data[2]['events']        = $taiwan_swing_special_info['modelData']['items'];
         $data[2]['calendarId'] = Self::TAIPEI_BLUES_EVENTS_CALENDAR;
 
-        //$file_path = base_path() . '/_conf/blues_data.php';
-
         if (is_file($this->_blues_file_path) && file_exists($this->_blues_file_path))
         {
-            //Then file exists. kill that file
-            unlink($this->_blues_file_path);
-            return 'File deleted';
-        }
-        else
-        {
-            // file_put_contents($this->_blues_file_path, $data);
-            // $fp = fopen($this->_blues_file_path, 'w');
-            // fwrite($fp, print_r($data, TRUE));
-            // fclose($fp);
-
-            file_put_contents($this->_blues_file_path, '<?php $data = ' . var_export($data, true) . ';');
-            return 'File written';
+            unlink($this->_blues_file_path); //File exists, kill and update.
         }
 
+        date_default_timezone_set("Asia/Taipei");
+        $gen_time = date("Y-m-d H:i:s");
+        file_put_contents($this->_blues_file_path, '<!-- FILE GEN AT: ' . $gen_time .  ' --><?php $data = ' . var_export($data, true) . ';');
+        
+        return 'File written at [' . $gen_time . ']';
     }
 
     public function check_data()
@@ -254,9 +244,7 @@ class DataController extends Controller
         if (is_file($this->_blues_file_path) && file_exists($this->_blues_file_path))
         {
             include($this->_blues_file_path);
-
             var_dump($data);
-            //return $data;
         }
         else
         {
@@ -264,18 +252,36 @@ class DataController extends Controller
         }
     }
 
-
     public function blues_from_file() //This one reads blues from file directly
     {
         if (is_file($this->_blues_file_path) && file_exists($this->_blues_file_path))
         {
             include($this->_blues_file_path); //Read the file and use the $data array right away.
         }
+        else
+        {
+            //if can't find file: then call api.
+            $calendar = new GoogleCalendar;
+    
+            //Parameters : Events within this week 
+            $optParams = array(
+              'maxResults' => 40,
+              'orderBy' => 'startTime',
+              'singleEvents' => TRUE,
+              'timeMin' => date('c'),
+              'timeMax' => $this->_date_next_week->format('c')
+            );
+
+            //Blues Calendar
+            $calendarId = Self::TAIPEI_BLUES_EVENTS_CALENDAR; //Swing Calendar.
+            $taiwan_swing_special_info = $calendar->get_events($calendarId, $optParams);
+            $data[2]['events']        = $taiwan_swing_special_info['modelData']['items'];
+            $data[2]['calendarId'] = Self::TAIPEI_BLUES_EVENTS_CALENDAR;
+
+        }
 
         return view('blues', compact('data'));
     }
-
-
 
 
     public function now() //List events in one week.
