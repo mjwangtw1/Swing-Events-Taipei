@@ -42,10 +42,12 @@ Route::get('/event/{calendarId}/{eventId}/{typeId}', 'DataController@event'); //
 
 //Backend - for coding purpose
 Route::get('/sync', 'DataController@sync'); //Sync file and create local files.
+Route::get('/sync_all', 'DataController@prepare_file'); //Sync all 3.
 Route::get('/read', 'DataController@check_data'); //Sync file and create local files.
 
 
 Route::get('/blues2', 'DataController@blues_from_file'); //Sync file and create local files.
+Route::get('/home2', 'DataController@home_from_file'); // List Events within this week
 
 
 Route::get('/log', 'DataController@log'); //Check to see logs

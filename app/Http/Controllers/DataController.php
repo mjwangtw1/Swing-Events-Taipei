@@ -33,6 +33,8 @@ class DataController extends Controller
         ['swing_regular', 'swing_special', 'blues'];
 
     private $_blues_file_path = '';
+    private $_swing_file_path = '';
+    private $_special_file_path = '';
 
     public function __construct()
     { 
@@ -41,6 +43,8 @@ class DataController extends Controller
         $this->_date_today = Carbon::today();
         $this->_date_next_week = $this->_date_today->addweeks(1);
         $this->_blues_file_path = base_path() . '/_conf/blues_data.php';
+        $this->_swing_file_path = base_path() . '/_conf/swing_data.php';
+        $this->_special_file_path = base_path() . '/_conf/special_data.php';
     }
 
 
@@ -208,6 +212,63 @@ class DataController extends Controller
         return view('blues', compact('data'));
     }
 
+    public function prepare_file() //List events in one week.
+    {
+        $calendar = new GoogleCalendar;
+    
+        //Parameters : Events within this week 
+        $optParams = array(
+          'maxResults' => 40,
+          'orderBy' => 'startTime',
+          'singleEvents' => TRUE,
+          'timeMin' => date('c'),
+          'timeMax' => $this->_date_next_week->format('c')
+        );
+
+        //0 -> TS Regular | 1 -> TS Special | 2 -> Blues Event
+        //Swing Regular Calendar
+        $calendarId = Self::TAIWAN_SWING_CALENDAR_REGULAR; //Swing Calendar.
+        $taiwan_swing_regular_info = $calendar->get_events($calendarId, $optParams);
+        $data[0]['events']        = $taiwan_swing_regular_info['modelData']['items'];
+        $data[0]['calendarId'] = Self::TAIWAN_SWING_CALENDAR_REGULAR;
+
+        //Blues Calendar
+        $calendarId = Self::TAIPEI_BLUES_EVENTS_CALENDAR; //Swing Calendar.
+        $taiwan_swing_special_info = $calendar->get_events($calendarId, $optParams);
+        $data[2]['events']        = $taiwan_swing_special_info['modelData']['items'];
+        $data[2]['calendarId'] = Self::TAIPEI_BLUES_EVENTS_CALENDAR;
+        $blues_data[2]['events']        = $taiwan_swing_special_info['modelData']['items'];
+        $blues_data[2]['calendarId'] = Self::TAIPEI_BLUES_EVENTS_CALENDAR;
+
+        //Special Events we Enlarge to 1 months
+        //$optParams['timeMin'] = $this->_current_time->subdays(20)->format('c'); //FIXME: remove this later
+
+        $optParams['maxResults'] = 1; //We just fetch ONE special events;
+        $optParams['timeMax'] = $this->_current_time->addweeks(5)->format('c'); //Fetch the coming 3 weeks events.    
+        //Swing Calendar - Special
+        $calendarId = Self::TAIWAN_SWING_CALENDAR_SPECIAL; //Swing Calendar.
+        $taiwan_swing_special_info = $calendar->get_events($calendarId, $optParams);
+        $special['events'] = $taiwan_swing_special_info['modelData']['items'];
+        $special['calendarId'] = Self::TAIWAN_SWING_CALENDAR_SPECIAL;
+
+        $this->check_and_delete_static_files();
+
+        date_default_timezone_set("Asia/Taipei");
+        $gen_time = date("Y-m-d H:i:s");
+
+        //Blues Only
+        file_put_contents($this->_blues_file_path, '<!-- FILE GEN AT: ' . $gen_time .  ' --><?php $data = ' . var_export($blues_data, true) . ';');
+
+        //Swing Files (incldes Swing and Blues)
+        file_put_contents($this->_swing_file_path, '<!-- FILE GEN AT: ' . $gen_time .  ' --><?php $data = ' . var_export($data, true) . ';');
+
+        //Special Events
+        file_put_contents($this->_special_file_path, '<!-- FILE GEN AT: ' . $gen_time .  ' --><?php $special = ' . var_export($special, true) . ';');
+
+        return 'File written at [' . $gen_time . ']';
+    }
+
+
     public function sync() //Fetch and create data
     {
         $calendar = new GoogleCalendar;
@@ -224,19 +285,30 @@ class DataController extends Controller
         //Blues Calendar
         $calendarId = Self::TAIPEI_BLUES_EVENTS_CALENDAR; //Swing Calendar.
         $taiwan_swing_special_info = $calendar->get_events($calendarId, $optParams);
-        $data[2]['events']        = $taiwan_swing_special_info['modelData']['items'];
-        $data[2]['calendarId'] = Self::TAIPEI_BLUES_EVENTS_CALENDAR;
+        $blues_data[2]['events']        = $taiwan_swing_special_info['modelData']['items'];
+        $blues_data[2]['calendarId'] = Self::TAIPEI_BLUES_EVENTS_CALENDAR;
 
-        if (is_file($this->_blues_file_path) && file_exists($this->_blues_file_path))
-        {
-            unlink($this->_blues_file_path); //File exists, kill and update.
-        }
+        $this->check_and_delete_static_files();
 
         date_default_timezone_set("Asia/Taipei");
         $gen_time = date("Y-m-d H:i:s");
-        file_put_contents($this->_blues_file_path, '<!-- FILE GEN AT: ' . $gen_time .  ' --><?php $data = ' . var_export($data, true) . ';');
+        file_put_contents($this->_blues_file_path, '<!-- FILE GEN AT: ' . $gen_time .  ' --><?php $data = ' . var_export($blues_data, true) . ';');
         
         return 'File written at [' . $gen_time . ']';
+    }
+
+    public function check_and_delete_static_files()
+    {
+        if (is_file($this->_blues_file_path) && file_exists($this->_blues_file_path))
+        {
+            unlink($this->_blues_file_path); 
+        }
+
+        if (is_file($this->_swing_file_path) && file_exists($this->_swing_file_path))
+        {
+            unlink($this->_swing_file_path); 
+        }
+
     }
 
     public function check_data()
@@ -250,6 +322,23 @@ class DataController extends Controller
         {
             return 'No file found!';
         }
+    }
+
+    public function home_from_file() //Loads from Swing file
+    {
+        if (is_file($this->_swing_file_path) && file_exists($this->_swing_file_path))
+        {
+            include($this->_swing_file_path); //Read the file and use the $data array right away.
+            include($this->_special_file_path); //Read the special events
+        }
+        else
+        {
+            //Here should Call API and 
+        }
+        // var_dump($data);
+        // var_dump($special);
+
+        return view('home', compact('data','special'));
     }
 
     public function blues_from_file() //This one reads blues from file directly
