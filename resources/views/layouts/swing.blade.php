@@ -14,11 +14,13 @@
   </head>
   <body>
     @yield('content')
+  
+    <!-- JS CDN-->
+    <script   src="https://code.jquery.com/jquery-1.12.3.min.js"   integrity="sha256-aaODHAgvwQW1bFOGXMeX+pC4PZIPsvn2h1sArYOhgXQ="   crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/what-input/2.0.1/what-input.min.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.1.2/foundation.min.js"></script>
 
-    <!-- JS --> 
-    <script src="{{ URL::asset('js/public/jquery/dist/jquery.js') }}"></script>
-    <script src="{{ URL::asset('js/public/what-input/what-input.js') }}"></script>
-    <script src="{{ URL::asset('js/public/foundation-sites/dist/foundation.js') }}"></script>
+    <!--JS -->
     <script src="{{ URL::asset('js/custom/swing.js') }}"></script>
 
     <!-- GA Section-->

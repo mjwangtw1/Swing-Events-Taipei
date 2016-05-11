@@ -1,7 +1,7 @@
 
-<h1> Listing all changes here as logs </h1>
+<h1>Change Logs by date.</h1>
 
-<h4> 2016.05.10 </h4>
+<h3> 2016.05.10 </h3>
     <ol>
         <li>Working on file based data. Trying to avoid calling API everytime user access website. (rough 2s -> 500ms)</li>
     </ol>

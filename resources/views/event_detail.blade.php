@@ -171,19 +171,13 @@ $weekday['tw'] = ['周日', '周一','周二','周三','周四','周五','周六
                     </div> -->
                 </div>
             </div>
-
-
         </div>
     </div>
-
-
-
-
     <div class="row">
         <div class="small-12 columns">
             <div class="the_event is__recommend">
                 <h6>
-                    為您推薦
+                    {{ trans('default.recommend_for_you')}}
                 </h6>
 
                 <div class="row">
