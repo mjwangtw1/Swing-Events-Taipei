@@ -49,12 +49,12 @@ $weekday['tw'] = ['周日', '周一','周二','周三','周四','周五','周六
 
                 <!-- For Menu -->
                 <div class="small-4 columns">
-                    <a href="javascript:void(0)">
+                    <!-- <a href="javascript:void(0)">
                         <i class="icon is__hamburger o_hz s_normal">&nbsp;</i>
                         <h6>
                             選單
                         </h6>
-                    </a>
+                    </a> -->
                 </div>
 
             </div>
