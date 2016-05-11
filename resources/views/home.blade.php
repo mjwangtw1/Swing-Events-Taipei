@@ -5,7 +5,7 @@ $event_type = ['Swing', 'Special', 'Blues'];
 $event_type_dom = ['is__swing', 'is__special', 'is__blues'];
 
 $weekday['en'] = ['Sun', 'Mon','Tue','Wed','Thu','Fri','Sat'];
-$weekday['tw'] = ['星期日', '星期一','星期二','星期三','星期四','星期五','星期六'];
+$weekday['tw'] = ['周日', '周一','周二','周三','周四','周五','周六'];
 
 ?>
 
@@ -193,7 +193,7 @@ $weekday['tw'] = ['星期日', '星期一','星期二','星期三','星期四','
                 
             <div class="the_event is__thisweek">
                 <h6>
-                    本週活動
+                    {{ trans('default.event_this_week') }}
                 </h6>
                 
                   @foreach($data as $type => $event)
@@ -321,7 +321,9 @@ $weekday['tw'] = ['星期日', '星期一','星期二','星期三','星期四','
 
         <div class="small-12 columns text-center">
             <div>
-                <a href="http://goo.gl/forms/AlYg1Oqp3q" class="button to__report" role="button" target="_blank">回報活動</a>
+                <a href="http://goo.gl/forms/AlYg1Oqp3q" class="button to__report" role="button" target="_blank">
+                    {{ trans('default.report_event') }}
+                </a>
             </div>
             <div>
                 <span class="copyright">&copy; 2016 Swing Events Taipei</span>

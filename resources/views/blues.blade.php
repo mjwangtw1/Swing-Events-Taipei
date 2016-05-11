@@ -193,7 +193,7 @@ $weekday['tw'] = ['周日', '周一','周二','周三','周四','周五','周六
                 
             <div class="the_event is__thisweek">
                 <h6>
-                    本週活動
+                    {{ trans('default.event_this_week') }}
                 </h6>
                 
                   @foreach($data as $type => $event)
@@ -325,7 +325,9 @@ $weekday['tw'] = ['周日', '周一','周二','周三','周四','周五','周六
 
         <div class="small-12 columns text-center">
             <div>
-                <a href="http://goo.gl/forms/AlYg1Oqp3q" class="button to__report" role="button" target="_blank">回報活動</a>
+                <a href="http://goo.gl/forms/AlYg1Oqp3q" class="button to__report" role="button" target="_blank">
+                {{ trans('default.report_event') }}
+                </a>
             </div>
             <div>
                 <span class="copyright">&copy; 2016 Blues Events Taipei</span>

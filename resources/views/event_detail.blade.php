@@ -5,7 +5,7 @@ $event_type = ['Swing', 'Special', 'Blues'];
 $event_type_dom = ['is__swing', 'is__special', 'is__blues'];
 
 $weekday['en'] = ['Sun', 'Mon','Tue','Wed','Thu','Fri','Sat'];
-$weekday['tw'] = ['星期日', '星期一','星期二','星期三','星期四','星期五','星期六'];
+$weekday['tw'] = ['周日', '周一','周二','周三','周四','周五','周六'];
 
 ?>
 
@@ -124,7 +124,7 @@ $weekday['tw'] = ['星期日', '星期一','星期二','星期三','星期四','
 
                             <div class="to__googlemap">
                                 <a href="https://maps.google.com/maps?hl=zh-TW&amp;q={{ isset($event->location) ? $event->location : '' }}"  class="button small" target="_blank">
-                                    Google 地圖
+                                    {{ trans('default.google_map') }}
                                 </a>         
                             </div>
 
@@ -310,7 +310,9 @@ $weekday['tw'] = ['星期日', '星期一','星期二','星期三','星期四','
 
         <div class="small-12 columns text-center">
             <div>
-                <a href="http://goo.gl/forms/AlYg1Oqp3q" class="button to__report" role="button" target="_blank">回報活動</a>
+                <a href="http://goo.gl/forms/AlYg1Oqp3q" class="button to__report" role="button" target="_blank">
+                    {{ trans('default.report_event') }}
+                </a>
             </div>
             <div>
                 <span class="copyright">&copy; 2016 Swing Events@Taipei</span>
