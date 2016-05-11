@@ -5,10 +5,12 @@
     <div class="row">
         <div class="col-md-12 col-md-offset-0">
             <div class="panel panel-default">
-                <div class="panel-heading">Course Manage Panel</div>
+                <div class="panel-heading">
+                  <h3>Hi, {{$data['user_name']}}, Here will list all the events you posted</h3>
+                  </div>
 
                 <div class="panel-body">
-                    <h3>Hi, {{$data['user_name']}}, Here will list all the events you posted</h3>
+                    
 
                 <div class="panel panel-default">
                   <div class="panel-heading">
@@ -39,35 +41,58 @@
 
                 <div class="panel panel-default">
                   <!-- Default panel contents -->
-                  <div class="panel-heading">課程一覽表</div>
+                  <div class="panel-heading">活動一覽表 (過期活動不會在此)   
+
+                    <button type="button" class="btn btn-warning" aria-label="Left Align">
+                      <span class="glyphicon glyphicon-star" aria-hidden="true">
+                        <a href="/course/new">
+                          新增活動
+                        </a>
+                        </span>
+                    </button>
+
+                      
+
+                  </div>
                     
                       <!-- Table -->
                       <table class="table">
                         <!--This part is Title part-->
                         <tr>
-                            <td>課程</td>
-                            <td>老師</td>
-                            <td>分級</td>
+                            <td>活動</td>
+                            <td>風格</td>
+                            <td>時間</td>
                             <td>地點</td>
+                            <td>費用</td>
+                            <td>連結</td>
+                            <td>簡介</td>
+                            <td>圖片</td>
+                            <td>Created</td>
+                            <td>Tag</td>
+                            <td>編輯</td>
+                        <!--     <td>主辦</td>
+                            <td>分級</td>
                             <td>價格(couple)</td>
                             <td>報名連結</td>
-                            <td>時間</td>
+                            
                             <td>簡介</td>
-                            <td>編輯</td>
-                            <td>Created</td>
+                            <td>編輯</td> -->
+                            
                         </tr>
 
                         <!--This part is content, should use foreach loop-->
 
                         <tr>
-                            <td>LV3 超級花招班</td>
-                            <td>凱惇</td>
-                            <td>中高級</td>
-                            <td>Salsa Salud</td>
-                            <td>4000</td>
-                            <td>http://www.google.com.twsadis</td>
-                            <td>5/2,5/9,5/16,5/23</td>
-                            <td>超級花招班又來嚕！！！</td>
+                            <td>好的 blues party Lv.3</td>
+                            <td>Blues</td>
+                            <td>5/20, 8pm</td>
+                            <td>Sappho</td>
+                            <td>400</td>
+                            <td>http://tinyurl.abc.qq</td>
+                            <td>blues party blah blah blah 棒棒啦!</td>
+                            <td>圖片圖片位置</td>
+                            <td>RnB</td>
+                            <td>Live Band!, Taster</td>
                             <td>
                                 <a class=" glyphicon glyphicon-remove " data-id="2" role="button"></a>
                             </td>
