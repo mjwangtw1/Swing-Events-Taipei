@@ -31,7 +31,7 @@ $weekday['tw'] = ['周日', '周一','周二','周三','周四','周五','周六
                     <div class="special_promo">
                         <!-- <a href="javascript:void(0)">
                             <span>
-                                Taipei Lindy Festival 2017
+                                Taipei Lindy Festival 2016
                             </span>
                         </a> -->
                     </div>
