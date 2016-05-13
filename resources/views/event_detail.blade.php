@@ -49,37 +49,6 @@ $weekday['tw'] = ['周日', '周一','周二','周三','周四','周五','周六
                             </div>
                         </div>
                         <div class="small-5 columns">
-                            <div class="for__relateday">
-                                <span>
-
-                                <!-- 還有 999 天 -->
-                                    
-                                <?php
-                                if (isset($event['modelData']['start']['dateTime']))
-                                {
-                                     if($dt->parse($event['modelData']['start']['dateTime'])->isToday())
-                                    {
-                                        echo trans('default.today'); 
-                                    }
-                                    else
-                                    {
-                                        //Calculate the Difference.
-                                        $count = $dt->diffInDays($dt->parse($event['modelData']['start']['dateTime'])) + 1; //Start from 0 so add 1
-                                        echo trans('default.days_till', ['count' => $count]);
-                                    }
-
-                                }
-                               
-
-                                ?>
-
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="small-12 columns">
                             <div class="for__day_time">
 
                                 <!-- 星期 -->
@@ -110,6 +79,37 @@ $weekday['tw'] = ['周日', '周一','周二','周三','周四','周五','周六
                         </div>
                     </div>
 
+                    <div class="the_calendar row">
+                        <div class="small-12 columns">
+                            <div class="for__relateday">
+                                <span>
+
+                                <!-- 還有 999 天 -->
+                                    
+                                <?php
+                                if (isset($event['modelData']['start']['dateTime']))
+                                {
+                                     if($dt->parse($event['modelData']['start']['dateTime'])->isToday())
+                                    {
+                                        echo trans('default.today'); 
+                                    }
+                                    else
+                                    {
+                                        //Calculate the Difference.
+                                        $count = $dt->diffInDays($dt->parse($event['modelData']['start']['dateTime'])) + 1; //Start from 0 so add 1
+                                        echo trans('default.days_till', ['count' => $count]);
+                                    }
+
+                                }
+                               
+
+                                ?>
+
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="row">
                         
                         <div class="small-12 columns">
@@ -122,8 +122,8 @@ $weekday['tw'] = ['周日', '周一','周二','周三','周四','周五','周六
                                 </p>
                             </div>
 
-                            <div class="to__googlemap">
-                                <a href="https://maps.google.com/maps?hl=zh-TW&amp;q={{ isset($event->location) ? $event->location : '' }}"  class="button small" target="_blank">
+                            <div class="to__external">
+                                <a href="https://maps.google.com/maps?hl=zh-TW&amp;q={{ isset($event->location) ? $event->location : '' }}"  class="button small for__eventurl" target="_blank">
                                     {{ trans('default.google_map') }}
                                 </a> 
                                 
@@ -137,7 +137,7 @@ $weekday['tw'] = ['周日', '周一','周二','周三','周四','周五','周六
                                         if (( ! is_null($output_array[0])) && ( ! empty($output_array[0])))
                                         {   
                                             //Then we parsed a URL link: put it here.   
-                                            $link_button = '<a href="' . $output_array[0] . '" class="button small" target="_blank">';
+                                            $link_button = '<a href="' . $output_array[0] . '" class="button small for__navigate" target="_blank">';
                                             $link_button .= trans('default.event_link');
                                             $link_button .= '</a>';
 
@@ -145,6 +145,12 @@ $weekday['tw'] = ['周日', '周一','周二','周三','周四','周五','周六
                                         }
                                     }   
                                 ?>
+
+                                <p class="show_url">
+                                    <a href="https://www.facebook.com/events/102046990207239/">
+                                        https://www.facebook.com/events/102046990207239/
+                                    </a>
+                                </p>
                             </div>
 
                         </div>
