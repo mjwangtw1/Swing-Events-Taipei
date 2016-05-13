@@ -125,7 +125,26 @@ $weekday['tw'] = ['周日', '周一','周二','周三','周四','周五','周六
                             <div class="to__googlemap">
                                 <a href="https://maps.google.com/maps?hl=zh-TW&amp;q={{ isset($event->location) ? $event->location : '' }}"  class="button small" target="_blank">
                                     {{ trans('default.google_map') }}
-                                </a>         
+                                </a> 
+                                
+                                <?php
+                                    //Dynamic Gen a Link button if there is one! 
+                                    if ( ! is_null($event->description))
+                                    {
+                                        $patt = "/https*:\/\/[a-zA-Z0-9\.\/_]+/";
+                                        preg_match($patt, $event->description, $output_array);
+
+                                        if (( ! is_null($output_array[0])) && ( ! empty($output_array[0])))
+                                        {   
+                                            //Then we parsed a URL link: put it here.   
+                                            $link_button = '<a href="' . $output_array[0] . '" class="button small" target="_blank">';
+                                            $link_button .= trans('default.event_link');
+                                            $link_button .= '</a>';
+
+                                            echo $link_button;
+                                        }
+                                    }   
+                                ?>
                             </div>
 
                         </div>

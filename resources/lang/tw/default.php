@@ -18,6 +18,7 @@
         'report_event' => '回報活動',
         'google_map' => 'Google 地圖',
         'recommend_for_you' => '為您推薦',
+        'event_link' => '活動連結',
         'Mon' => '星期一',
         'Tue' => '星期二',
         'Wed' => '星期三',

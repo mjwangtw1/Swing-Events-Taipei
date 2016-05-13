@@ -1,6 +1,16 @@
 @extends('layout.swing')
 
 @section('content')
+
+<?php
+
+    echo 'test here';
+    
+
+?>
+
+
+
     <div class="the_event is__detail">
         <div class="row">
 

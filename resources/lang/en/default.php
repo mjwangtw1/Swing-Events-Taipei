@@ -18,6 +18,7 @@
         'report_event' => 'Report Event',
         'google_map'  => 'Google Map',
         'recommend_for_you' => 'Recommend For You',
+        'event_link' => 'Event Link',
         'Mon' => 'Mon',
         'Tue' => 'Tue',
         'Wed' => 'Wed',
