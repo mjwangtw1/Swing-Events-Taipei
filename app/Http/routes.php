@@ -51,6 +51,8 @@ Route::get('/home2', 'DataController@home'); // List Events within this week
 Route::get('/blues2', 'DataController@blues'); // List Events within this week
 
 
+
+Route::get('/live', 'LiveController@live'); //Check to see logs
 Route::get('/log', 'DataController@log'); //Check to see logs
 
 
