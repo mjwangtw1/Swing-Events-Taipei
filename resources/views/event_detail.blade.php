@@ -126,7 +126,7 @@ $weekday['tw'] = ['周日', '周一','周二','周三','周四','周五','周六
                                 <a href="https://maps.google.com/maps?hl=zh-TW&amp;q={{ isset($event->location) ? $event->location : '' }}"  class="button small for__eventurl" target="_blank">
                                     {{ trans('default.google_map') }}
                                 </a> 
-                                
+                            
                                 <?php
                                     //Dynamic Gen a Link button if there is one! 
                                     if ( ! is_null($event->description))
@@ -142,15 +142,17 @@ $weekday['tw'] = ['周日', '周一','周二','周三','周四','周五','周六
                                             $link_button .= '</a>';
 
                                             echo $link_button;
+
+
+                                            //Displaying the Link
+                                            $link_show  = '<p class="show_url"><a href="' . $output_array[0] . '" target="_blank">' . $output_array[0] . '</a></p>';
+                                         
+                                            echo $link_show;
+
                                         }
                                     }   
                                 ?>
 
-                                <p class="show_url">
-                                    <a href="https://www.facebook.com/events/102046990207239/">
-                                        https://www.facebook.com/events/102046990207239/
-                                    </a>
-                                </p>
                             </div>
 
                         </div>
