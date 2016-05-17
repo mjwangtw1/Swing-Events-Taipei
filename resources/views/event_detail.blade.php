@@ -183,6 +183,19 @@ $weekday['tw'] = ['周日', '周一','周二','周三','周四','周五','周六
                 <div class="row align-center">
                     <div class="event_featured_cover">
                         &nbsp;
+
+                    @if(isset($event->location))
+
+ <!--                    <iframe
+                      width="100%"
+                      height="250px"
+                      frameborder="0" style="border:0"
+                      src="https://www.google.com/maps/embed/v1/place?key={{$api_key}}
+                        &q={{$event->location}}" allowfullscreen>
+                    </iframe> -->
+
+                    @endif
+
                     </div>
                     <!-- <div class="fb_share small-6 medium-4 columns">
                         <a href="javascript:void(0)" class="button to__fbshare">

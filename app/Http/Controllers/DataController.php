@@ -23,6 +23,7 @@ class DataController extends Controller
     const TAIPEI_BLUES_EVENTS_CALENDAR    = 'hbcpknmo5l1jp455qdbrjps2uo@group.calendar.google.com'; //Blues Events @ Taipei
 
     // const BIRD_GIF_1 = 'http://2.bp.blogspot.com/-IU6NUe_3JRA/VlaQZXDDj6I/AAAAAAADOhw/ETH4ovfm8jo/s1600/8795400.gif';
+    const GOOGLE_MAP_API_KEY = 'AIzaSyBY7C54J0Z2tm_OOORmDvVY0gZjeNQIvQY';
 
     private $_current_time = '';
     private $_date_today = '';
@@ -147,7 +148,9 @@ class DataController extends Controller
         $data[2]['events']        = $taiwan_swing_special_info['modelData']['items'];
         $data[2]['calendarId'] = Self::TAIPEI_BLUES_EVENTS_CALENDAR;
 
-        return view('event_detail', compact('event', 'data'));
+        $api_key = self::GOOGLE_MAP_API_KEY;
+
+        return view('event_detail', compact('event', 'data', 'api_key'));
     }
 
     public function home() //List events in one week.

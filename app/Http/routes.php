@@ -30,6 +30,11 @@ Route::get('/redirect', function()
 });
 
 
+Route::get('/map', function()
+{
+    return view('map');
+});
+
 //Entrance Page
 Route::get('/', 'DataController@home_from_file'); //預設直接進來 就看本日活動
 
