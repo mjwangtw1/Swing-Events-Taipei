@@ -23,6 +23,6 @@ $(function()
             break;
     }
 
-    $('.event_featured_cover').css('background-image', 'url(' + featured_image_path + ')');
+    //$('.event_featured_cover').css('background-image', 'url(' + featured_image_path + ')');
 
 });//end of Doc ready

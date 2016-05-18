@@ -29,6 +29,11 @@ Route::get('/redirect', function()
     return view('errors.503');
 });
 
+Route::get('/sitemap', function()
+{
+    return view('sitemap');
+});
+
 
 Route::get('/map', function()
 {
