@@ -34,11 +34,16 @@ Route::get('/sitemap', function()
     return view('sitemap');
 });
 
-
 Route::get('/map', function()
 {
     return view('map');
 });
+
+Route::get('/.well-known/acme-challenge/$id')
+{
+    return base_path() . '/_conf/.well-known/acme-challenge/' . $id;
+}
+
 
 //Entrance Page
 Route::get('/', 'DataController@home_from_file'); //預設直接進來 就看本日活動
