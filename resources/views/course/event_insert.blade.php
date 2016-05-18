@@ -15,88 +15,129 @@
                     
 
                 <div class="panel panel-default">
- 
-                   <h3>建立新活動</h3>
-                       <form action="{{ URL::asset('course/insert') }}" method="post">
-                          {{ csrf_field()}}
+                 
+                <form class="form-horizontal" action="{{ URL::asset('event/insert') }}" method="post">
+                        {{ csrf_field()}}
+                        <fieldset>
 
-                            <div class="form-group">
+                        <!-- Form Name -->
+                        <legend>建立新活動</legend>
 
-                             <fieldset class="form-group">
-                                <textarea class="form-control" id="course_title" rows="1"></textarea>
-                                <label >Event Nanme 活動名稱</label>
+                        <!-- Text input-->
+                        <div class="form-group">
+                          <label class="col-md-4 control-label" for="textinput">活動名稱 </label>  
+                          <div class="col-md-4">
+                          <input id="textinput" name="textinput" type="text" placeholder="Name of Event?" class="form-control input-md">
+                            
+                          </div>
+                        </div>
 
-                                <div class="dropdown">
-                                  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                    Style 風格
-                                    <span class="caret"></span>
-                                  </button>
-                                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                    <li><a href="#">Swing 搖擺舞</a></li>
-                                    <li><a href="#">Blues 藍調</a></li>
-                                    <li><a href="#">Swing&Blues 兩者都有</a></li>
-                                  </ul>
-                                </div>
+                        <!-- Multiple Radios (inline) -->
+                        <div class="form-group">
+                          <label class="col-md-4 control-label" for="radios">Style</label>
+                          <div class="col-md-4"> 
+                            <label class="radio-inline" for="radios-0">
+                              <input type="radio" name="radios" id="radios-0" value="1" checked="checked">
+                              Swing
+                            </label> 
+                            <label class="radio-inline" for="radios-1">
+                              <input type="radio" name="radios" id="radios-1" value="2">
+                              Blues
+                            </label> 
+                            <label class="radio-inline" for="radios-2">
+                              <input type="radio" name="radios" id="radios-2" value="3">
+                              Swing &amp; Blues
+                            </label>
+                          </div>
+                        </div>
 
+                        <!-- Button Drop Down -->
+                        <div class="form-group">
+                          <label class="col-md-4 control-label" for="selectbasic">請選擇一個地點</label>
+                          <div class="col-md-4">
+                            <select id="selectbasic" name="selectbasic" class="form-control">
+                              <option value="1">Tangorismo</option>
+                              <option value="2">TAV</option>
+                              <option value="3">中山堂</option>
+                            </select>
+                          </div>
+                        </div>
 
-                                <div class="dropdown">
-                                  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                    Location 地點
-                                    <span class="caret"></span>
-                                  </button>
-                                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                    <li><a href="#">Sappho</a></li>
-                                    <li><a href="#">福州 11</a></li>
-                                    <li><a href="#">Tangorismo</a></li>
-                                    <li><a href="#">TAV</a></li>
-                                    <li><a href="#">中山堂</a></li>
-                                    <li><a href="#">Triangle</a></li>
-                                    <li><a href="#">Maji Maji</a></li>
-                                  </ul>
-                                </div>
-                                
-                                <div class="dropdown">
-                                  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                    Image 圖片
-                                    <span class="caret"></span>
-                                  </button>
-                                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                    <li><a href="#">Swing 室外</a></li>
-                                    <li><a href="#">Swing 室內</a></li>
-                                    <li><a href="#">Blues 室內</a></li>
-                                    <li><a href="#">大型 Party</a></li>
-                                  </ul>
-                                </div>
+                        <!-- Multiple Radios (inline) -->
+                        <div class="form-group">
+                          <label class="col-md-4 control-label" for="radios">室內 | 室外</label>
+                          <div class="col-md-4"> 
+                            <label class="radio-inline" for="radios-0">
+                              <input type="radio" name="radios" id="radios-0" value="1" checked="checked">
+                              Indoor
+                            </label> 
+                            <label class="radio-inline" for="radios-1">
+                              <input type="radio" name="radios" id="radios-1" value="2">
+                              Outdoor
+                            </label> 
+                            <label class="radio-inline" for="radios-2">
+                              <input type="radio" name="radios" id="radios-2" value="3">
+                              Mix
+                            </label>
+                          </div>
+                        </div>
 
+                        <!-- Text input-->
+                        <div class="form-group">
+                          <label class="col-md-4 control-label" for="textinput">費用</label>  
+                          <div class="col-md-4">
+                          <input id="textinput" name="textinput" type="text" placeholder="$400 maybe ?" class="form-control input-md">
+                            
+                          </div>
+                        </div>
 
+                        <!-- Text input-->
+                        <div class="form-group">
+                          <label class="col-md-4 control-label" for="textinput">時間</label>  
+                          <div class="col-md-4">
+                          <input id="textinput" name="textinput" type="text" placeholder="(2016/05/18 20:00:00)" class="form-control input-md">
+                          <span class="help-block time_help">說明</span>  
+                          </div>
+                        </div>
 
-                                <label ></label>
-                                <textarea class="form-control" id="course_teacher" rows="1"></textarea>
-                                <label >費用</label>
-                                <textarea class="form-control" id="course_level" rows="1"></textarea>
-                                <label ></label>
-                                <textarea class="form-control" id="course_location" rows="1"></textarea>
-                                <label >費用</label>
-                                <textarea class="form-control" id="course_price" rows="1"></textarea>
-                                <label >連結</label>
-                                <textarea class="form-control" id="course_link" rows="1"></textarea>
-                                <label >時間</label>
-                                <textarea class="form-control" id="course_date" rows="1"></textarea>
-                                <label >活動說明</label>
-                                <textarea class="form-control" id="course_desc" rows="1"></textarea>
-                                <input name="course_group" type="hidden" value="{{$data['user_name']}}">
+                        <!-- Text input-->
+                        <div class="form-group">
+                          <label class="col-md-4 control-label" for="textinput">活動連結</label>  
+                          <div class="col-md-4">
+                          <input id="textinput" name="textinput" type="text" placeholder="Event Link URL" class="form-control input-md">
+                            
+                          </div>
+                        </div>
 
-                              </fieldset>
+                        <!-- Textarea -->
+                        <div class="form-group">
+                          <label class="col-md-4 control-label" for="textarea">活動說明</label>
+                          <div class="col-md-4">                     
+                            <textarea class="form-control" id="textarea" name="textarea">Tell us about the event! Live band? DJ music ? No Alcohol ? Bring your Own shoes? Taster Lessons? </textarea>
+                          </div>
+                        </div>
 
-                              <p>
-                            <!-- <input class="btn btn-warning" type="submit" value="Submit"> -->
-                            <a class="btn btn-warning" id="course_submit" href="#" role="button">確定新增</a>
-                            <a class="btn btn-primary" href="{{ URL::asset('course/') }}" role="button">取消</a>
-                            <a class="btn btn-default" href="{{ URL::asset('course/') }}" role="button">課程列表</a>
-            </p>
+                        <div class="form-group">
+                          <label class="col-md-4 control-label" for="textinput">Tags</label>  
+                          <div class="col-md-4">
+                          <input id="textinput" name="textinput" type="text" placeholder="Event Link URL" class="form-control input-md">
+                          <span class="help-block tags_help">說明</span>    
+                          </div>
+                        </div>
 
+                        <!-- Button (Double) -->
+                        <div class="form-group">
+                          <label class="col-md-4 control-label" for="button1id"></label>
+                          <div class="col-md-8">
+                            <button id="button1id" name="button1id" class="btn btn-success">Yes 我要新增</button>
+                            <button id="button2id" name="button2id" class="btn btn-danger"> Nah 算惹</button>
+                          </div>
+                        </div>
+  
 
-                        </form>                     
+                        </fieldset>
+                </form>
+             
                 </div>            
 
                 </div>

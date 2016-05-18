@@ -81,6 +81,12 @@ Route::get('/sample', 'DataController@sample');
 Route::get('/calendar', 'CalendarController@index');
 
 
+//Create A new Event
+Route::post('/event/insert', 'EventController@insert'); //Insert New courses.
+
+
+
+
 //Course - Still working.
 Route::get('/course/new', 'CourseController@new_course'); //Go to new course insert page.
 //Course-Insert Content

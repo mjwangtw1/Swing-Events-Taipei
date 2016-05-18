@@ -266,8 +266,6 @@ class DataController extends Controller
         }
     }
 
-
-
     //MDFH use Testing::::
     public function sample()
     {
