@@ -39,10 +39,11 @@ Route::get('/map', function()
     return view('map');
 });
 
-Route::get('/.well-known/acme-challenge/{$id}', function()
+
+//This one for SSL-thing.
+Route::get('/.well-known/acme-challenge/{id}', function($id)
 {
-    return base_path() . '/_conf/.well-known/acme-challenge/' . $id;
-    //return 'www.google.com';
+    include(base_path() . "/_conf/.well-known/acme-challenge/$id");
 });
 
 
