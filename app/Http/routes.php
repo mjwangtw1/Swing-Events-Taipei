@@ -39,7 +39,7 @@ Route::get('/map', function()
     return view('map');
 });
 
-Route::get('/.well-known/acme-challenge/{id}')
+Route::get('/.well-known/acme-challenge/{id}'), function()
 {
     return base_path() . '/_conf/.well-known/acme-challenge/' . $id;
 });
