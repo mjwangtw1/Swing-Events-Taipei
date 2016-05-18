@@ -48,17 +48,16 @@ Route::get('/.well-known/acme-challenge/{id}', function($id)
 
 
 //Entrance Page
-Route::get('/', 'DataController@home_from_file'); //預設直接進來 就看本日活動
+Route::get('/', 'DataController@home'); //預設直接進來 就看本日活動
 
 //OFFICIAL
-Route::get('/blues', 'DataController@blues_from_file'); //Sync file and create local files.
-Route::get('/home', 'DataController@home_from_file'); // List Events within this week
+Route::get('/blues', 'DataController@blues'); //Sync file and create local files.
+Route::get('/home', 'DataController@home'); // List Events within this week
 Route::get('/now', 'DataController@now');   // List whatever happened Today.
 Route::get('/event/{calendarId}/{eventId}/{typeId}', 'DataController@event'); //List Specific Event with Detailed Info
 
 
 //Backend - for coding purpose
-Route::get('/sync', 'DataController@sync'); //Sync file and create local files.
 Route::get('/sync_all', 'DataController@prepare_file'); //Sync all 3.
 Route::get('/read', 'DataController@check_data'); //Sync file and create local files.
 

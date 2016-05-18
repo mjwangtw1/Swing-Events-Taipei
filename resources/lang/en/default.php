@@ -1,7 +1,7 @@
 <?php
 
     return [
-        'title' => 'Taipei Swing Calendar',
+        'title' => 'Swing Events Taipei',
         'home'  => 'Home',
         'calendar' => 'Calendar',
         'event' => 'Events',

@@ -25,7 +25,6 @@ class CourseController extends Controller
         //Check if LoggedIn
         $this->middleware('auth'); 
         //$this->middleware('admin');
-        //
         
         $this->_user = Auth::user();
 
@@ -90,6 +89,5 @@ class CourseController extends Controller
         $course->save();
         
         return $course;
-        // return $course;        
     }
 }

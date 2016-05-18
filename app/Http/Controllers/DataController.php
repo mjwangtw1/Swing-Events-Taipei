@@ -48,7 +48,6 @@ class DataController extends Controller
         $this->_special_file_path = base_path() . '/_conf/special_data.php';
     }
 
-
     public function index()
     {
         return view('home');
@@ -150,71 +149,37 @@ class DataController extends Controller
 
         $api_key = self::GOOGLE_MAP_API_KEY;
 
-        return view('event_detail', compact('event', 'data', 'api_key'));
+        return view('event_display.event_detail', compact('event', 'data', 'api_key'));
     }
 
-    public function home() //List events in one week.
+    public function home() //Loads from Swing file
+    {   
+        //Check first: if not then regen file.
+        if ( ! (is_file($this->_swing_file_path) && file_exists($this->_swing_file_path)) ) 
+        {
+            $this->prepare_file();
+        }
+
+        include($this->_swing_file_path); //Read the file and use the $data array right away.
+        include($this->_special_file_path); //Read the special events
+
+        return view('event_display.home', compact('data','special'));
+    }
+
+    public function blues() //This one reads blues from file directly
     {
-        $calendar = new GoogleCalendar;
-    
-        //Parameters : Events within this week 
-        $optParams = array(
-          'maxResults' => 40,
-          'orderBy' => 'startTime',
-          'singleEvents' => TRUE,
-          'timeMin' => date('c'),
-          'timeMax' => $this->_date_next_week->format('c')
-        );
+        if ( !(is_file($this->_blues_file_path) && file_exists($this->_blues_file_path)))
+        {
+            $this->prepare_file();
+        }
+        include($this->_blues_file_path); //Read the file and use the $data array right away.
 
-        //0 -> TS Regular | 1 -> TS Special | 2 -> Blues Event
-        //Swing Regular Calendar
-        $calendarId = Self::TAIWAN_SWING_CALENDAR_REGULAR; //Swing Calendar.
-        $taiwan_swing_regular_info = $calendar->get_events($calendarId, $optParams);
-        $data[0]['events']        = $taiwan_swing_regular_info['modelData']['items'];
-        $data[0]['calendarId'] = Self::TAIWAN_SWING_CALENDAR_REGULAR;
-
-        //Blues Calendar
-        $calendarId = Self::TAIPEI_BLUES_EVENTS_CALENDAR; //Swing Calendar.
-        $taiwan_swing_special_info = $calendar->get_events($calendarId, $optParams);
-        $data[2]['events']        = $taiwan_swing_special_info['modelData']['items'];
-        $data[2]['calendarId'] = Self::TAIPEI_BLUES_EVENTS_CALENDAR;
-
-        //Special Events we Enlarge to 1 months
-        //$optParams['timeMin'] = $this->_current_time->subdays(20)->format('c'); //FIXME: remove this later
-
-        $optParams['maxResults'] = 1; //We just fetch ONE special events;
-        $optParams['timeMax'] = $this->_current_time->addweeks(5)->format('c'); //Fetch the coming 3 weeks events.    
-        //Swing Calendar - Special
-        $calendarId = Self::TAIWAN_SWING_CALENDAR_SPECIAL; //Swing Calendar.
-        $taiwan_swing_special_info = $calendar->get_events($calendarId, $optParams);
-        $special['events'] = $taiwan_swing_special_info['modelData']['items'];
-        $special['calendarId'] = Self::TAIWAN_SWING_CALENDAR_SPECIAL;
-
-        return view('home', compact('data','special'));
+        return view('event_display.blues', compact('data'));
     }
 
-    public function blues() //List events in one week.
-    {
-        $calendar = new GoogleCalendar;
-    
-        //Parameters : Events within this week 
-        $optParams = array(
-          'maxResults' => 40,
-          'orderBy' => 'startTime',
-          'singleEvents' => TRUE,
-          'timeMin' => date('c'),
-          'timeMax' => $this->_date_next_week->format('c')
-        );
-
-        //Blues Calendar
-        $calendarId = Self::TAIPEI_BLUES_EVENTS_CALENDAR; //Swing Calendar.
-        $taiwan_swing_special_info = $calendar->get_events($calendarId, $optParams);
-        $data[2]['events']        = $taiwan_swing_special_info['modelData']['items'];
-        $data[2]['calendarId'] = Self::TAIPEI_BLUES_EVENTS_CALENDAR;
-
-        return view('blues', compact('data'));
-    }
-
+    // FEATURE FUNCTIONS ====================================================================================
+    // FEATURE FUNCTIONS ====================================================================================
+    //Here Feature Functions
     public function prepare_file() //List events in one week.
     {
         $calendar = new GoogleCalendar;
@@ -254,7 +219,7 @@ class DataController extends Controller
         $special['events'] = $taiwan_swing_special_info['modelData']['items'];
         $special['calendarId'] = Self::TAIWAN_SWING_CALENDAR_SPECIAL;
 
-        $this->check_and_delete_static_files();
+        $this->_check_and_delete_static_files();
 
         date_default_timezone_set("Asia/Taipei");
         $gen_time = date("Y-m-d H:i:s");
@@ -271,49 +236,6 @@ class DataController extends Controller
         return 'File written at [' . $gen_time . ']';
     }
 
-
-    public function sync() //Fetch and create data
-    {
-        $calendar = new GoogleCalendar;
-    
-        //Parameters : Events within this week 
-        $optParams = array(
-          'maxResults' => 40,
-          'orderBy' => 'startTime',
-          'singleEvents' => TRUE,
-          'timeMin' => date('c'),
-          'timeMax' => $this->_date_next_week->format('c')
-        );
-
-        //Blues Calendar
-        $calendarId = Self::TAIPEI_BLUES_EVENTS_CALENDAR; //Swing Calendar.
-        $taiwan_swing_special_info = $calendar->get_events($calendarId, $optParams);
-        $blues_data[2]['events']        = $taiwan_swing_special_info['modelData']['items'];
-        $blues_data[2]['calendarId'] = Self::TAIPEI_BLUES_EVENTS_CALENDAR;
-
-        $this->check_and_delete_static_files();
-
-        date_default_timezone_set("Asia/Taipei");
-        $gen_time = date("Y-m-d H:i:s");
-        file_put_contents($this->_blues_file_path, '<!-- FILE GEN AT: ' . $gen_time .  ' --><?php $data = ' . var_export($blues_data, true) . ';');
-        
-        return 'File written at [' . $gen_time . ']';
-    }
-
-
-    public function check_and_delete_static_files()
-    {
-        if (is_file($this->_blues_file_path) && file_exists($this->_blues_file_path))
-        {
-            unlink($this->_blues_file_path); 
-        }
-
-        if (is_file($this->_swing_file_path) && file_exists($this->_swing_file_path))
-        {
-            unlink($this->_swing_file_path); 
-        }
-    }
-
     public function check_data()
     {
         if (is_file($this->_blues_file_path) && file_exists($this->_blues_file_path))
@@ -327,88 +249,24 @@ class DataController extends Controller
         }
     }
 
-    public function home_from_file() //Loads from Swing file
-    {
-        if (is_file($this->_swing_file_path) && file_exists($this->_swing_file_path))
-        {
-            include($this->_swing_file_path); //Read the file and use the $data array right away.
-            include($this->_special_file_path); //Read the special events
-        }
-        else
-        {
-            //Here should Call API. Still working on it.
-        }
-
-        return view('home', compact('data','special'));
-    }
-
-    public function blues_from_file() //This one reads blues from file directly
+    //
+    // PRIVATE FUNCTIONS ====================================================================================
+    // PRIVATE FUNCTIONS ====================================================================================
+    //Here Private Functions
+    private function _check_and_delete_static_files()
     {
         if (is_file($this->_blues_file_path) && file_exists($this->_blues_file_path))
         {
-            include($this->_blues_file_path); //Read the file and use the $data array right away.
+            unlink($this->_blues_file_path); 
         }
-        else
+
+        if (is_file($this->_swing_file_path) && file_exists($this->_swing_file_path))
         {
-            //if can't find file: then call api.
-            $calendar = new GoogleCalendar;
-    
-            //Parameters : Events within this week 
-            $optParams = array(
-              'maxResults' => 40,
-              'orderBy' => 'startTime',
-              'singleEvents' => TRUE,
-              'timeMin' => date('c'),
-              'timeMax' => $this->_date_next_week->format('c')
-            );
-
-            //Blues Calendar
-            $calendarId = Self::TAIPEI_BLUES_EVENTS_CALENDAR; //Swing Calendar.
-            $taiwan_swing_special_info = $calendar->get_events($calendarId, $optParams);
-            $data[2]['events']        = $taiwan_swing_special_info['modelData']['items'];
-            $data[2]['calendarId'] = Self::TAIPEI_BLUES_EVENTS_CALENDAR;
-
+            unlink($this->_swing_file_path); 
         }
-
-        return view('blues', compact('data'));
     }
 
 
-    public function now() //List events in one week.
-    {
-        $calendar = new GoogleCalendar;
-    
-        //Parameters : Events within this week 
-        $optParams = array(
-          'maxResults' => 40,
-          'orderBy' => 'startTime',
-          'singleEvents' => TRUE,
-          'timeMin' => date('c'),
-          //'timeMin' => $this->_current_time->subdays(3)->format('c'), //This One Remove later.
-          'timeMax' => $this->_current_time->adddays(1)->format('c'),
-        );
-
-        //0 -> TS Regular | 1 -> TS Special | 2 -> Blues Event
-        //Swing Regular Calendar
-        $calendarId = Self::TAIWAN_SWING_CALENDAR_REGULAR; //Swing Calendar.
-        $taiwan_swing_regular_info = $calendar->get_events($calendarId, $optParams);
-        $data[0]['events']        = $taiwan_swing_regular_info['modelData']['items'];
-        $data[0]['calendarId'] = Self::TAIWAN_SWING_CALENDAR_REGULAR;
-
-        //Swing Calendar - Special
-        $calendarId = Self::TAIWAN_SWING_CALENDAR_SPECIAL; //Swing Calendar.
-        $taiwan_swing_special_info = $calendar->get_events($calendarId, $optParams);
-        $data[1]['events']        = $taiwan_swing_special_info['modelData']['items'];
-        $data[1]['calendarId'] = Self::TAIWAN_SWING_CALENDAR_SPECIAL;
-
-        //Blues Calendar
-        $calendarId = Self::TAIPEI_BLUES_EVENTS_CALENDAR; //Swing Calendar.
-        $taiwan_swing_special_info = $calendar->get_events($calendarId, $optParams);
-        $data[2]['events']        = $taiwan_swing_special_info['modelData']['items'];
-        $data[2]['calendarId'] = Self::TAIPEI_BLUES_EVENTS_CALENDAR;
-
-        return view('now', compact('data'));
-    }
 
     //MDFH use Testing::::
     public function sample()
@@ -426,9 +284,7 @@ class DataController extends Controller
     {
         //$dt = Carbon::addweeks(1);
         //return $this->_date_next_week;
-
         return $this->_date_next_week->format('c');
-
     }
 
     public function sam()
