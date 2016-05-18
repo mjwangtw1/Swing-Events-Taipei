@@ -42,7 +42,7 @@ Route::get('/map', function()
 Route::get('/.well-known/acme-challenge/{id}')
 {
     return base_path() . '/_conf/.well-known/acme-challenge/' . $id;
-}
+});
 
 
 //Entrance Page
