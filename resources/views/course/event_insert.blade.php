@@ -7,34 +7,28 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3>
-                        Hi, {{$data['user_name']}}, Create a New Event here
+                        Hi, {{$data['user_name']}}, 請在此建立新活動
                     </h3>
                 </div>
 
                 <div class="panel-body">
-                    
-
-                <div class="panel panel-default">
                  
                 <form class="form-horizontal" action="{{ URL::asset('event/insert') }}" method="post">
                         {{ csrf_field()}}
                         <fieldset>
 
-                        <!-- Form Name -->
-                        <legend>建立新活動</legend>
-
                         <!-- Text input-->
                         <div class="form-group">
-                          <label class="col-md-4 control-label" for="textinput">活動名稱 </label>  
+                          <label class="col-md-4 control-label" for="textinput">活動名稱</label>  
                           <div class="col-md-4">
-                          <input id="textinput" name="textinput" type="text" placeholder="Name of Event?" class="form-control input-md">
+                          <input id="textinput" name="event_name" type="text" placeholder="Name of Event?" class="form-control input-md">
                             
                           </div>
                         </div>
 
                         <!-- Multiple Radios (inline) -->
                         <div class="form-group">
-                          <label class="col-md-4 control-label" for="radios">Style</label>
+                          <label class="col-md-4 control-label" for="radios">風格</label>
                           <div class="col-md-4"> 
                             <label class="radio-inline" for="radios-0">
                               <input type="radio" name="radios" id="radios-0" value="1" checked="checked">
@@ -48,6 +42,20 @@
                               <input type="radio" name="radios" id="radios-2" value="3">
                               Swing &amp; Blues
                             </label>
+                          </div>
+                        </div>
+                        
+                        <!-- Prepended checkbox -->
+                        <div class="form-group">
+                          <label class="col-md-4 control-label" for="prependedcheckbox">非常態活動</label>
+                          <div class="col-md-4">
+                            <div class="input-group">
+                              <span class="input-group-addon">     
+                                  <input type="checkbox">     
+                              </span>
+                              <input id="prependedcheckbox" name="prependedcheckbox" class="form-control" type="text" placeholder="特殊活動">
+                            </div>
+                            <p class="help-block">說明</p>
                           </div>
                         </div>
 
@@ -85,11 +93,17 @@
                         <!-- Text input-->
                         <div class="form-group">
                           <label class="col-md-4 control-label" for="textinput">費用</label>  
-                          <div class="col-md-4">
-                          <input id="textinput" name="textinput" type="text" placeholder="$400 maybe ?" class="form-control input-md">
-                            
-                          </div>
+                            <div class="input group">  
+
+                              <div class="col-md-4">
+                                 
+                                  <input id="textinput" name="textinput" type="text" placeholder="$400 maybe ?" class="form-control input-md">
+                              </div>  
+                            </div>
+
                         </div>
+
+                      
 
                         <!-- Text input-->
                         <div class="form-group">
