@@ -61,5 +61,16 @@ class GoogleCalendar {
         return $results;
     }
 
+    //Try to quick add
+    public function quickadd($calendarId, $data)
+    {
+        
+        $createdEvent = $this->service->events->quickAdd($calendarId,$data);
+        $event_id = $createdEvent->getId();
+
+        return $event_id;
+    }
+
+
 
 }

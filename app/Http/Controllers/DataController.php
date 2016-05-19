@@ -88,6 +88,28 @@ class DataController extends Controller
         //$dt = Carbon::parse($data['events'][0]['start']['dateTime']);
     }
 
+    public function quickadd()
+    {
+        $calendar = new GoogleCalendar;
+
+        $calendarId = Self::TAIWAN_SWING_CALENDAR_REGULAR;
+
+        // $createdEvent = $service->events->quickAdd(
+        //     'primary',
+        //     'Mou-Test :: Appointment at Somewhere on June 3rd 10am-10:25am');
+
+        // echo $createdEvent->getId();
+        // 
+        // 
+        $data = 'Mou Testing';
+
+        $try_insert = $calendar->quickadd($calendarId, $data);
+
+        return $try_insert;
+    }
+
+
+
     public function course()
     {
         $calendar = new GoogleCalendar;

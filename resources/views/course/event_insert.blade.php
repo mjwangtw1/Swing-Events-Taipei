@@ -31,15 +31,15 @@
                           <label class="col-md-4 control-label" for="radios">風格</label>
                           <div class="col-md-4"> 
                             <label class="radio-inline" for="radios-0">
-                              <input type="radio" name="style_radio" id="radios-0" value="1" checked="checked">
+                              <input type="radio" name="dance_style" id="radios-0" value="1" checked="checked">
                               Swing
                             </label> 
                             <label class="radio-inline" for="radios-1">
-                              <input type="radio" name="style_radio" id="radios-1" value="2">
+                              <input type="radio" name="dance_style" id="radios-1" value="2">
                               Blues
                             </label> 
                             <label class="radio-inline" for="radios-2">
-                              <input type="radio" name="style_radio" id="radios-2" value="3">
+                              <input type="radio" name="dance_style" id="radios-2" value="3">
                               Swing &amp; Blues
                             </label>
                           </div>
@@ -63,10 +63,21 @@
                         <div class="form-group">
                           <label class="col-md-4 control-label" for="selectbasic">請選擇一個地點</label>
                           <div class="col-md-4">
-                            <select id="selectbasic" name="selectbasic" class="form-control">
-                              <option value="1">Tangorismo</option>
-                              <option value="2">TAV</option>
-                              <option value="3">中山堂</option>
+                            <select id="selectbasic" name="location" class="form-control">
+                              <option value="1">華山木地板</option>
+                              <option value="2">松煙木地板</option>
+                              <option value="3">國父紀念館走廊下</option>
+                              <option value="4">圓山MajiMaji集食行樂</option>
+                              <option value="5">圓山Traingle Bar</option>
+                              <option value="6">圓山花博木地板</option>
+                              <option value="7">USR127玩藝工廠</option>
+                              <option value="8">Sappho</option>
+                              <option value="9">TAV</option>
+                              <option value="10">Tangorismo</option>
+                              <option value="11">Corazon Tango</option>
+                              <option value="12">台大滴咖啡</option>
+                              <option value="13">中山堂</option>
+                              <option value="99">其他(請務必在說明中填寫)</option>
                             </select>
                           </div>
                         </div>
@@ -76,15 +87,15 @@
                           <label class="col-md-4 control-label" for="radios">室內 | 室外</label>
                           <div class="col-md-4"> 
                             <label class="radio-inline" for="radios-0">
-                              <input type="radio" name="location_radios" id="radios-0" value="1" checked="checked">
+                              <input type="radio" name="location_type" id="radios-0" value="1" checked="checked">
                               Indoor
                             </label> 
                             <label class="radio-inline" for="radios-1">
-                              <input type="radio" name="location_radios" id="radios-1" value="2">
+                              <input type="radio" name="location_type" id="radios-1" value="2">
                               Outdoor
                             </label> 
                             <label class="radio-inline" for="radios-2">
-                              <input type="radio" name="location_radios" id="radios-2" value="3">
+                              <input type="radio" name="location_type" id="radios-2" value="3">
                               Mix
                             </label>
                           </div>
@@ -131,7 +142,7 @@
                         <div class="form-group">
                           <label class="col-md-4 control-label" for="textinput">Tags</label>  
                           <div class="col-md-4">
-                          <input id="textinput" name="event_tags" type="text" placeholder="Event Link URL" class="form-control input-md">
+                          <input id="textinput" name="event_tags" type="text" placeholder="Live Band, Taster" class="form-control input-md">
                           <span class="help-block tags_help">請用逗號分隔開來</span>    
                           </div>
                         </div>
