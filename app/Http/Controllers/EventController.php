@@ -27,6 +27,29 @@ class EventController extends Controller
         $this->_user = Auth::user();
     }
 
+    public function index()
+    {
+
+        $data['user_name'] = $this->_user['name'];
+
+        return view('course.event_manage', compact('data'));
+
+        //return $userId = Auth::user();
+    }
+
+
+    /**
+     * Display new course insert interface.
+     *
+     * @return [type] [description]
+     */
+    public function new()
+    {
+        $data['user_name'] = $this->_user['name'];
+        
+        return view('course.event_insert', compact('data'));
+    }
+
 
     /**
      * Insert blog Content
@@ -37,8 +60,10 @@ class EventController extends Controller
     {
         var_dump($request->input());
 
-
     }
+
+
+
 
 
 }
