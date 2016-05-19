@@ -5,7 +5,7 @@ $event_type = ['Swing', 'Special', 'Blues'];
 $event_type_dom = ['is__swing', 'is__special', 'is__blues'];
 
 $weekday['en'] = ['Sun', 'Mon','Tue','Wed','Thu','Fri','Sat'];
-$weekday['tw'] = ['星期日', '星期一','星期二','星期三','星期四','星期五','星期六'];
+$weekday['tw'] = ['周日', '周一','周二','周三','周四','周五','周六'];
 
 ?>
 
@@ -16,9 +16,9 @@ $weekday['tw'] = ['星期日', '星期一','星期二','星期三','星期四','
 
         <div class="the_logo small-12 columns">
             <h1 class="logo_text">
-                Swing Events
+                Blues Events
             </h1>
-            <div class="logo_taipei">
+            <div class="logo_taipei is__blues">
                 &nbsp;
             </div>
         </div>
@@ -67,11 +67,8 @@ $weekday['tw'] = ['星期日', '星期一','星期二','星期三','星期四','
         <!-- Featured -->
         <?php
 
-        $featured_flag = FALSE;
-
         if ( ! empty($special['events'])) //Nothing inside Special
         {
-            $featured_flag = TRUE; //display the flag only when SPECIAL EVENTS
             //Special Event
             $special_event = $special['events'][0];
             $special_link  = '/event/' . $special['calendarId'] . '/' . $special_event['id'] . '/1';
@@ -80,9 +77,9 @@ $weekday['tw'] = ['星期日', '星期一','星期二','星期三','星期四','
         else
         {
             //Or we use the first one we got.
-            $special_event = $data[0]['events'][0]; //Fetch Swing event the First one.
-            $special_link  = '/event/' . $data[0]['calendarId'] . '/' . $special_event['id'] . '/0';
-            $special_type = 0; 
+            $special_event = $data[2]['events'][0]; //Fetch Swing event the First one.
+            $special_link  = '/event/' . $data[2]['calendarId'] . '/' . $special_event['id'] . '/2';
+            $special_type = 2; 
         }
 
         ?>
@@ -95,16 +92,10 @@ $weekday['tw'] = ['星期日', '星期一','星期二','星期三','星期四','
                 <div class="feature_tags">
  <!--                    <span class="label is__special">Special</span> -->
                     <span class="label {{ $event_type_dom[$special_type] }}">{{ $event_type[$special_type] }}</span>
-    
-                    @if( $featured_flag)
-
-                        <span class="label to__detail">
-                           {{ trans('default.featured') }}
-                            <i class="icon o_vt s_small is__chevy_right"></i>
-                        </span>
-                    
-                    @endif
-
+                    <span class="label to__detail">
+                       {{ trans('default.featured') }}
+                        <i class="icon o_vt s_small is__chevy_right"></i>
+                    </span>
                 </div>
             </a>
             <div class="description_box row small-collapse align-center">
@@ -116,11 +107,11 @@ $weekday['tw'] = ['星期日', '星期一','星期二','星期三','星期四','
                     <div class="date_calendar">
                         <!-- 月份 -->
                         <div class="for__month">
-                          {{ $dt->parse($special_event['start']['dateTime'])->format('M') }}
+                          {{ isset($special_event['start']['dateTime']) ? $dt->parse($special_event['start']['dateTime'])->format('M') : '' }}
                         </div>
                         <!-- 日期 -->
                         <div class="for__day">
-                            {{ $dt->parse($special_event['start']['dateTime'])->format('d') }} 
+                            {{ isset($special_event['start']['dateTime']) ? $dt->parse($special_event['start']['dateTime'])->format('d') : ''}} 
                         </div>
                     </div>
                 </div>
@@ -129,11 +120,14 @@ $weekday['tw'] = ['星期日', '星期一','星期二','星期三','星期四','
                        
                         <?php
 
-                            $weekday_counter = $dt->parse($special_event["start"]["dateTime"])->format("w");
-                            
-                            $lang_type = (Session::get('locale') === "tw") ? 'tw' : 'en';
-                            
-                            echo $weekday[$lang_type][$weekday_counter];
+                            if (isset($special_event['start']['dateTime']))
+                            {
+                                  $weekday_counter = $dt->parse($special_event["start"]["dateTime"])->format("w");
+                                
+                                $lang_type = (Session::get('locale') === "tw") ? 'tw' : 'en';
+                                
+                                echo $weekday[$lang_type][$weekday_counter];
+                            }
                         ?>
                         <!-- 視覺分隔點(全型的點)-->
                         ．
@@ -141,23 +135,28 @@ $weekday['tw'] = ['星期日', '星期一','星期二','星期三','星期四','
                         <span class="for__relateday">
                         
                                 <?php
-                                    if($dt->parse($special_event['start']['dateTime'])->isToday())
+                                    if (isset($special_event['start']['dateTime']))
                                     {
-                                        echo trans('default.today'); 
+                                        if($dt->parse($special_event['start']['dateTime'])->isToday())
+                                        {
+                                            echo trans('default.today'); 
+                                        }
+                                        else
+                                        {
+                                            //Calculate the Difference.
+                                            $count = $dt->diffInDays($dt->parse($special_event['start']['dateTime'])) + 1; //Start from 0 so add 1
+                                            echo trans('default.days_till', ['count' => $count]);
+                                        }
                                     }
-                                    else
-                                    {
-                                        //Calculate the Difference.
-                                        $count = $dt->diffInDays($dt->parse($special_event['start']['dateTime'])) + 1; //Start from 0 so add 1
-                                        echo trans('default.days_till', ['count' => $count]);
-                                    }
+
+                                    
                                 ?>
                         </span>
                         <!-- 視覺分隔點 -->
                         ．
                         <!-- 當天時間 -->
                         <span class="for__oclock">
-                            {{ $dt->parse($special_event['start']['dateTime'])->format('H:i') }} 
+                            {{ isset($special_event['start']['dateTime']) ? $dt->parse($special_event['start']['dateTime'])->format('H:i') : '' }} 
                         </span>
                     </div>
                     <!-- 地點 -->
@@ -172,9 +171,10 @@ $weekday['tw'] = ['星期日', '星期一','星期二','星期三','星期四','
 
             <div class="swing_intro row hide-for-small show-for-medium">
                 <h4>
-                    哈囉！台北
+                    Blues 最棒惹 ! 起來嗨！ 通通起來嗨 !
+                    <br/> Discover all the Blues Events in Taipei!
                 </h4>
-                <p>
+            <!--     <p>
                     Swing dance (搖擺舞)是一種復古舞蹈，源於 1930 年代的美國。它充滿了樂趣，而且保證跳完後你一定開心得闔不攏嘴！
                 </p>
                 <p>
@@ -182,7 +182,7 @@ $weekday['tw'] = ['星期日', '星期一','星期二','星期三','星期四','
                 </p>
                 <p>
                     我們喜歡這個舞蹈，相信你們也會喜歡。來跟我們一起跳舞吧！
-                </p>
+                </p> -->
             </div>
         </div>
 
@@ -193,7 +193,7 @@ $weekday['tw'] = ['星期日', '星期一','星期二','星期三','星期四','
                 
             <div class="the_event is__thisweek">
                 <h6>
-                    本週活動
+                    {{ trans('default.event_this_week') }}
                 </h6>
                 
                   @foreach($data as $type => $event)
@@ -225,7 +225,7 @@ $weekday['tw'] = ['星期日', '星期一','星期二','星期三','星期四','
                                         <div class="date_clock">
                                             <?php
 
-                                                if (isset($single_event['start']['dateTime']))
+                                                if (isset($single_event["start"]["dateTime"]))
                                                 {
                                                     $weekday_counter = $dt->parse($single_event["start"]["dateTime"])->format("w");
                                                 
@@ -233,16 +233,19 @@ $weekday['tw'] = ['星期日', '星期一','星期二','星期三','星期四','
                                                     
                                                     echo $weekday[$lang_type][$weekday_counter];
                                                 }
+
+                                              
                                             ?>
                                             <!-- 視覺分隔點(全型的點)-->
                                             ．
                                             <!-- 相對日期 -->
                                             <span class="for__relateday">
 
-                                                 <?php
+                                                <?php
 
                                                 if (isset($single_event['start']['dateTime']))
                                                 {
+
                                                     if($dt->parse($single_event['start']['dateTime'])->isToday())
                                                     {
                                                         echo trans('default.today'); 
@@ -253,7 +256,8 @@ $weekday['tw'] = ['星期日', '星期一','星期二','星期三','星期四','
                                                         $count = $dt->diffInDays($dt->parse($single_event['start']['dateTime'])) + 1; //Start from 0 so add 1
                                                         echo trans('default.days_till', ['count' => $count]);
                                                     }
-                                                 }
+                                                }
+
                                                 ?>
 
                                             </span>
@@ -305,11 +309,11 @@ $weekday['tw'] = ['星期日', '星期一','星期二','星期三','星期四','
     <footer class="row">
 
         <div class="the_logo small-12 columns">
-            <a href="/">
+            <a href="/blues">
                 <h4 class="logo_text">
-                    Swing Events
+                    Blues Events
                 </h4>
-                <div class="logo_taipei for__footer">
+                <div class="logo_taipei is__blues for__footer">
                     &nbsp;
                 </div>
             </a>
@@ -321,10 +325,12 @@ $weekday['tw'] = ['星期日', '星期一','星期二','星期三','星期四','
 
         <div class="small-12 columns text-center">
             <div>
-                <a href="http://goo.gl/forms/AlYg1Oqp3q" class="button to__report" role="button" target="_blank">回報活動</a>
+                <a href="http://goo.gl/forms/AlYg1Oqp3q" class="button to__report" role="button" target="_blank">
+                {{ trans('default.report_event') }}
+                </a>
             </div>
             <div>
-                <span class="copyright">&copy; 2016 Swing Events Taipei</span>
+                <span class="copyright">&copy; 2016 Blues Events Taipei</span>
             </div>
         </div>
 

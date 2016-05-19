@@ -1,7 +1,7 @@
 <?php
 
     return [
-        'title' => 'Taipei Swing Calendar',
+        'title' => 'Swing Events Taipei',
         'home'  => 'Home',
         'calendar' => 'Calendar',
         'event' => 'Events',
@@ -15,6 +15,10 @@
         'featured' => 'FEATURED',
         'no_events' => 'Oops, No Events Today. Have some nice swing music and take a break!',
         'new_course' => 'New Course',
+        'report_event' => 'Report Event',
+        'google_map'  => 'Google Map',
+        'recommend_for_you' => 'Recommend For You',
+        'event_link' => 'Event Link',
         'Mon' => 'Mon',
         'Tue' => 'Tue',
         'Wed' => 'Wed',

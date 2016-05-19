@@ -5,7 +5,7 @@ $event_type = ['Swing', 'Special', 'Blues'];
 $event_type_dom = ['is__swing', 'is__special', 'is__blues'];
 
 $weekday['en'] = ['Sun', 'Mon','Tue','Wed','Thu','Fri','Sat'];
-$weekday['tw'] = ['星期日', '星期一','星期二','星期三','星期四','星期五','星期六'];
+$weekday['tw'] = ['周日', '周一','周二','周三','周四','周五','周六'];
 
 ?>
 
@@ -49,37 +49,6 @@ $weekday['tw'] = ['星期日', '星期一','星期二','星期三','星期四','
                             </div>
                         </div>
                         <div class="small-5 columns">
-                            <div class="for__relateday">
-                                <span>
-
-                                <!-- 還有 999 天 -->
-                                    
-                                <?php
-                                if (isset($event['modelData']['start']['dateTime']))
-                                {
-                                     if($dt->parse($event['modelData']['start']['dateTime'])->isToday())
-                                    {
-                                        echo trans('default.today'); 
-                                    }
-                                    else
-                                    {
-                                        //Calculate the Difference.
-                                        $count = $dt->diffInDays($dt->parse($event['modelData']['start']['dateTime'])) + 1; //Start from 0 so add 1
-                                        echo trans('default.days_till', ['count' => $count]);
-                                    }
-
-                                }
-                               
-
-                                ?>
-
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="small-12 columns">
                             <div class="for__day_time">
 
                                 <!-- 星期 -->
@@ -110,6 +79,37 @@ $weekday['tw'] = ['星期日', '星期一','星期二','星期三','星期四','
                         </div>
                     </div>
 
+                    <div class="the_calendar row">
+                        <div class="small-12 columns">
+                            <div class="for__relateday">
+                                <span>
+
+                                <!-- 還有 999 天 -->
+                                    
+                                <?php
+                                if (isset($event['modelData']['start']['dateTime']))
+                                {
+                                     if($dt->parse($event['modelData']['start']['dateTime'])->isToday())
+                                    {
+                                        echo trans('default.today'); 
+                                    }
+                                    else
+                                    {
+                                        //Calculate the Difference.
+                                        $count = $dt->diffInDays($dt->parse($event['modelData']['start']['dateTime'])) + 1; //Start from 0 so add 1
+                                        echo trans('default.days_till', ['count' => $count]);
+                                    }
+
+                                }
+                               
+
+                                ?>
+
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="row">
                         
                         <div class="small-12 columns">
@@ -122,10 +122,37 @@ $weekday['tw'] = ['星期日', '星期一','星期二','星期三','星期四','
                                 </p>
                             </div>
 
-                            <div class="to__googlemap">
-                                <a href="https://maps.google.com/maps?hl=zh-TW&amp;q={{ isset($event->location) ? $event->location : '' }}"  class="button small" target="_blank">
-                                    Google 地圖
-                                </a>         
+                            <div class="to__external">
+                                <a href="https://maps.google.com/maps?hl=zh-TW&amp;q={{ isset($event->location) ? $event->location : '' }}"  class="button small for__eventurl" target="_blank">
+                                    {{ trans('default.google_map') }}
+                                </a> 
+                            
+                                <?php
+                                    //Dynamic Gen a Link button if there is one! 
+                                    if ( ! is_null($event->description))
+                                    {
+                                        $patt = "/https*:\/\/[a-zA-Z0-9\.\/_]+/";
+                                        preg_match($patt, $event->description, $output_array);
+
+                                        if (( ! is_null($output_array[0])) && ( ! empty($output_array[0])))
+                                        {   
+                                            //Then we parsed a URL link: put it here.   
+                                            $link_button = '<a href="' . $output_array[0] . '" class="button small for__navigate" target="_blank">';
+                                            $link_button .= trans('default.event_link');
+                                            $link_button .= '</a>';
+
+                                            echo $link_button;
+
+
+                                            //Displaying the Link
+                                            $link_show  = '<p class="show_url"><a href="' . $output_array[0] . '" target="_blank">' . $output_array[0] . '</a></p>';
+                                         
+                                            echo $link_show;
+
+                                        }
+                                    }   
+                                ?>
+
                             </div>
 
                         </div>
@@ -156,6 +183,19 @@ $weekday['tw'] = ['星期日', '星期一','星期二','星期三','星期四','
                 <div class="row align-center">
                     <div class="event_featured_cover">
                         &nbsp;
+
+                    @if(isset($event->location))
+
+ <!--                    <iframe
+                      width="100%"
+                      height="250px"
+                      frameborder="0" style="border:0"
+                      src="https://www.google.com/maps/embed/v1/place?key={{$api_key}}
+                        &q={{$event->location}}" allowfullscreen>
+                    </iframe> -->
+
+                    @endif
+
                     </div>
                     <!-- <div class="fb_share small-6 medium-4 columns">
                         <a href="javascript:void(0)" class="button to__fbshare">
@@ -171,19 +211,13 @@ $weekday['tw'] = ['星期日', '星期一','星期二','星期三','星期四','
                     </div> -->
                 </div>
             </div>
-
-
         </div>
     </div>
-
-
-
-
     <div class="row">
         <div class="small-12 columns">
             <div class="the_event is__recommend">
                 <h6>
-                    為您推薦
+                    {{ trans('default.recommend_for_you')}}
                 </h6>
 
                 <div class="row">
@@ -310,7 +344,9 @@ $weekday['tw'] = ['星期日', '星期一','星期二','星期三','星期四','
 
         <div class="small-12 columns text-center">
             <div>
-                <a href="http://goo.gl/forms/AlYg1Oqp3q" class="button to__report" role="button" target="_blank">回報活動</a>
+                <a href="http://goo.gl/forms/AlYg1Oqp3q" class="button to__report" role="button" target="_blank">
+                    {{ trans('default.report_event') }}
+                </a>
             </div>
             <div>
                 <span class="copyright">&copy; 2016 Swing Events@Taipei</span>

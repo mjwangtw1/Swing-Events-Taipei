@@ -25,7 +25,6 @@ class CourseController extends Controller
         //Check if LoggedIn
         $this->middleware('auth'); 
         //$this->middleware('admin');
-        //
         
         $this->_user = Auth::user();
 
@@ -36,7 +35,7 @@ class CourseController extends Controller
 
         $data['user_name'] = $this->_user['name'];
 
-        return view('course.manage', compact('data'));
+        return view('course.event_manage', compact('data'));
 
         //return $userId = Auth::user();
     }
@@ -50,7 +49,7 @@ class CourseController extends Controller
     {
         $data['user_name'] = $this->_user['name'];
         
-        return view('course.insert', compact('data'));
+        return view('course.event_insert', compact('data'));
     }
 
     /**
@@ -90,6 +89,5 @@ class CourseController extends Controller
         $course->save();
         
         return $course;
-        // return $course;        
     }
 }

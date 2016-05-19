@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Swing Events @ Taipei</title>
+    <title>Swing Events Taipei</title>
 
     <!-- Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
@@ -49,21 +49,22 @@
                 <ul class="nav navbar-nav">
                     
                     <li><a href="{{ url('/home') }}">{{ trans('default.home') }}</a></li>
-                    <li><a href="{{ url('/calendar') }}">{{ trans('default.calendar') }}</a></li>
+                    
+<!--                     <li><a href="{{ url('/calendar') }}">{{ trans('default.calendar') }}</a></li>
                     <li><a href="{{ url('/event') }}">{{ trans('default.event') }}</a></li>
                     <li><a href="{{ url('/course') }}">{{ trans('default.course') }}</a></li>
                     <li><a href="{{ url('/group') }}">{{ trans('default.group') }}</a></li>
 
                     <li><strong><a href="{{ url('/tlf2016') }}">{{ trans('default.tlf2016') }}</a></strong></li>
-
+ -->
                     <!-- This form used to switch Lang file-->
-                    <li>
+                  <!--   <li>
                         <form method="post" action="/locale">
                             <button name="locale" type="submit" value="{{ Session::get('locale') === "tw" ? "en" : "tw" }}">
                             {{ Session::get('locale') === "tw" ? " English" : "中文" }}</button>
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         </form>
-                    </li>
+                    </li> -->
                 </ul>
 
                 <!-- Right Side Of Navbar -->

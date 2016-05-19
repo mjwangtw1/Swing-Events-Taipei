@@ -37,8 +37,9 @@ return [
     | you may use many connections at once using the Database library.
     |
     */
-
-    'default' => env('DB_CONNECTION', 'mysql'), 
+   'default' => 'sqlite', // this case we ignored the stages 
+    //'default' => env('DB_CONNECTION','sqlite'),
+    //'default' => env('DB_CONNECTION', 'mysql'), 
     //'default' => 'pgsql',
 
     /*
@@ -61,7 +62,9 @@ return [
 
         'sqlite' => [
             'driver' => 'sqlite',
-            'database' => env('DB_DATABASE', database_path('database.sqlite')),
+            'database' =>  base_path() . '/_conf/database.sqlite',
+            //'database' => env('DB_DATABASE', database_path('database.sqlite')),
+            //'database' => database_path('database.sqlite'),
             'prefix' => '',
         ],
 

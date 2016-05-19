@@ -29,15 +29,48 @@ Route::get('/redirect', function()
     return view('errors.503');
 });
 
+Route::get('/sitemap', function()
+{
+    return view('sitemap');
+});
+
+Route::get('/map', function()
+{
+    return view('map');
+});
+
+
+//This one for SSL-thing.
+Route::get('/.well-known/acme-challenge/{id}', function($id)
+{
+    include(base_path() . "/_conf/.well-known/acme-challenge/$id");
+});
+
 
 //Entrance Page
 Route::get('/', 'DataController@home'); //預設直接進來 就看本日活動
 
 //OFFICIAL
+Route::get('/blues', 'DataController@blues'); //Sync file and create local files.
 Route::get('/home', 'DataController@home'); // List Events within this week
-Route::get('/blues', 'DataController@blues'); // List Events within this week
 Route::get('/now', 'DataController@now');   // List whatever happened Today.
 Route::get('/event/{calendarId}/{eventId}/{typeId}', 'DataController@event'); //List Specific Event with Detailed Info
+
+
+//Backend - for coding purpose
+Route::get('/sync_all', 'DataController@prepare_file'); //Sync all 3.
+Route::get('/read', 'DataController@check_data'); //Sync file and create local files.
+
+
+//Previous: Directly load API 
+Route::get('/home2', 'DataController@home'); // List Events within this week
+Route::get('/blues2', 'DataController@blues'); // List Events within this week
+
+
+
+Route::get('/live', 'LiveController@live'); //Check to see logs
+Route::get('/log', 'DataController@log'); //Check to see logs
+
 
 //for MDFH-- Mockup places
 Route::get('/sample/event_detail', 'DataController@event_detail');
@@ -46,6 +79,12 @@ Route::get('/sample', 'DataController@sample');
 
 //Calendar Feature
 Route::get('/calendar', 'CalendarController@index');
+
+
+//Create A new Event
+Route::post('/event/insert', 'EventController@insert'); //Insert New courses.
+
+
 
 
 //Course - Still working.
