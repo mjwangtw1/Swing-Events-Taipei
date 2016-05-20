@@ -13,6 +13,7 @@ class LiveController extends Controller
     {
         $data['provider'] = 'BigApple Party';
 
-        return view('live', compact('data'));
+        return view('event_display.live', compact('data'));
     }
+
 }
