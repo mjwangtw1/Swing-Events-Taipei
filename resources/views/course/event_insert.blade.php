@@ -53,9 +53,9 @@
                               <span class="input-group-addon">     
                                   <input type="checkbox">     
                               </span>
-                              <input id="prependedcheckbox" name="is_special_event" class="form-control" type="text" placeholder="特殊活動">
+                              <input id="prependedcheckbox" name="is_special_event" class="form-control" type="text" placeholder="這是一個特殊活動唷">
                             </div>
-                            <p class="help-block">說明</p>
+                            <p class="help-block">特殊活動請勾選,謝謝</p>
                           </div>
                         </div>
 
@@ -108,7 +108,8 @@
 
                               <div class="col-md-4">
                                  
-                                  <input id="textinput" name="event_fee" type="text" placeholder="$400 maybe ?" class="form-control input-md">
+                                  <input id="textinput" name="event_fee" type="text" placeholder="400 maybe ?" class="form-control input-md">
+                                  <span class="help-block time_help">請直接填數字即可, 若免費活動請填 0</span>  
                               </div>  
                             </div>
                         </div>
@@ -117,8 +118,8 @@
                         <div class="form-group">
                           <label class="col-md-4 control-label" for="textinput">時間</label>  
                           <div class="col-md-4">
-                              <input id="textinput" name="event_time" type="text" placeholder="(2016/05/18 20:00:00)" class="form-control input-md">
-                              <span class="help-block time_help">請依照上面的格式輸入</span>  
+                              <input id="textinput" name="event_time" type="text" placeholder="2016/05/18 20:00:00" class="form-control input-md">
+                              <span class="help-block time_help">請依照上面的格式輸入, 以便資料建立</span>  
                           </div>
                         </div>
 

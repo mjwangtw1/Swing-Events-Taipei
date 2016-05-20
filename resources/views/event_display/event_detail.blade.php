@@ -193,18 +193,14 @@ $weekday['tw'] = ['周日', '周一','周二','周三','周四','周五','周六
 
                 <div class="row align-center">
                     <div class="event_map_display">
-                        Google Maps Here
-
                     @if(isset($event->location))
-
- <!--                    <iframe
+                    <iframe
                       width="100%"
                       height="250px"
                       frameborder="0" style="border:0"
                       src="https://www.google.com/maps/embed/v1/place?key={{$api_key}}
                         &q={{$event->location}}" allowfullscreen>
-                    </iframe> -->
-
+                    </iframe>
                     @endif
 
                     </div>
@@ -222,9 +218,7 @@ $weekday['tw'] = ['周日', '周一','周二','周三','周四','周五','周六
                     </div> -->
                 </div>
 
-
              </div>
-
 
         </div>
 
@@ -232,9 +226,7 @@ $weekday['tw'] = ['周日', '周一','周二','周三','周四','周五','周六
         <div class="row">
 
 
-
             <div class="event_page small-12 large-4 columns">
-
 
                 
             </div>

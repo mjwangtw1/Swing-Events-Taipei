@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Services\GoogleCalendar; //Google calendar API
-use App\Services\Google_Service_Calendar_Event; //Google calendar API
 use Carbon\Carbon;               //Carbon for Time formatting
 
 define('DEFAULT_IMAGE_HOMEPAGE', '');
@@ -22,7 +21,7 @@ class DataController extends Controller
     // const BIRD_GIF_1 = 'http://2.bp.blogspot.com/-IU6NUe_3JRA/VlaQZXDDj6I/AAAAAAADOhw/ETH4ovfm8jo/s1600/8795400.gif';
     const GOOGLE_MAP_API_KEY = 'AIzaSyBY7C54J0Z2tm_OOORmDvVY0gZjeNQIvQY';
 
-    const TAIPEI_TIMEZONE = 'Taipei/Taiwan';
+    const TAIPEI_TIMEZONE = 'Asia/Taipei';
 
 
     private $_current_time = '';
@@ -88,59 +87,13 @@ class DataController extends Controller
         //$dt = Carbon::parse($data['events'][0]['start']['dateTime']);
     }
 
-    public function insert_to_calendar($calendarId = '', $post_data = '')
-    {
-        $calendar = new GoogleCalendar;
-        $calendarId = Self::TAIWAN_SWING_CALENDAR_REGULAR;
 
-        //Sample time format: //2016-05-21T09:00:00-07:00
-
-        $event_detail = array(
-          'summary' => $post_data['summary'],
-          'location' => $post_data['location'],
-          'description' => $post_data['description'],
-          'start' => array(
-            'dateTime' => $post_data['start_time'],
-            'timeZone' => self::TAIPEI_TIMEZONE,
-          ),
-          'end' => array(
-            'dateTime' => '2016-05-21T17:00:00-07:00',
-            'timeZone' => self::TAIPEI_TIMEZONE,
-          ),
-          'recurrence' => array(
-            // 'RRULE:FREQ=DAILY;COUNT=2'
-          ),
-          'attendees' => array(
-            // array('email' => 'lpage@example.com'),
-            // array('email' => 'sbrin@example.com'),
-          ),
-          // 'reminders' => array(
-          //   'useDefault' => FALSE,
-          //   'overrides' => array(
-          //     array('method' => 'email', 'minutes' => 24 * 60),
-          //     array('method' => 'popup', 'minutes' => 10),
-          //   ),
-          'creator' => array(
-            'id' => 'mou_the_badger'
-          ),
-        );
-
-        echo 'check event_detail';
-        var_dump($event_detail);
-
-
-        //$event = $calendar->insert($calendarId, $event_detail);
-       
-        //return $event->htmlLink;
-         //return 'Event created: %s\n', $event->htmlLink;
-    }
-
-    public function delet_event_from_calendar($calendarId, $eventId)
+    public function delete_event_from_calendar()
     {
         $calendar = new GoogleCalendar;
 
         $calendarId = Self::TAIWAN_SWING_CALENDAR_REGULAR;
-        $eventId = 'ta7k9mug2lm92utup9lagfcqq8';
+        $eventId = '9jfiifalphl33b3fpf6l9ifob0';
 
         $result = $calendar->delete($calendarId, $eventId);
 
