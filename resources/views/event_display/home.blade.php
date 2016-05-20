@@ -71,7 +71,7 @@ $weekday['tw'] = ['周日', '周一','周二','周三','周四','周五','周六
     </div>
 
 
-    <div class="content row">
+    <div class="content in__home row">
         
         <!-- Featured -->
         <?php
@@ -195,11 +195,11 @@ $weekday['tw'] = ['周日', '周一','周二','周三','周四','周五','周六
     </div>
 
     <!-- Thisweek -->
-    <div class="row columns small-collapse">
+    <div class="row small-collapse align-center">
 
         @if ( ! empty($data))
             
-        <div class="the_event is__thisweek small-12 medium-5 medium-offset-1 columns">
+        <div class="the_event is__thisweek small-12 medium-5 columns">
             <h6>
                 {{ trans('default.event_this_week') }}
             </h6>
