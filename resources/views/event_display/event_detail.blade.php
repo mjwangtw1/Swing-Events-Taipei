@@ -222,9 +222,7 @@ $weekday['tw'] = ['周日', '周一','周二','周三','周四','周五','周六
                     </div> -->
                 </div>
 
-
              </div>
-
 
         </div>
 
@@ -232,9 +230,7 @@ $weekday['tw'] = ['周日', '周一','周二','周三','周四','周五','周六
         <div class="row">
 
 
-
             <div class="event_page small-12 large-4 columns">
-
 
                 
             </div>
