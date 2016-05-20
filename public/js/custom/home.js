@@ -48,7 +48,7 @@ $(function()
 
     // Timeline宣告
     var tl_header_bg = new TimelineLite()
-        .to(".page__home", .5, {scaleX: .75, scaleY: .75, y: -15})
+        .to(".page__home", .5, {scaleX: .7, scaleY: .7, y: -15})
         .to(".header_bg", .5, {opacity: 1}, "-=0.4")
 
 
