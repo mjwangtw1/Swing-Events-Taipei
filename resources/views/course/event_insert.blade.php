@@ -64,20 +64,20 @@
                           <label class="col-md-4 control-label" for="selectbasic">請選擇一個地點</label>
                           <div class="col-md-4">
                             <select id="selectbasic" name="location" class="form-control">
-                              <option value="1">華山木地板</option>
-                              <option value="2">松煙木地板</option>
-                              <option value="3">國父紀念館走廊下</option>
-                              <option value="4">圓山 Maji Maji 集食行樂</option>
-                              <option value="5">圓山 Traingle Bar</option>
-                              <option value="6">圓山 花博木地板</option>
-                              <option value="7">USR127玩藝工廠</option>
-                              <option value="8">Sappho</option>
-                              <option value="9">TAV</option>
-                              <option value="10">Tangorismo</option>
-                              <option value="11">Corazon Tango</option>
-                              <option value="12">台大滴咖啡</option>
-                              <option value="13">中山堂</option>
-                              <option value="99">其他(請務必在說明中填寫)</option>
+
+                              <?php 
+
+                              //Foreach to loop out all the locations
+                              if (is_array($event_location) && ! (empty($event_location)))
+                              {
+                                foreach($event_location as $single_location)
+                                {
+                                  echo '<option value="' . $single_location['id'] . '">' . $single_location['name'] . '</option>';
+                                }
+                              }
+
+                              ?>
+
                             </select>
                           </div>
                         </div>
