@@ -65,12 +65,27 @@ class GoogleCalendar {
     public function quickadd($calendarId, $data)
     {
         
-        $createdEvent = $this->service->events->quickAdd($calendarId,$data);
+        $createdEvent = $this->service->events->insert($calendarId,$data);
         $event_id = $createdEvent->getId();
 
         return $event_id;
     }
 
+    //Insert with specific details
+    public function insert($calendarId, $event_detail)
+    {
+        //We need to new this Object.
+        $event = new \Google_Service_Calendar_Event($event_detail);
+        $event_result = $this->service->events->insert($calendarId, $event);
+        
+        return $event_result;
+    }
 
+    public function delete($calendarId, $eventId)
+    {
+        $results = $this->service->events->delete($calendarId, $eventId);
+
+        return $results;
+    }
 
 }

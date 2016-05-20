@@ -67,9 +67,9 @@
                               <option value="1">華山木地板</option>
                               <option value="2">松煙木地板</option>
                               <option value="3">國父紀念館走廊下</option>
-                              <option value="4">圓山MajiMaji集食行樂</option>
-                              <option value="5">圓山Traingle Bar</option>
-                              <option value="6">圓山花博木地板</option>
+                              <option value="4">圓山 Maji Maji 集食行樂</option>
+                              <option value="5">圓山 Traingle Bar</option>
+                              <option value="6">圓山 花博木地板</option>
                               <option value="7">USR127玩藝工廠</option>
                               <option value="8">Sappho</option>
                               <option value="9">TAV</option>
@@ -117,7 +117,7 @@
                         <div class="form-group">
                           <label class="col-md-4 control-label" for="textinput">時間</label>  
                           <div class="col-md-4">
-                              <input id="textinput" name="textinput" type="text" placeholder="(2016/05/18 20:00:00)" class="form-control input-md">
+                              <input id="textinput" name="event_time" type="text" placeholder="(2016/05/18 20:00:00)" class="form-control input-md">
                               <span class="help-block time_help">請依照上面的格式輸入</span>  
                           </div>
                         </div>

@@ -32,12 +32,10 @@ class CourseController extends Controller
     
     public function index()
     {
-
         $data['user_name'] = $this->_user['name'];
 
         return view('course.event_manage', compact('data'));
 
-        //return $userId = Auth::user();
     }
 
     /**
