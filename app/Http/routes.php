@@ -56,6 +56,15 @@ Route::get('/home', 'DataController@home'); // List Events within this week
 Route::get('/now', 'DataController@now');   // List whatever happened Today.
 Route::get('/event/{calendarId}/{eventId}/{typeId}', 'DataController@event'); //List Specific Event with Detailed Info
 
+//Try adding
+Route::get('/try_add', 'DataController@insert_to_calendar'); //Sync file and create local files.
+Route::get('/try_del', 'DataController@delet_event_from_calendar'); //Sync file and create local files.
+
+//Here for backend create content
+Route::get('/event/new', 'EventController@new'); //For making new events.
+Route::get('/event_list', 'EventController@index'); //Post-login Class Controller.
+
+Route::post('/event/insert', 'EventController@insert'); //For ACTUAL inserting a new data.
 
 //Backend - for coding purpose
 Route::get('/sync_all', 'DataController@prepare_file'); //Sync all 3.
