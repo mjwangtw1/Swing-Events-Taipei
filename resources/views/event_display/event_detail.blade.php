@@ -12,177 +12,188 @@ $weekday['tw'] = ['周日', '周一','周二','周三','周四','周五','周六
 @extends('layouts.swing')
 
 @section('content')
-        <div class="the_event is__detail">
 
+    <div class="event_cover">
+        &nbsp;
+    </div>
+
+    <div class="the_event is__detail">
         <div class="row">
-            <div class="event_page small-12 columns">
-                <div class="the__name" data-type="{{$event['type']}}">
-                    <h4>
-                        {{ $event->summary }}
 
-                        <span class="label {{$event_type_dom[$event['type']]}}">
-                            {{$event_type[$event['type']]}}
-                        </span>
-                    </h4>
-                </div>
-            </div>
-        </div>
 
-        <div class="row">
-            <div class="event_page small-12 medium-6 large-4 columns">
-                <div class="the__detail">
+            <div class="event_page small-12 medium-8 columns">
+                <div class="row">
+
+                    <!-- 本次活動標題 -->
+                    <div class="small-12 columns">
+                        <div class="the__name" data-type="{{$event['type']}}">
+                            <h4>
+                                {{ $event->summary }}
+                        
+                                <span class="label {{$event_type_dom[$event['type']]}}">
+                                    {{$event_type[$event['type']]}}
+                                </span>
+                            </h4>
+                        </div>
+                    </div>
+
 
                     <!-- 本次活動的時間 -->
-                    <div class="the_calendar row align-center">
-                        <div class="small-3 columns">
-                            <div class="date_calendar">
-                                <!-- 月份 -->
-                                <div class="for__month">
-                                    {{ 
-                                    
-                                    isset($event['modelData']['start']['dateTime']) ? $dt->parse($event['modelData']['start']['dateTime'])->format('M') : '' }}  
+                    <div class="small-12 medium-6 columns">
+                        <div class="the__detail">
+
+                            <div class="the_calendar row align-center">
+                                <div class="small-3 columns">
+                                    <div class="date_calendar">
+                                        <!-- 月份 -->
+                                        <div class="for__month">
+                                            {{ 
+                                            
+                                            isset($event['modelData']['start']['dateTime']) ? $dt->parse($event['modelData']['start']['dateTime'])->format('M') : '' }}  
+                                        </div>
+                                        <!-- 日期 -->
+                                        <div class="for__day">
+                                            {{ isset($event['modelData']['start']['dateTime']) ? $dt->parse($event['modelData']['start']['dateTime'])->format('d') : '' }}
+                                        </div>
+                                    </div>
                                 </div>
-                                <!-- 日期 -->
-                                <div class="for__day">
-                                    {{ isset($event['modelData']['start']['dateTime']) ? $dt->parse($event['modelData']['start']['dateTime'])->format('d') : '' }}
+                                <div class="small-5 columns">
+                                    <div class="for__day_time">
+
+                                        <!-- 星期 -->
+                                        <span>
+
+                                         <?php
+
+                                            if(isset($event['modelData']['start']['dateTime']))
+                                            {
+                                                $weekday_counter = $dt->parse($event['modelData']['start']['dateTime'])->format("w");
+                                                $lang_type = (Session::get('locale') === "tw") ? 'tw' : 'en';
+                                                echo $weekday[$lang_type][$weekday_counter];
+                                            }
+                                        ?>
+
+                                        </span>
+                                        <!-- 視覺分隔點 -->
+                                        ．
+                                        <!-- 時刻 -->
+                                        <span>
+
+                                            {{ isset($event['modelData']['start']['dateTime']) ? $dt->parse($event['modelData']['start']['dateTime'])->format('H:i') : '' }} 
+
+                                        <!-- 16:30 -->
+
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="small-5 columns">
-                            <div class="for__day_time">
 
-                                <!-- 星期 -->
-                                <span>
+                            <div class="the_calendar row">
+                                <div class="small-12 columns">
+                                    <div class="for__relateday">
+                                        <span>
 
-                                 <?php
-
-                                    if(isset($event['modelData']['start']['dateTime']))
-                                    {
-                                        $weekday_counter = $dt->parse($event['modelData']['start']['dateTime'])->format("w");
-                                        $lang_type = (Session::get('locale') === "tw") ? 'tw' : 'en';
-                                        echo $weekday[$lang_type][$weekday_counter];
-                                    }
-                                ?>
-
-                                </span>
-                                <!-- 視覺分隔點 -->
-                                ．
-                                <!-- 時刻 -->
-                                <span>
-
-                                    {{ isset($event['modelData']['start']['dateTime']) ? $dt->parse($event['modelData']['start']['dateTime'])->format('H:i') : '' }} 
-
-                                <!-- 16:30 -->
-
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="the_calendar row">
-                        <div class="small-12 columns">
-                            <div class="for__relateday">
-                                <span>
-
-                                <!-- 還有 999 天 -->
-                                    
-                                <?php
-                                if (isset($event['modelData']['start']['dateTime']))
-                                {
-                                     if($dt->parse($event['modelData']['start']['dateTime'])->isToday())
-                                    {
-                                        echo trans('default.today'); 
-                                    }
-                                    else
-                                    {
-                                        //Calculate the Difference.
-                                        $count = $dt->diffInDays($dt->parse($event['modelData']['start']['dateTime'])) + 1; //Start from 0 so add 1
-                                        echo trans('default.days_till', ['count' => $count]);
-                                    }
-
-                                }
-                               
-
-                                ?>
-
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        
-                        <div class="small-12 columns">
-                            <!-- 地點 -->
-                            <div class="for__placename">
-                                <i class="icon is__pin_b o_vt s_normal">&nbsp;</i>
-                                <p>
-                                   <!--  國父紀念館 SYS Memorial Hall -->
-                                    {{ isset($event->location) ? $event->location : '' }}
-                                </p>
-                            </div>
-
-                            <div class="to__external">
-                                <a href="https://maps.google.com/maps?hl=zh-TW&amp;q={{ isset($event->location) ? $event->location : '' }}"  class="button small for__eventurl" target="_blank">
-                                    {{ trans('default.google_map') }}
-                                </a> 
-                            
-                                <?php
-                                    //Dynamic Gen a Link button if there is one! 
-                                    if ( ! is_null($event->description))
-                                    {
-                                        $patt = "/https*:\/\/[a-zA-Z0-9\.\/_]+/";
-                                        preg_match($patt, $event->description, $output_array);
-
-                                        if (( ! is_null($output_array[0])) && ( ! empty($output_array[0])))
-                                        {   
-                                            //Then we parsed a URL link: put it here.   
-                                            $link_button = '<a href="' . $output_array[0] . '" class="button small for__navigate" target="_blank">';
-                                            $link_button .= trans('default.event_link');
-                                            $link_button .= '</a>';
-
-                                            echo $link_button;
-
-
-                                            //Displaying the Link
-                                            $link_show  = '<p class="show_url"><a href="' . $output_array[0] . '" target="_blank">' . $output_array[0] . '</a></p>';
-                                         
-                                            echo $link_show;
+                                        <!-- 還有 999 天 -->
+                                            
+                                        <?php
+                                        if (isset($event['modelData']['start']['dateTime']))
+                                        {
+                                             if($dt->parse($event['modelData']['start']['dateTime'])->isToday())
+                                            {
+                                                echo trans('default.today'); 
+                                            }
+                                            else
+                                            {
+                                                //Calculate the Difference.
+                                                $count = $dt->diffInDays($dt->parse($event['modelData']['start']['dateTime'])) + 1; //Start from 0 so add 1
+                                                echo trans('default.days_till', ['count' => $count]);
+                                            }
 
                                         }
-                                    }   
-                                ?>
+                                       
 
+                                        ?>
+
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="small-12 columns">
+                                    <!-- 地點 -->
+                                    <div class="for__placename">
+                                        <i class="icon is__pin_b o_vt s_normal">&nbsp;</i>
+                                        <p>
+                                           <!--  國父紀念館 SYS Memorial Hall -->
+                                            {{ isset($event->location) ? $event->location : '' }}
+                                        </p>
+                                    </div>
+
+                                    <div class="to__external">
+                                        <a href="https://maps.google.com/maps?hl=zh-TW&amp;q={{ isset($event->location) ? $event->location : '' }}"  class="button small for__eventurl" target="_blank">
+                                            {{ trans('default.google_map') }}
+                                        </a> 
+                                    
+                                        <?php
+                                            //Dynamic Gen a Link button if there is one! 
+                                            if ( ! is_null($event->description))
+                                            {
+                                                $patt = "/https*:\/\/[a-zA-Z0-9\.\/_]+/";
+                                                preg_match($patt, $event->description, $output_array);
+
+                                                if (( ! is_null($output_array[0])) && ( ! empty($output_array[0])))
+                                                {   
+                                                    //Then we parsed a URL link: put it here.   
+                                                    $link_button = '<a href="' . $output_array[0] . '" class="button small for__navigate" target="_blank">';
+                                                    $link_button .= trans('default.event_link');
+                                                    $link_button .= '</a>';
+
+                                                    echo $link_button;
+
+
+                                                    //Displaying the Link
+                                                    $link_show  = '<p class="show_url"><a href="' . $output_array[0] . '" target="_blank">' . $output_array[0] . '</a></p>';
+                                                 
+                                                    echo $link_show;
+
+                                                }
+                                            }   
+                                        ?>
+
+                                    </div>
+
+                                </div>
                             </div>
 
                         </div>
                     </div>
 
+                    <!-- 本次活動說明 -->
+                    <div class="small-12 medium-6 columns">
+
+                        <div class="for__description">
+                            <p>
+                                
+                                {{ is_null($event->description) ? '' : $event->description }}
+
+                            </p>
+                        </div>
+
+                    </div>
 
                 </div>
             </div>
 
-            <div class="event_page small-12 medium-6 large-4 columns">
-                <div class="for__description">
-                    <p>
-                        
-                        {{ is_null($event->description) ? '' : $event->description }}
+            <div class="event_page small-12 medium-4 columns">
 
-                        <!-- 活動頁面 https://www.facebook.com/events/102046990207239/
-                        【Swing Dance 體驗教學：16:30~】→不須舞蹈基礎，歡迎! 
-                        (根據現場情況時間可能更動，請隨意詢問周圍舞者關於體驗教學詳情) -->
-                    </p>
-                </div>
-            </div>
-
-            <div class="event_page small-12 large-4 columns">
-                <div class="seperator row columns hide-for-large">
+                <div class="seperator row columns hide-for-medium">
                     <hr>
-                </div> 
+                </div>
 
                 <div class="row align-center">
-                    <div class="event_featured_cover">
-                        &nbsp;
+                    <div class="event_map_display">
+                        Google Maps Here
 
                     @if(isset($event->location))
 
@@ -210,10 +221,26 @@ $weekday['tw'] = ['周日', '周一','周二','周三','周四','周五','周六
                         </a>
                     </div> -->
                 </div>
+
+
+             </div>
+
+
+        </div>
+
+
+        <div class="row">
+
+
+
+            <div class="event_page small-12 large-4 columns">
+
+
+                
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="content is__detail row">
         <div class="small-12 columns">
             <div class="the_event is__recommend">
                 <h6>
