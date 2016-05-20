@@ -77,7 +77,6 @@ class EventController extends Controller
                 array('id' => 14,'name' => '西雅圖咖啡世貿旗艦店','address' => '110台北市信義區信義路五段6號'),
 
                 array('id' => 99,'name' => '其他(請務必在說明中填寫)','address' => ''),
-
         );
 
         $data['user_name'] = $this->_user['name'];

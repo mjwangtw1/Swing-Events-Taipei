@@ -51,7 +51,7 @@ Route::get('/.well-known/acme-challenge/{id}', function($id)
 Route::get('/', 'DataController@home'); //預設直接進來 就看本日活動
 
 //Here for backend create content
-Route::get('/event/new', 'EventController@new'); //For making new events.
+Route::get('/new_event', 'EventController@new'); //For making new events.
 Route::get('/event_list', 'EventController@index'); //Post-login Class Controller.
 
 Route::post('/event/insert', 'EventController@insert'); //For ACTUAL inserting a new data.
