@@ -40,6 +40,6 @@ $(function()
     // //Sun
     // feature_event_image.sun_ss_sun_outdoor = 'https://scontent-tpe1-1.xx.fbcdn.net/v/t1.0-9/12512641_10208470701592694_323433579423670011_n.jpg?oh=d1b8cb0176d62aea71c7efbf205db444&oe=57E240B6';
 
-    $('.featured_cover').css('background-image', 'url(' + featured_image_path + ')');
+    //$('.featured_cover').css('background-image', 'url(' + featured_image_path + ')');
 
 });//end of Doc ready
