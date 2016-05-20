@@ -55,7 +55,7 @@ class EventController extends Controller
      *
      * @return [type] [description]
      */
-    public function new()
+    public function new_event()
     {
         $event_location = [];
 
