@@ -23,7 +23,7 @@ class EventController extends Controller
 
     const GOOGLE_MAP_API_KEY = 'AIzaSyBY7C54J0Z2tm_OOORmDvVY0gZjeNQIvQY';
 
-    const TAIPEI_TIMEZONE = 'Taipei/Taiwan';
+    const TAIPEI_TIMEZONE = 'Asia/Taipei';
 
     /**
      * Create a new controller instance.
@@ -41,14 +41,12 @@ class EventController extends Controller
 
     public function index()
     {
-
         $data['user_name'] = $this->_user['name'];
 
         return view('course.event_manage', compact('data'));
 
         //return $userId = Auth::user();
     }
-
 
     /**
      * Display new course insert interface.
@@ -105,21 +103,36 @@ class EventController extends Controller
 
         $data['event_submitter'] = $this->_user['name'];
 
-        $data['event_time'] = date($request->input('event_time'), RFC_3339);
+        $date_time = strtotime($request->input('event_time')); //Convert to UNIX time
+        $date_time = date("Y-m-d\TH:i:sP", $date_time); //Format to Google time
+
+        $end_time = strtotime($request->input('event_time') . ' + 2 hours');
+        $end_time = date('Y-m-d\TH:i:sP', $end_time);
+
+        $data['event_time'] = $date_time;
+        $data['event_end_time'] = $end_time;
+
+        if (2 == $data['dance_style'])
+        {
+            $calendarId = Self::TAIPEI_BLUES_EVENTS_CALENDAR;
+        }
+
+        //Switch calendar - Override if special event.
+        if ( ! empty($data['special_event_flag']) && 1 == $data['special_event_flag'])
+        {
+            $calendarId = Self::TAIWAN_SWING_CALENDAR_SPECIAL;
+        } 
 
         //Here call and write to Calendar API.
         $result = $this->insert_to_calendar($calendarId, $data);
 
-        //Here write to Database (new feature)
-        //return back();
-
-        return $result;
+        return $result->htmlLink;
     }
 
     public function insert_to_calendar($calendarId = '', $data = '')
     {
         $calendar = new GoogleCalendar;
-        
+
         //Sample time format: //2016-05-21T09:00:00-07:00
 
         $event_detail = array(
@@ -131,7 +144,7 @@ class EventController extends Controller
             'timeZone' => self::TAIPEI_TIMEZONE,
           ),
           'end' => array(
-            //'dateTime' => '2016-05-21T17:00:00-07:00',
+            'dateTime' => $data['event_end_time'],
             'timeZone' => self::TAIPEI_TIMEZONE,
           ),
           'recurrence' => array(
@@ -152,14 +165,13 @@ class EventController extends Controller
           ),
         );
 
-        //echo 'check event_detail';
-        var_dump($event_detail);
+        $event = $calendar->insert($calendarId, $event_detail);
 
-        //$event = $calendar->insert($calendarId, $event_detail);
-       
-        //return $event->htmlLink;
-         //return 'Event created: %s\n', $event->htmlLink;
+        return $event;
     }
+
+
+
 
 
 
