@@ -106,7 +106,7 @@ class EventController extends Controller
 
         $data['event_submitter'] = $this->_user['name'];
 
-        $data['event_time'] = $request->input('event_time');
+        $data['event_time'] = date($request->input('event_time'), RFC_3339);
 
         //Here call and write to Calendar API.
         $result = $this->insert_to_calendar($calendarId, $data);
