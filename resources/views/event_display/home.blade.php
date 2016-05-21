@@ -65,6 +65,10 @@ $weekday['tw'] = ['周日', '周一','周二','周三','周四','周五','周六
 
     </header>
 
+    <div class="header_bg">
+        &nbsp;
+    </div>
+
 
     <div class="featured_cover">
         &nbsp;
@@ -341,6 +345,16 @@ $weekday['tw'] = ['周日', '周一','周二','周三','周四','周五','周六
 @stop
 
 @section('footer_js')
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/ScrollMagic.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/plugins/animation.gsap.min.js"></script>
+    <!-- ScrollMagic Indicator -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/plugins/debug.addIndicators.min.js"></script> -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.2/plugins/CSSPlugin.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.2/easing/EasePack.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.2/TimelineLite.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.2/TweenLite.min.js"></script>
 
     <script src="{{ URL::asset('js/custom/home.js') }}"></script>
 

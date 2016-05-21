@@ -42,4 +42,30 @@ $(function()
 
     //$('.featured_cover').css('background-image', 'url(' + featured_image_path + ')');
 
+    // 0520: New gsap animation
+    // 變數宣告
+    var controller = new ScrollMagic.Controller();
+
+    // Timeline宣告
+    var tl_header_bg = new TimelineLite()
+        .to(".page__home", .5, {scaleX: .7, scaleY: .7, y: -15})
+        .to(".header_bg", .5, {opacity: 1}, "-=0.4")
+
+
+    // ScrollMagic參數設定 (scene1)
+    var scene1 = new ScrollMagic.Scene
+    ({
+        triggerElement: ".is__featured",
+        triggerHook: 0.6,
+        // duration: 100,
+        reverse: true
+    })
+    
+    // 呼叫 Timeline
+    .setTween(tl_header_bg)
+    // Debug Mode
+    // .addIndicators({name: "1 (duration: 0)"})
+    // 啟動 Scrollmagic
+    .addTo(controller);
+
 });//end of Doc ready
