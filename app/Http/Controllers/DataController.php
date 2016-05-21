@@ -88,17 +88,6 @@ class DataController extends Controller
     }
 
 
-    public function delete_event_from_calendar()
-    {
-        $calendar = new GoogleCalendar;
-
-        $calendarId = Self::TAIWAN_SWING_CALENDAR_REGULAR;
-        $eventId = '9jfiifalphl33b3fpf6l9ifob0';
-
-        $result = $calendar->delete($calendarId, $eventId);
-
-        return $result;
-    }
 
 
     public function course()

@@ -24,6 +24,7 @@ class EventController extends Controller
     const GOOGLE_MAP_API_KEY = 'AIzaSyBY7C54J0Z2tm_OOORmDvVY0gZjeNQIvQY';
 
     const TAIPEI_TIMEZONE = 'Asia/Taipei';
+    const PASS_CODE = 'bibi';
 
     /**
      * Create a new controller instance.
@@ -100,17 +101,30 @@ class EventController extends Controller
         $data['event_link'] = $request->input('event_link');
         $data['event_desc'] = $request->input('event_desc');
         $data['event_tags'] = $request->input('event_tags');
+        
+        $event_length = $request->input('event_length');
 
         $data['event_submitter'] = $this->_user['name'];
 
         $date_time = strtotime($request->input('event_time')); //Convert to UNIX time
         $date_time = date("Y-m-d\TH:i:sP", $date_time); //Format to Google time
 
-        $end_time = strtotime($request->input('event_time') . ' + 2 hours');
+        $end_time = strtotime($request->input('event_time') . " + $event_length hours");
         $end_time = date('Y-m-d\TH:i:sP', $end_time);
 
         $data['event_time'] = $date_time;
         $data['event_end_time'] = $end_time;
+
+        $passcode = $request->input('passcode');
+
+        //Block this just avoid BOT injection.
+        if (Self::PASS_CODE != $passcode)
+        {
+            echo 'Wrong passcode! Try again.';
+
+            return back();
+        }
+
 
         if (2 == $data['dance_style'])
         {
@@ -123,12 +137,13 @@ class EventController extends Controller
             $calendarId = Self::TAIWAN_SWING_CALENDAR_SPECIAL;
         } 
 
-        // var_dump($date_time);
+        // var_dump($passcode);
+        // exit();
 
         //Here call and write to Calendar API.
-        $result = $this->insert_to_calendar($calendarId, $data);
+        //$result = $this->insert_to_calendar($calendarId, $data);
 
-        return $result->htmlLink;
+        return $result->eventId;
     }
 
     public function insert_to_calendar($calendarId = '', $data = '')
@@ -143,11 +158,11 @@ class EventController extends Controller
           'description' => $data['event_desc'],
           'start' => array(
             'dateTime' => $data['event_time'],
-            'timeZone' => self::TAIPEI_TIMEZONE,
+            //'timeZone' => self::TAIPEI_TIMEZONE,
           ),
           'end' => array(
             'dateTime' => $data['event_end_time'],
-            'timeZone' => self::TAIPEI_TIMEZONE,
+            //'timeZone' => self::TAIPEI_TIMEZONE,
           ),
           'recurrence' => array(
             // 'RRULE:FREQ=DAILY;COUNT=2'
@@ -167,12 +182,22 @@ class EventController extends Controller
           ),
         );
 
-        $event = $calendar->insert($calendarId, $event_detail);
-
-        return $event;
+        return $calendar->insert($calendarId, $event_detail);
     }
 
 
+
+    public function delete_event_from_calendar()
+    {
+        $calendar = new GoogleCalendar;
+
+        $calendarId = Self::TAIWAN_SWING_CALENDAR_REGULAR;
+        $eventId = 'aeq4n0tg5bcm3vs9qkjl7r53r0';
+
+        $result = $calendar->delete($calendarId, $eventId);
+
+        return $result;
+    }   
 
 
 

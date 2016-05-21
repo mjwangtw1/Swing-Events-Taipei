@@ -21,7 +21,7 @@
                         <div class="form-group">
                           <label class="col-md-4 control-label" for="textinput">活動名稱</label>  
                           <div class="col-md-4">
-                          <input id="textinput" name="event_name" type="text" placeholder="Name of Event?" class="form-control input-md">
+                          <input id="textinput" name="event_name" type="text" placeholder="Name of Event?" class="form-control input-md" required>
                             
                           </div>
                         </div>
@@ -31,7 +31,7 @@
                           <label class="col-md-4 control-label" for="radios">風格</label>
                           <div class="col-md-4"> 
                             <label class="radio-inline" for="radios-0">
-                              <input type="radio" name="dance_style" id="radios-0" value="1" checked="checked">
+                              <input type="radio" name="dance_style" id="radios-0" value="1" checked="checked" required>
                               Swing
                             </label> 
                             <label class="radio-inline" for="radios-1">
@@ -64,7 +64,7 @@
                         <div class="form-group">
                           <label class="col-md-4 control-label" for="selectbasic">請選擇一個地點</label>
                           <div class="col-md-4">
-                            <select id="selectbasic" name="location" class="form-control">
+                            <select id="selectbasic" name="location" class="form-control" > 
 
                               <?php 
 
@@ -117,12 +117,28 @@
 
                         <!-- Text input-->
                         <div class="form-group">
-                          <label class="col-md-4 control-label" for="textinput">時間</label>  
+                          <label class="col-md-4 control-label" for="textinput">活動開始時間</label>  
                           <div class="col-md-4">
-                              <input id="textinput" name="event_time" type="text" placeholder="2016/05/18 20:00:00" class="form-control input-md">
+                              <input id="textinput" name="event_time" type="text" placeholder="2032/05/18 20:00:00" class="form-control input-md" required>
                               <span class="help-block time_help">請依照上面的格式輸入, 以便資料建立</span>  
                           </div>
                         </div>
+
+                          <div class="form-group">
+                          <label class="col-md-4 control-label" for="selectbasic">活動時間</label>
+                          <div class="col-md-4">
+                            <select id="selectbasic" name="event_length" class="form-control">
+                                
+                              <option value="2">2 小時</option>  
+                              <option value="3">3 小時</option> 
+                              <option value="4">4 小時</option> 
+                              <option value="5">5 小時</option> 
+
+                              <span class="help-block end_time_help">請選擇活動時間</span>
+                            </select>
+                          </div>
+                        </div>
+
 
                         <!-- Text input-->
                         <div class="form-group">
@@ -151,12 +167,21 @@
                           </div>
                         </div>
 
+                        <div class="form-group">
+                          <label class="col-md-4 control-label" for="textinput">passcode</label>  
+                          <div class="col-md-4">
+                          <input id="textinput" name="passcode" type="text" placeholder="Event Link URL" class="form-control input-md" required>
+                          <span class="help-block time_help">請輸入passcode 才能建立唷! (請洽阿懋) </span>  
+                          </div>
+                        </div>
+
                         <!-- Button (Double) -->
                         <div class="form-group">
                           <label class="col-md-4 control-label" for="button1id"></label>
                           <div class="col-md-8">
                             <button id="button1id" name="submit" class="btn btn-success">Yes 我要新增</button>
-                            <button id="button2id" name="cancel" class="btn btn-danger"> Nah 算惹</button>
+                            <!-- <button id="button2id" name="cancel" class="btn btn-danger"> </button> -->
+                            <a href="/" class="btn btn-danger" role="button">Nah 算惹</a>
                           </div>
                         </div>
   
