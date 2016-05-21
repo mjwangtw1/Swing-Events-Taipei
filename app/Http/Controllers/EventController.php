@@ -118,10 +118,12 @@ class EventController extends Controller
         }
 
         //Switch calendar - Override if special event.
-        if ( ! empty($data['special_event_flag']) && 1 == $data['special_event_flag'])
+        if ( ! is_null($data['special_event_flag']) && 1 == $data['special_event_flag'])
         {
             $calendarId = Self::TAIWAN_SWING_CALENDAR_SPECIAL;
         } 
+
+        // var_dump($date_time);
 
         //Here call and write to Calendar API.
         $result = $this->insert_to_calendar($calendarId, $data);

@@ -51,9 +51,10 @@
                           <div class="col-md-4">
                             <div class="input-group">
                               <span class="input-group-addon">     
-                                  <input type="checkbox">     
-                              </span>
-                              <input id="prependedcheckbox" name="is_special_event" class="form-control" type="text" placeholder="這是一個特殊活動唷">
+                                  <input type="checkbox" name="is_special_event" value="1">     
+                               </span>
+                              <input id="prependedcheckbox" class="form-control" type="text" placeholder="這是一個特殊活動!" ㄒ>
+                              
                             </div>
                             <p class="help-block">特殊活動請勾選,謝謝</p>
                           </div>
@@ -128,7 +129,7 @@
                           <label class="col-md-4 control-label" for="textinput">活動連結</label>  
                           <div class="col-md-4">
                           <input id="textinput" name="event_link" type="text" placeholder="Event Link URL" class="form-control input-md">
-                            
+                          <span class="help-block time_help">前面請加 http://</span>  
                           </div>
                         </div>
 
@@ -136,7 +137,9 @@
                         <div class="form-group">
                           <label class="col-md-4 control-label" for="textarea">活動說明</label>
                           <div class="col-md-4">                     
-                            <textarea class="form-control" id="textarea" name="event_desc">Tell us about the event! Live band? DJ music ? No Alcohol ? Bring your Own shoes? Taster Lessons? </textarea>
+                            <textarea class="form-control" id="textarea" name="event_desc" placeholder="Tell us about the event! Live band? DJ music ? No Alcohol ? Bring your Own shoes? Taster Lessons?">
+                              
+                            </textarea>
                           </div>
                         </div>
 
