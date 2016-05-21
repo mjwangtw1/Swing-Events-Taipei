@@ -137,28 +137,33 @@ $weekday['tw'] = ['周日', '周一','周二','周三','周四','周五','周六
                                     
                                         <?php
                                             //Dynamic Gen a Link button if there is one! 
-                                            if ( ! is_null($event->description))
+                                            if ( ! is_null($event->description) && ! empty($event->description))
                                             {
                                                 $patt = "/https*:\/\/[a-zA-Z0-9\.\/_]+/";
                                                 preg_match($patt, $event->description, $output_array);
 
-                                                if (( ! is_null($output_array[0])) && ( ! empty($output_array[0])))
-                                                {   
-                                                    //Then we parsed a URL link: put it here.   
-                                                    $link_button = '<a href="' . $output_array[0] . '" class="button small for__navigate" target="_blank">';
-                                                    $link_button .= trans('default.event_link');
-                                                    $link_button .= '</a>';
+                                                if ( ! empty($output_array))
+                                                {
+                                                     if (( ! is_null($output_array[0])) && ( ! empty($output_array[0])))
+                                                    {   
+                                                        //Then we parsed a URL link: put it here.   
+                                                        $link_button = '<a href="' . $output_array[0] . '" class="button small for__navigate" target="_blank">';
+                                                        $link_button .= trans('default.event_link');
+                                                        $link_button .= '</a>';
 
-                                                    echo $link_button;
+                                                        echo $link_button;
 
+                                                        //Displaying the Link
+                                                        $link_show  = '<p class="show_url"><a href="' . $output_array[0] . '" target="_blank">' . $output_array[0] . '</a></p>';
+                                                     
+                                                        echo $link_show;
+                                                    }
+                                                 }   
 
-                                                    //Displaying the Link
-                                                    $link_show  = '<p class="show_url"><a href="' . $output_array[0] . '" target="_blank">' . $output_array[0] . '</a></p>';
-                                                 
-                                                    echo $link_show;
 
                                                 }
-                                            }   
+
+                                               
                                         ?>
 
                                     </div>

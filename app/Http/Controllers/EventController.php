@@ -26,6 +26,25 @@ class EventController extends Controller
     const TAIPEI_TIMEZONE = 'Asia/Taipei';
     const PASS_CODE = 'bibi';
 
+    private $_location_list  = array(
+                array('id' => 1,'name' => '華山木地板','address' => '100台北市中正區八德路一段1號'),
+                array('id' => 2,'name' => '松煙木地板','address' => ' 110台北市信義區光復南路133號'),
+                array('id' => 3,'name' => '國父紀念館走廊下','address' => '110台北市信義區仁愛路四段505號'),
+                array('id' => 4,'name' => '圓山 Maji Maji 集食行樂','address' => '104台北市中山區玉門街1號'),
+                array('id' => 5,'name' => '圓山 Triangle Bar','address' => '104台北市中山區玉門街1號'),
+                array('id' => 6,'name' => '圓山 花博木地板','address' => '104台北市中山區玉門街1號'),
+                array('id' => 7,'name' => 'USR127玩藝工廠','address' => '103台北市大同區迪化街一段127號號'),
+                array('id' => 8,'name' => 'Sappho Live Jazz','address' => '106台北市大安區安和路一段102巷1號'),
+                array('id' => 9,'name' => 'TAV','address' => '100台北市中正區北平東路7號'),
+                array('id' => 10,'name' => 'Tangorismo','address' => '106台北市大安區忠孝東路四段169號之4'),
+                array('id' => 11,'name' => 'Corazon Tango','address' => '106復興南路一段92-9號'),
+                array('id' => 12,'name' => '台大滴咖啡','address' => ' 106台北市大安區羅斯福路四段1號台大體育館二樓'),
+                array('id' => 13,'name' => '中山堂','address' => '100台北市中正區延平南路98號'),
+                array('id' => 14,'name' => '西雅圖咖啡世貿旗艦店','address' => '110台北市信義區信義路五段6號'),
+
+                array('id' => 99,'name' => '其他(請務必在說明中填寫)','address' => ''),
+        );
+
     /**
      * Create a new controller instance.
      *
@@ -59,24 +78,7 @@ class EventController extends Controller
         $event_location = [];
 
         //Update location here;
-        $event_location = array(
-                array('id' => 1,'name' => '華山木地板','address' => '100台北市中正區八德路一段1號'),
-                array('id' => 2,'name' => '松煙木地板','address' => ' 110台北市信義區光復南路133號'),
-                array('id' => 3,'name' => '國父紀念館走廊下','address' => '110台北市信義區仁愛路四段505號'),
-                array('id' => 4,'name' => '圓山 Maji Maji 集食行樂','address' => '104台北市中山區玉門街1號'),
-                array('id' => 5,'name' => '圓山 Triangle Bar','address' => '104台北市中山區玉門街1號'),
-                array('id' => 6,'name' => '圓山 花博木地板','address' => '104台北市中山區玉門街1號'),
-                array('id' => 7,'name' => 'USR127玩藝工廠','address' => '103台北市大同區迪化街一段127號號'),
-                array('id' => 8,'name' => 'Sappho Live Jazz','address' => '106台北市大安區安和路一段102巷1號'),
-                array('id' => 9,'name' => 'TAV','address' => '100台北市中正區北平東路7號'),
-                array('id' => 10,'name' => 'Tangorismo','address' => '106台北市大安區忠孝東路四段169號之4'),
-                array('id' => 11,'name' => 'Corazon Tango','address' => '106復興南路一段92-9號'),
-                array('id' => 12,'name' => '台大滴咖啡','address' => ' 106台北市大安區羅斯福路四段1號台大體育館二樓'),
-                array('id' => 13,'name' => '中山堂','address' => '100台北市中正區延平南路98號'),
-                array('id' => 14,'name' => '西雅圖咖啡世貿旗艦店','address' => '110台北市信義區信義路五段6號'),
-
-                array('id' => 99,'name' => '其他(請務必在說明中填寫)','address' => ''),
-        );
+        $event_location = $this->_location_list;
 
         $data['user_name'] = $this->_user['name'];
         
@@ -107,10 +109,10 @@ class EventController extends Controller
         $data['event_submitter'] = $this->_user['name'];
 
         $date_time = strtotime($request->input('event_time')); //Convert to UNIX time
-        $date_time = date("Y-m-d\TH:i:sP", $date_time); //Format to Google time
+        $date_time = date("Y-m-d\ H:i:s", $date_time); //Format to Google time
 
         $end_time = strtotime($request->input('event_time') . " + $event_length hours");
-        $end_time = date('Y-m-d\TH:i:sP', $end_time);
+        $end_time = date('Y-m-d\ H:i:s', $end_time);
 
         $data['event_time'] = $date_time;
         $data['event_end_time'] = $end_time;
@@ -120,11 +122,8 @@ class EventController extends Controller
         //Block this just avoid BOT injection.
         if (Self::PASS_CODE != $passcode)
         {
-            echo 'Wrong passcode! Try again.';
-
-            return back();
+            return back(); //Throw you back motherfucker.
         }
-
 
         if (2 == $data['dance_style'])
         {
@@ -137,13 +136,13 @@ class EventController extends Controller
             $calendarId = Self::TAIWAN_SWING_CALENDAR_SPECIAL;
         } 
 
-        // var_dump($passcode);
-        // exit();
+        // echo 'check data';
+        // var_dump($data);
 
         //Here call and write to Calendar API.
-        //$result = $this->insert_to_calendar($calendarId, $data);
+        $result = $this->insert_to_calendar($calendarId, $data);
 
-        return $result->eventId;
+        return $result->id;
     }
 
     public function insert_to_calendar($calendarId = '', $data = '')
@@ -152,17 +151,19 @@ class EventController extends Controller
 
         //Sample time format: //2016-05-21T09:00:00-07:00
 
+        $location_list = $this->_location_list; //We toss in the Address instead of the id.
+
         $event_detail = array(
           'summary' => $data['event_name'],
-          'location' => $data['location'],
+          'location' => $this->_location_list[$data['location']]['address'],
           'description' => $data['event_desc'],
           'start' => array(
             'dateTime' => $data['event_time'],
-            //'timeZone' => self::TAIPEI_TIMEZONE,
+            'timeZone' => self::TAIPEI_TIMEZONE,
           ),
           'end' => array(
             'dateTime' => $data['event_end_time'],
-            //'timeZone' => self::TAIPEI_TIMEZONE,
+            'timeZone' => self::TAIPEI_TIMEZONE,
           ),
           'recurrence' => array(
             // 'RRULE:FREQ=DAILY;COUNT=2'
@@ -187,12 +188,12 @@ class EventController extends Controller
 
 
 
-    public function delete_event_from_calendar()
+    public function delete_event_from_calendar($calendarId, $eventId)
     {
         $calendar = new GoogleCalendar;
 
-        $calendarId = Self::TAIWAN_SWING_CALENDAR_REGULAR;
-        $eventId = 'aeq4n0tg5bcm3vs9qkjl7r53r0';
+        //$calendarId = Self::TAIWAN_SWING_CALENDAR_REGULAR;
+        //$eventId = 'olknmlv8133vqu5gi73i4300a4';
 
         $result = $calendar->delete($calendarId, $eventId);
 

@@ -119,7 +119,7 @@
                         <div class="form-group">
                           <label class="col-md-4 control-label" for="textinput">活動開始時間</label>  
                           <div class="col-md-4">
-                              <input id="textinput" name="event_time" type="text" placeholder="2032/05/18 20:00:00" class="form-control input-md" required>
+                              <input id="textinput" name="event_time" type="text" placeholder="2032/05/18 20:00:00" class="form-control input-md" maxlength="20" required>
                               <span class="help-block time_help">請依照上面的格式輸入, 以便資料建立</span>  
                           </div>
                         </div>
@@ -180,8 +180,8 @@
                           <label class="col-md-4 control-label" for="button1id"></label>
                           <div class="col-md-8">
                             <button id="button1id" name="submit" class="btn btn-success">Yes 我要新增</button>
-                            <!-- <button id="button2id" name="cancel" class="btn btn-danger"> </button> -->
                             <a href="/" class="btn btn-danger" role="button">Nah 算惹</a>
+
                           </div>
                         </div>
   
