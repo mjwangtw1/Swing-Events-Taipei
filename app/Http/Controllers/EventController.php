@@ -108,11 +108,13 @@ class EventController extends Controller
 
         $data['event_submitter'] = $this->_user['name'];
 
+        date_default_timezone_set(self::TAIPEI_TIMEZONE);
+
         $date_time = strtotime($request->input('event_time')); //Convert to UNIX time
-        $date_time = date("Y-m-d\ H:i:s", $date_time); //Format to Google time
+        $date_time = date(DATE_RFC3339, $date_time); //Format to Google time
 
         $end_time = strtotime($request->input('event_time') . " + $event_length hours");
-        $end_time = date('Y-m-d\ H:i:s', $end_time);
+        $end_time = date(DATE_RFC3339, $end_time);
 
         $data['event_time'] = $date_time;
         $data['event_end_time'] = $end_time;
@@ -135,9 +137,6 @@ class EventController extends Controller
         {
             $calendarId = Self::TAIWAN_SWING_CALENDAR_SPECIAL;
         } 
-
-        // echo 'check data';
-        // var_dump($data);
 
         //Here call and write to Calendar API.
         $result = $this->insert_to_calendar($calendarId, $data);
@@ -191,9 +190,6 @@ class EventController extends Controller
     public function delete_event_from_calendar($calendarId, $eventId)
     {
         $calendar = new GoogleCalendar;
-
-        //$calendarId = Self::TAIWAN_SWING_CALENDAR_REGULAR;
-        //$eventId = 'olknmlv8133vqu5gi73i4300a4';
 
         $result = $calendar->delete($calendarId, $eventId);
 
