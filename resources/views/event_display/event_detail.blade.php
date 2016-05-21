@@ -195,9 +195,6 @@ $weekday['tw'] = ['周日', '周一','周二','周三','周四','周五','周六
                     <div class="event_map_display">
                     @if(isset($event->location))
                     <iframe
-                      width="100%"
-                      height="250px"
-                      frameborder="0" style="border:0"
                       src="https://www.google.com/maps/embed/v1/place?key={{$api_key}}
                         &q={{$event->location}}" allowfullscreen>
                     </iframe>
