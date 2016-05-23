@@ -7,6 +7,9 @@ $event_type_dom = ['is__swing', 'is__special', 'is__blues'];
 $weekday['en'] = ['Sun', 'Mon','Tue','Wed','Thu','Fri','Sat'];
 $weekday['tw'] = ['周日', '周一','周二','周三','周四','周五','周六'];
 
+$logo_text = ('swing' == $title_info) ? 'Swing Events' : 'Blues Events';
+$logo_class = ('swing' == $title_info) ? '' : 'is__blues'
+
 ?>
 
 @extends('layouts.swing')
@@ -18,9 +21,9 @@ $weekday['tw'] = ['周日', '周一','周二','周三','周四','周五','周六
 
             <div class="the_logo small-12 columns">
                 <h1 class="logo_text">
-                    Swing Events
+                    <?php echo $logo_text; ?>
                 </h1>
-                <div class="logo_taipei">
+                <div class="logo_taipei <?php echo $logo_class?>">
                     &nbsp;
                 </div>
             </div>
@@ -317,9 +320,9 @@ $weekday['tw'] = ['周日', '周一','周二','周三','周四','周五','周六
         <div class="the_logo small-12 columns">
             <a href="/">
                 <h4 class="logo_text">
-                    Swing Events
+                    <?php echo $logo_text?>
                 </h4>
-                <div class="logo_taipei for__footer">
+                <div class="logo_taipei for__footer <?php echo $logo_class?>">
                     &nbsp;
                 </div>
             </a>

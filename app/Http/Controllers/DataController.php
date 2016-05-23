@@ -165,7 +165,9 @@ class DataController extends Controller
         include($this->_swing_file_path); //Read the file and use the $data array right away.
         include($this->_special_file_path); //Read the special events
 
-        return view('event_display.home', compact('data','special'));
+        $title_info = 'swing';
+
+        return view('event_display.home', compact('data','special','title_info'));
     }
 
     public function blues() //This one reads blues from file directly
@@ -175,8 +177,11 @@ class DataController extends Controller
             $this->prepare_file();
         }
         include($this->_blues_file_path); //Read the file and use the $data array right away.
+        include($this->_special_file_path); //Read the special events
 
-        return view('event_display.blues', compact('data'));
+        $title_info = 'blues';
+
+        return view('event_display.home', compact('data', 'special','title_info'));
     }
 
     // FEATURE FUNCTIONS ====================================================================================
