@@ -3,7 +3,6 @@ use Carbon\Carbon;
 $dt = Carbon::now(); //Don't delete this:server site Time formatting.
 $event_type = ['Swing', 'Special', 'Blues'];
 $event_type_dom = ['is__swing', 'is__special', 'is__blues'];
-
 $weekday['en'] = ['Sun', 'Mon','Tue','Wed','Thu','Fri','Sat'];
 $weekday['tw'] = ['周日', '周一','周二','周三','周四','周五','周六'];
 
@@ -36,7 +35,6 @@ $weekday['tw'] = ['周日', '周一','周二','周三','周四','周五','周六
                         </a> -->
                     </div>
                 </div>
-
                 <!-- For Language Switch -->
                 <div class="small-4 columns">
                     <form method="post" action="/locale">
