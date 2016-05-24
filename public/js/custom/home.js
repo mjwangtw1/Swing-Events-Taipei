@@ -1,7 +1,7 @@
 //Doc Ready
 $(function() 
 {
-    var featured_image_path = 'https://scontent-tpe1-1.xx.fbcdn.net/hphotos-xtp1/v/t1.0-9/s851x315/13096080_1709318172689797_2323366522317056287_n.jpg?oh=35c7494bf39d9a5af2214561e43d6f2a&oe=57B39033';
+    var featured_image_path = '/assets/stock/featured_cover_2.png';
     //var featured_image_path = 'http://2.bp.blogspot.com/-IU6NUe_3JRA/VlaQZXDDj6I/AAAAAAADOhw/ETH4ovfm8jo/s1600/8795400.gif'; //Bird GIF
     //var featured_image_path = '/assets/stock/featured_cover.jpg'; //STOCK photo
 
@@ -54,8 +54,11 @@ $(function()
     // Timeline宣告
     var tl_header_bg = new TimelineLite()
         .to(".page__home", .5, {scaleX: .7, scaleY: .7, y: -15})
-        .to(".header_bg", .5, {opacity: 1}, "-=0.4")
+        // .to(".for__language", .25, {opacity: 0})
+        .to(".header_bg", .5, {opacity: 1 }, "-=0.4")
 
+    // var hide_lan = document.getElementsByClassName('for__language')
+    //  hide_lan[0].style.display = "none";
 
     // ScrollMagic參數設定 (scene1)
     var scene1 = new ScrollMagic.Scene
@@ -72,5 +75,71 @@ $(function()
     // .addIndicators({name: "1 (duration: 0)"})
     // 啟動 Scrollmagic
     .addTo(controller);
+
+
+    // Featured Events: Switch from for 5 seconds
+    var feaS_1 = document.getElementsByClassName("is__featured_1");
+    var feaS_2 = document.getElementsByClassName("is__featured_2");
+    // var Ovrly_1 = feaS_1.getElementsByClassName("for__switch_layer");
+    // var Ovrly_2 = feaS_2.getElementsByClassName("for__switch_layer");
+
+    // Timeline宣告
+
+    if (document.documentElement.clientWidth > 640) 
+    {
+    var tl_switch = new TimelineLite
+    (
+        { onComplete:
+            function()
+            {
+                this.restart()
+            }
+        }
+    )
+        .to(feaS_1, .5, {marginTop: 0, marginLeft: 0}, "+=7")
+        .to(feaS_2, .5, {marginTop: '-2.5rem', marginLeft: '-1.5rem'}, '-=0.25')
+        .to(feaS_1, 1, {zIndex: 50}, '-=1')
+        .to(feaS_2, 1, {zIndex: 75}, '-=1')
+        .to(".is__featured_2 .for__switch_layer", 1, {opacity: 0}, '-=0.5')
+        .to(".is__featured_1 .for__switch_layer", 1, {opacity: 1}, '-=1')
+        .to(feaS_2, .5, {marginTop: 0, marginLeft: 0}, "+=7")
+        .to(feaS_1, .5, {marginTop: '-2.5rem', marginLeft: '-1.5rem'}, "-=0.25")
+        .to(feaS_1, 1, {zIndex: 75}, '-=1')
+        .to(feaS_2, 1, {zIndex: 50}, '-=1')
+        .to(".is__featured_2 .for__switch_layer", 1, {opacity: 1}, "-=0.5")
+        .to(".is__featured_1 .for__switch_layer", 1, {opacity: 0}, "-=1")
+     
+            
+    // 呼叫 Timeline
+    .setTween(tl_switch)
+    }
+    else 
+    {
+        var tl_switch = new TimelineLite
+        (
+            { onComplete:
+                function()
+                {
+                    this.restart()
+                }
+            }
+        )
+        .to(feaS_1, .5, {marginTop: '3rem'}, "+=8")
+        .to(feaS_2, .5, {marginTop: 0}, '-=0.25')
+        .to(feaS_1, 1, {zIndex: 50}, '-=1')
+        .to(feaS_2, 1, {zIndex: 75}, '-=1')
+        .to(".is__featured_2 .for__switch_layer", 1, {opacity: 0}, '-=0.5')
+        .to(".is__featured_1 .for__switch_layer", 1, {opacity: 1}, '-=1')
+        .to(feaS_2, .5, {marginTop: '3rem'}, "+=5")
+        .to(feaS_1, .5, {marginTop: 0}, "-=0.25")
+        .to(feaS_1, 1, {zIndex: 75}, '-=1')
+        .to(feaS_2, 1, {zIndex: 50}, '-=1')
+        .to(".is__featured_2 .for__switch_layer", 1, {opacity: 1}, "-=0.5")
+        .to(".is__featured_1 .for__switch_layer", 1, {opacity: 0}, "-=1")
+     
+            
+    // 呼叫 Timeline
+    .setTween(tl_switch)
+    }
 
 });//end of Doc ready
