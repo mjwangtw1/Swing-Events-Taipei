@@ -56,7 +56,7 @@ Route::get('/event_list', 'EventController@index'); //Post-login Class Controlle
 
 Route::post('/event/insert', 'EventController@insert'); //For ACTUAL inserting a new data.
 
-
+Route::get('/try_data', 'CalendarController@try_data'); //This is the sample .
 
 
 //OFFICIAL
