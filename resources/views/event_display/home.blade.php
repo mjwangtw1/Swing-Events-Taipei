@@ -105,80 +105,176 @@ $logo_class = ('swing' == $title_info) ? '' : 'is__blues'
 
         <div class="the_event is__featured small-12 medium-5 medium-offset-1 columns">
             
-            <a href="{{ $special_link }}" class="description_box row small-collapse align-center">
-                <!-- 活動標題 -->
-                <h3 class="event_header for__feature_title small-12 columns">
+            <div class="row align-center">
+                <div class="small-12 columns">
 
-                    {{ $special_event['summary'] }}
-
-                    <span class="label {{ $event_type_dom[$special_type] }} for__home">{{ $event_type[$special_type] }}</span>
-    
-                    <!-- @if( $featured_flag)
-
-                        <span class="label to__detail">
-                           {{ trans('default.featured') }}
-                            <i class="icon o_vt s_small is__chevy_right"></i>
-                        </span>
-                    
-                    @endif -->
-                </h3>
-                <div class="small-3 medium-2 columns">
-                    <div class="date_calendar">
-                        <!-- 月份 -->
-                        <div class="for__month">
-                          {{ $dt->parse($special_event['start']['dateTime'])->format('M') }}
-                        </div>
-                        <!-- 日期 -->
-                        <div class="for__day">
-                            {{ $dt->parse($special_event['start']['dateTime'])->format('d') }} 
-                        </div>
-                    </div>
-                </div>
-                <div class="small-7 medium-4 columns">
-                    <div class="date_clock">
-                       
-                        <?php
-
-                            $weekday_counter = $dt->parse($special_event["start"]["dateTime"])->format("w");
-                            
-                            $lang_type = (Session::get('locale') === "tw") ? 'tw' : 'en';
-                            
-                            echo $weekday[$lang_type][$weekday_counter];
-                        ?>
-                        <!-- 視覺分隔點(全型的點)-->
-                        ．
-                        <!-- 相對日期 -->
-                        <span class="for__relateday">
+                    <div class="description_box is__featured_1 row align-center">
+                        <!-- 活動標題 -->
+                        <h3 class="event_header for__feature_title small-12 columns">
                         
+                            {{ $special_event['summary'] }}
+                        
+                            <span class="label {{ $event_type_dom[$special_type] }} for__home">{{ $event_type[$special_type] }}</span>
+                            
+                            <!-- @if( $featured_flag)
+                        
+                                <span class="label to__detail">
+                                   {{ trans('default.featured') }}
+                                    <i class="icon o_vt s_small is__chevy_right"></i>
+                                </span>
+                            
+                            @endif -->
+                        </h3>
+
+                        <div class="small-3 medium-2 columns">
+                            <div class="date_calendar">
+                                <!-- 月份 -->
+                                <div class="for__month">
+                                  {{ $dt->parse($special_event['start']['dateTime'])->format('M') }}
+                                </div>
+                                <!-- 日期 -->
+                                <div class="for__day">
+                                    {{ $dt->parse($special_event['start']['dateTime'])->format('d') }} 
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="small-7 medium-4 columns">
+                            <div class="date_clock">
+                               
                                 <?php
-                                    if($dt->parse($special_event['start']['dateTime'])->isToday())
-                                    {
-                                        echo trans('default.today'); 
-                                    }
-                                    else
-                                    {
-                                        //Calculate the Difference.
-                                        $count = $dt->diffInDays($dt->parse($special_event['start']['dateTime'])) + 1; //Start from 0 so add 1
-                                        echo trans('default.days_till', ['count' => $count]);
-                                    }
+                        
+                                    $weekday_counter = $dt->parse($special_event["start"]["dateTime"])->format("w");
+                                    
+                                    $lang_type = (Session::get('locale') === "tw") ? 'tw' : 'en';
+                                    
+                                    echo $weekday[$lang_type][$weekday_counter];
                                 ?>
-                        </span>
-                        <!-- 視覺分隔點 -->
-                        ．
-                        <!-- 當天時間 -->
-                        <span class="for__oclock">
-                            {{ $dt->parse($special_event['start']['dateTime'])->format('H:i') }} 
-                        </span>
+                                <!-- 視覺分隔點(全型的點)-->
+                                ．
+                                <!-- 相對日期 -->
+                                <span class="for__relateday">
+                                
+                                        <?php
+                                            if($dt->parse($special_event['start']['dateTime'])->isToday())
+                                            {
+                                                echo trans('default.today'); 
+                                            }
+                                            else
+                                            {
+                                                //Calculate the Difference.
+                                                $count = $dt->diffInDays($dt->parse($special_event['start']['dateTime'])) + 1; //Start from 0 so add 1
+                                                echo trans('default.days_till', ['count' => $count]);
+                                            }
+                                        ?>
+                                </span>
+                                <!-- 視覺分隔點 -->
+                                ．
+                                <!-- 當天時間 -->
+                                <span class="for__oclock">
+                                    {{ $dt->parse($special_event['start']['dateTime'])->format('H:i') }} 
+                                </span>
+                            </div>
+                            <!-- 地點 -->
+                            <div class="for__placename">
+                                <i class="icon is__pin o_vt s_small">&nbsp;</i>
+                                <span>
+                              {{ isset($special_event['location']) ? $special_event['location'] : '' }}
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Switch Layer -->
+                        <a href="{{ $special_link }}" class="for__switch_layer">
+                            <div>&nbsp;</div>
+                        </a>
                     </div>
-                    <!-- 地點 -->
-                    <div class="for__placename">
-                        <i class="icon is__pin o_vt s_small">&nbsp;</i>
-                        <span>
-                      {{ isset($special_event['location']) ? $special_event['location'] : '' }}
-                        </span>
+
+                    <div class="description_box is__featured_2 row align-center">
+                        <!-- 活動標題 -->
+                        <h3 class="event_header for__feature_title small-12 columns">
+                        
+                            {{ $special_event['summary'] }}
+                        
+                            <span class="label {{ $event_type_dom[$special_type] }} for__home">{{ $event_type[$special_type] }}</span>
+                            
+                            <!-- @if( $featured_flag)
+                        
+                                <span class="label to__detail">
+                                   {{ trans('default.featured') }}
+                                    <i class="icon o_vt s_small is__chevy_right"></i>
+                                </span>
+                            
+                            @endif -->
+                        </h3>
+
+                        <div class="small-3 medium-2 columns">
+                            <div class="date_calendar">
+                                <!-- 月份 -->
+                                <div class="for__month">
+                                  {{ $dt->parse($special_event['start']['dateTime'])->format('M') }}
+                                </div>
+                                <!-- 日期 -->
+                                <div class="for__day">
+                                    {{ $dt->parse($special_event['start']['dateTime'])->format('d') }} 
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="small-7 medium-4 columns">
+                            <div class="date_clock">
+                               
+                                <?php
+                        
+                                    $weekday_counter = $dt->parse($special_event["start"]["dateTime"])->format("w");
+                                    
+                                    $lang_type = (Session::get('locale') === "tw") ? 'tw' : 'en';
+                                    
+                                    echo $weekday[$lang_type][$weekday_counter];
+                                ?>
+                                <!-- 視覺分隔點(全型的點)-->
+                                ．
+                                <!-- 相對日期 -->
+                                <span class="for__relateday">
+                                
+                                        <?php
+                                            if($dt->parse($special_event['start']['dateTime'])->isToday())
+                                            {
+                                                echo trans('default.today'); 
+                                            }
+                                            else
+                                            {
+                                                //Calculate the Difference.
+                                                $count = $dt->diffInDays($dt->parse($special_event['start']['dateTime'])) + 1; //Start from 0 so add 1
+                                                echo trans('default.days_till', ['count' => $count]);
+                                            }
+                                        ?>
+                                </span>
+                                <!-- 視覺分隔點 -->
+                                ．
+                                <!-- 當天時間 -->
+                                <span class="for__oclock">
+                                    {{ $dt->parse($special_event['start']['dateTime'])->format('H:i') }} 
+                                </span>
+                            </div>
+                            <!-- 地點 -->
+                            <div class="for__placename">
+                                <i class="icon is__pin o_vt s_small">&nbsp;</i>
+                                <span>
+                              {{ isset($special_event['location']) ? $special_event['location'] : '' }}
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Switch Layer -->
+                        <a href="{{ $special_link }}" class="for__switch_layer">
+                            <div>&nbsp;</div>
+                        </a>
                     </div>
+
                 </div>
-            </a>
+
+            </div>
 
         </div>
 
