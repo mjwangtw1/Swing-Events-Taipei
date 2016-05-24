@@ -5,6 +5,11 @@ $(function()
     //var featured_image_path = 'http://2.bp.blogspot.com/-IU6NUe_3JRA/VlaQZXDDj6I/AAAAAAADOhw/ETH4ovfm8jo/s1600/8795400.gif'; //Bird GIF
     //var featured_image_path = '/assets/stock/featured_cover.jpg'; //STOCK photo
 
+    var out_door_swing ='https://scontent-tpe1-1.xx.fbcdn.net/v/t1.0-9/12036520_1043850722321767_815228896261137827_n.jpg?oh=9305c825779894b481afda78a5d6388a&oe=57D06B7E';
+
+    //Turn off first.
+    //featured_image_path = out_door_swing;
+
     var feature_title = $('.for__feature_title');
 
     // console.log(feature_title);
@@ -40,7 +45,7 @@ $(function()
     // //Sun
     // feature_event_image.sun_ss_sun_outdoor = 'https://scontent-tpe1-1.xx.fbcdn.net/v/t1.0-9/12512641_10208470701592694_323433579423670011_n.jpg?oh=d1b8cb0176d62aea71c7efbf205db444&oe=57E240B6';
 
-    //$('.featured_cover').css('background-image', 'url(' + featured_image_path + ')');
+    $('.featured_cover').css('background-image', 'url(' + featured_image_path + ')');
 
     // 0520: New gsap animation
     // 變數宣告

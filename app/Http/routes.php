@@ -57,9 +57,12 @@ Route::get('/event_list', 'EventController@index'); //Post-login Class Controlle
 Route::post('/event/insert', 'EventController@insert'); //For ACTUAL inserting a new data.
 
 
+
+
 //OFFICIAL
 Route::get('/blues', 'DataController@blues'); //Sync file and create local files.
 Route::get('/home', 'DataController@home'); // List Events within this week
+Route::get('/realtime', 'DataController@fetch_api_data'); // List Events within this week
 Route::get('/now', 'DataController@now');   // List whatever happened Today.
 Route::get('/event/{calendarId}/{eventId}/{typeId}', 'DataController@event'); //List Specific Event with Detailed Info
 

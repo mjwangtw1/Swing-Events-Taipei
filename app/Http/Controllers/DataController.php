@@ -186,6 +186,53 @@ class DataController extends Controller
 
     // FEATURE FUNCTIONS ====================================================================================
     // FEATURE FUNCTIONS ====================================================================================
+    
+    //Real time data fetching.
+    public function fetch_api_data()
+    {
+        $calendar = new GoogleCalendar;
+    
+        //Parameters : Events within this week 
+        $optParams = array(
+          'maxResults' => 40,
+          'orderBy' => 'startTime',
+          'singleEvents' => TRUE,
+          'timeMin' => date('c'),
+          'timeMax' => $this->_date_next_week->format('c')
+        );
+
+        //0 -> TS Regular | 1 -> TS Special | 2 -> Blues Event
+        //Swing Regular Calendar
+        $calendarId = Self::TAIWAN_SWING_CALENDAR_REGULAR; //Swing Calendar.
+        $taiwan_swing_regular_info = $calendar->get_events($calendarId, $optParams);
+        $data[0]['events']        = $taiwan_swing_regular_info['modelData']['items'];
+        $data[0]['calendarId'] = Self::TAIWAN_SWING_CALENDAR_REGULAR;
+
+        //Blues Calendar
+        $calendarId = Self::TAIPEI_BLUES_EVENTS_CALENDAR; //Swing Calendar.
+        $taiwan_swing_special_info = $calendar->get_events($calendarId, $optParams);
+        $data[2]['events']        = $taiwan_swing_special_info['modelData']['items'];
+        $data[2]['calendarId'] = Self::TAIPEI_BLUES_EVENTS_CALENDAR;
+
+        //These 2 below are needed. just to export.
+        $blues_data[2]['events']        = $taiwan_swing_special_info['modelData']['items'];
+        $blues_data[2]['calendarId'] = Self::TAIPEI_BLUES_EVENTS_CALENDAR;
+
+
+        $optParams['maxResults'] = 1; //We just fetch ONE special events;
+        $optParams['timeMax'] = $this->_current_time->addweeks(5)->format('c'); //Fetch the coming 3 weeks events.    
+        //Swing Calendar - Special
+        $calendarId = Self::TAIWAN_SWING_CALENDAR_SPECIAL; //Swing Calendar.
+        $taiwan_swing_special_info = $calendar->get_events($calendarId, $optParams);
+        $special['events'] = $taiwan_swing_special_info['modelData']['items'];
+        $special['calendarId'] = Self::TAIWAN_SWING_CALENDAR_SPECIAL;
+
+        $title_info = 'swing';
+
+        return view('event_display.home', compact('data','special','title_info'));
+    }
+
+
     //Here Feature Functions
     public function prepare_file() //List events in one week.
     {
