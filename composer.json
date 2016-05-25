@@ -8,8 +8,7 @@
         "php": ">=5.5.9",
         "laravel/framework": "5.2.*",
         "google/apiclient": "^1.1",
-        "nesbot/carbon": "^1.21",
-        "guzzlehttp/guzzle": "^6.2"
+        "nesbot/carbon": "^1.21"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
