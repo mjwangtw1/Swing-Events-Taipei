@@ -3,15 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Guzzle\Http\Client;
 
 use App\Http\Requests;
+use Symfony\Component\DomCrawler\Crawler;
 
 class CalendarController extends Controller
 {
-    const MOMO_SEARCH = 'http://www.momoshop.com.tw/mosearch/'; //add .html in the back
-    const PCHOME_SEARCH = 'http://ecshweb.pchome.com.tw/search/v3.3/?q=';
-    const YAHOO_SHOPPING = 'https://tw.search.buy.yahoo.com/search/shopping/product?p';
+    const MOMO_SEARCH = 'http://www.momomall.com.tw/mmlsearch/searchEg.jsp'; //add .html in the back
+    const MOMO_SEARCH_STR = "http://www.momomall.com.tw/mmlsearch/searchEg.jsp?data=米森 蔓越莓麥片searchEngine%22%2C%22data%22%3A%7B%22crossDomain%22%3A%221%22%2C%22dispCnt%22%3A%225%22%2C%22curPage%22%3A%221%22%2C%22cateLevel%22%3A%220%22%2C%22searchGb%22%3A%220%22%2C%22searchType%22%3A%221%22%2C%22searchValue%22%3A%22%25E7%25B1%25B3%25E6%25A3%25AE%2520%25E8%2594%2593%25E8%25B6%258A%25E8%258E%2593%25E9%25BA%25A5%25E7%2589%2587%22%7D%7D&_=1464169808700";
+
+
+    const PCHOME_SEARCH = 'http://ecshweb.pchome.com.tw/search/v3.3/all/results';
+    const YAHOO_SHOPPING = 'https://tw.search.buy.yahoo.com/search/shopping/product?p=';
     const BOOKS_TW_SHOPPING = 'http://search.books.com.tw/exep/prod_search.php?key=';
+    const ASAP_SEARCH = 'http://www.asap.com.tw/search';
 
     //
     public function index()
@@ -27,54 +33,66 @@ class CalendarController extends Controller
         $data_string = '米森 蔓越莓麥片';
         $data_string_momo = '%E7%B1%B3%E6%A3%AE-%E8%94%93%E8%B6%8A%E8%8E%93%E9%BA%A5%E7%89%87'; //Momo can't take chinese char.
 
-        $momo_url   = Self::MOMO_SEARCH . $data_string_momo . '.html'; //MOMO site
+        $momo_url   = Self::MOMO_SEARCH . $data_string; //MOMO site
         $pchome_url = Self::PCHOME_SEARCH . $data_string; //pchome_works
         $yahoo_url  = Self::YAHOO_SHOPPING . $data_string; //Yahoo also works.
         $books_url  = Self::BOOKS_TW_SHOPPING . $data_string;  //Books.com also works
 
+        $books_url = 'http://search.books.com.tw/exep/prod_search.php?key=%E7%B1%B3%E6%A3%AE+%E8%94%93%E8%B6%8A%E8%8E%93%E9%BA%A5%E7%89%87&cat=all';
+
         //Fetch the page content
-        $momo_content   = file_get_contents($momo_url);
+        //$momo_content   = file_get_contents($momo_url);
         $pchome_content = file_get_contents($pchome_url);
         $yahoo_content  = file_get_contents($yahoo_url);
         $books_content  = file_get_contents($books_url);
 
-
-        //$yahoo_url = 'http://www.asap.com.tw/item/201604AM060001091';
-
-        //CURL method
-        // $ch = curl_init();
-        // $timeout = 5;
-        // curl_setopt($ch, CURLOPT_URL, $momo_search_url);
-        // curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        // curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
-        // $data = curl_exec($ch);
-        // curl_close($ch);
-
-        //HERE then Do the regex.
-        //$patt = "/https*:\/\/[a-zA-Z0-9\.\/_]+/";
-        //$patt = "/[Pp][Rr][Ii][Cc][Ee]+/";
-        //preg_match($patt, $momo_content, $output_array);
-
-        // $patt = '/<div id="searchResults">(.*?)<\/div>/';
-        // preg_match_all($patt, $momo_content, $match);
+        //Books 
+        $crawler = new Crawler($books_content);
+        $price_books = $crawler->filter('.cntlisearch08 > .result > .searchbook > .item > .price > b')->text();
 
 
-        // $momo_dom = new \DOMDocument();
-        // $momo_dom->load($yahoo_url);
+        $client = new \GuzzleHttp\Client();
+        $response = $client->request('GET', Self::YAHOO_SHOPPING , [
+                    'query' => ['p' => $data_string]
+                ]);
+        $body = $response->getBody();
 
-        // echo $momo_dom->saveHTML();
+        $yahoo_crawler = new Crawler($body->getContents());
 
-        $momo_dom = file_get_html($yahoo_url);
-
-        //preg_match_all('#<span class="money"[^>]*>#i', $momo_content, $match);
-
-
-
-
+        $yahoo_price = $yahoo_crawler->filter('#srp_sl_result > #sr > #srp_result_list > .item > .srp-pdcontent >.yui3-g > .yui3-u > .srp-pdmaininfo > .srp-pdprice >em')->text();
+        
 
 
+        $pchome_client = new \GuzzleHttp\Client();
+        $pchome_response = $pchome_client->request('GET', Self::PCHOME_SEARCH , [
+                    'query' => ['q' => $data_string]
+                ]);
 
-        var_dump($momo_dom);
+        $pchome_body = $pchome_response->getBody()->getContents();
+
+        $pchome_result = json_decode($pchome_body, TRUE);
+
+        $pchome_price = $pchome_result['range']['min'];
+
+        //Above this one works
+
+        //$momo_try = file_get_contents($momo_url);
+        $momo_client = new \GuzzleHttp\Client(); 
+        $momo_response = $momo_client->request('POST', Self::MOMO_SEARCH , [
+                    'query' => [
+                    "flag"=>"searchEngine",
+                    "data"=>["crossDomain"=>"0","dispCnt"=>"5","curPage"=>"1","cateLevel"=>"0","searchGb"=>"0","searchType"=>"1","searchValue"=> $data_string ]
+                    ],
+
+                ]);
+
+        $momo_body = $momo_response->getBody()->getContents();
+        var_dump($momo_body);
+
+
+
+
+
 
     }
 
