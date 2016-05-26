@@ -114,7 +114,9 @@ Route::get('/data', 'DataController@index');
 //Route::get('/now', 'DataController@calendar');
 // Route::get('/event', 'DataController@event');
 //Testing
-Route::get('/test', 'DataController@test');
+Route::get('/test1', 'TestController@iteration_q');
+Route::get('/test2', 'TestController@array_q');
+Route::get('/test3', 'TestController@array_q2');
 
 //Just for Fun
 Route::get('/sam', 'DataController@sam');
