@@ -235,7 +235,6 @@ $logo_class = ('swing' == $title_info) ? '' : 'is__blues'
 
                     @endforeach
 
-
                 </div>
 
             </div>
