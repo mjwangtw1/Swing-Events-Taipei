@@ -196,7 +196,8 @@ $logo_class = ('swing' == $title_info) ? '' : 'is__blues'
                         
                             {{ $special_event['summary'] }}
                         
-                            <span class="label {{ $event_type_dom[$special_type] }} for__home">{{ $event_type[$special_type] }}</span>
+                            <!-- 0526: 取消 Featured 顯示標籤 -->
+                            <!-- <span class="label {{ $event_type_dom[$special_type] }} for__home">{{ $event_type[$special_type] }}</span> -->
                             
                             <!-- @if( $featured_flag)
                         
