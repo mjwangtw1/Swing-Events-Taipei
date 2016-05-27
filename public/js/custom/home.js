@@ -146,12 +146,29 @@ $(function()
         .to(feaS_2, .5, {marginTop: 0}, '-=0.25')
         .to(feaS_1, 1, {zIndex: 50}, '-=1')
         .to(feaS_2, 1, {zIndex: 75}, '-=1')
+        // Switch Background using callbacks
+        .add
+        (
+            function()
+            {
+                $('.featured_cover').css('background-image', 'url(' + featured_image_2_path + ')')
+            }
+        )
+        // 
         .to(".is__featured_2 .for__switch_layer", 1, {opacity: 0}, '-=0.5')
         .to(".is__featured_1 .for__switch_layer", 1, {opacity: 1}, '-=1')
         .to(feaS_2, .5, {marginTop: '3rem'}, "+=5")
         .to(feaS_1, .5, {marginTop: 0}, "-=0.25")
         .to(feaS_1, 1, {zIndex: 75}, '-=1')
         .to(feaS_2, 1, {zIndex: 50}, '-=1')
+         // Switch Background using callbacks
+        .add
+        (
+            function()
+            {
+                $('.featured_cover').css('background-image', 'url(' + featured_image_1_path + ')')
+            }
+        )
         .to(".is__featured_2 .for__switch_layer", 1, {opacity: 1}, "-=0.5")
         .to(".is__featured_1 .for__switch_layer", 1, {opacity: 0}, "-=1")
      
