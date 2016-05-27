@@ -1,7 +1,8 @@
 //Doc Ready
 $(function() 
 {
-    var featured_image_path = '/assets/stock/featured_cover_2.png';
+    var featured_image_1_path = '/assets/stock/featured_cover_1.png';
+    var featured_image_2_path = '/assets/stock/featured_cover_2.png';
     //var featured_image_path = 'http://2.bp.blogspot.com/-IU6NUe_3JRA/VlaQZXDDj6I/AAAAAAADOhw/ETH4ovfm8jo/s1600/8795400.gif'; //Bird GIF
     //var featured_image_path = '/assets/stock/featured_cover.jpg'; //STOCK photo
 
@@ -45,9 +46,9 @@ $(function()
     // //Sun
     // feature_event_image.sun_ss_sun_outdoor = 'https://scontent-tpe1-1.xx.fbcdn.net/v/t1.0-9/12512641_10208470701592694_323433579423670011_n.jpg?oh=d1b8cb0176d62aea71c7efbf205db444&oe=57E240B6';
 
-    $('.featured_cover').css('background-image', 'url(' + featured_image_path + ')');
+    $('.featured_cover').css('background-image', 'url(' + featured_image_1_path + ')');
 
-    // 0520: New gsap animation
+    // Gsap animation
     // 變數宣告
     var controller = new ScrollMagic.Controller();
 
@@ -100,12 +101,29 @@ $(function()
         .to(feaS_2, .5, {marginTop: '-2.5rem', marginLeft: '-1.5rem'}, '-=0.25')
         .to(feaS_1, 1, {zIndex: 50}, '-=1')
         .to(feaS_2, 1, {zIndex: 75}, '-=1')
+        // Switch Background using callbacks
+        .add
+        (
+            function()
+            {
+                $('.featured_cover').css('background-image', 'url(' + featured_image_2_path + ')')
+            }
+        )
+        // 
         .to(".is__featured_2 .for__switch_layer", 1, {opacity: 0}, '-=0.5')
         .to(".is__featured_1 .for__switch_layer", 1, {opacity: 1}, '-=1')
         .to(feaS_2, .5, {marginTop: 0, marginLeft: 0}, "+=7")
         .to(feaS_1, .5, {marginTop: '-2.5rem', marginLeft: '-1.5rem'}, "-=0.25")
         .to(feaS_1, 1, {zIndex: 75}, '-=1')
         .to(feaS_2, 1, {zIndex: 50}, '-=1')
+         // Switch Background using callbacks
+        .add
+        (
+            function()
+            {
+                $('.featured_cover').css('background-image', 'url(' + featured_image_1_path + ')')
+            }
+        )
         .to(".is__featured_2 .for__switch_layer", 1, {opacity: 1}, "-=0.5")
         .to(".is__featured_1 .for__switch_layer", 1, {opacity: 0}, "-=1")
      

@@ -182,7 +182,7 @@ $logo_class = ('swing' == $title_info) ? '' : 'is__blues'
                             </div>
                         </div>
 
-                        <div class="small-7 medium-4 columns">
+                        <div class="small-7 medium-6 columns">
                             <div class="date_clock">
                                
                                 <?php
