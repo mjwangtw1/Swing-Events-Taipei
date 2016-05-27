@@ -92,8 +92,8 @@ class TestController extends Controller
     {
 
 //===============================Sample Input
-        $times = 3;                  
-        $array_a = [3,8,9,7,6];
+        $K = 6;                  
+        $A = [3,8,9,7,6];
 
 //===============================Resired Result
         $result =      [9,7,6,3,8]; //Desired Result;
@@ -120,39 +120,38 @@ class TestController extends Controller
 //===============================Resired Result
         $result = 7; //Unpaired stuff.
 
+        
+
+        //Plan A: simpler
         $count = count($A);
-
-        foreach($A as $key => $value)
+        
+        foreach($A as $key =>$value)
         {
-            //echo 'outside<br/>';
             $check_array = array_keys($A, $value);
-
-            // if (count($check_array) %2 == 0)
-            // {
-            //     foreach($check_array as $id=> $value)
-            //     {
-            //         echo 'CLEAN up! <br>';
-            //         unset($A[$value]); //Unset all these shit
-            //     }
-            // }
-
-            if (count($check_array) %2 != 0)
+            //Just get the single one
+            if (count($check_array) % 2 != 0)
             {
-                // foreach($check_array as $id=> $value)
-                // {
-                //     echo 'CLEAN up! <br>';
-                //     unset($A[$value]); //Unset all these shit
-                // }
-
                 return $value;
             }
-
-          
         }
 
-        //$data = array_values($A);
 
-        //return $data[0];
+        //Plan B: Use more resourse
+        foreach($A as $key => $value)
+        {
+            $check_array = array_keys($A, $value);
+
+            if (count($check_array) %2 == 0)
+            {
+                foreach($check_array as $id=> $value)
+                {
+                    unset($A[$value]); //Unset all these shit
+                }
+            }          
+        }
+        $data = array_values($A);
+
+        return $data[0];
     }
 
 

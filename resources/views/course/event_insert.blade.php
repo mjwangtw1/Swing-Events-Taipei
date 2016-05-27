@@ -170,7 +170,7 @@
                         <div class="form-group">
                           <label class="col-md-4 control-label" for="textinput">passcode</label>  
                           <div class="col-md-4">
-                          <input id="textinput" name="passcode" type="text" placeholder="Event Link URL" class="form-control input-md" required>
+                          <input id="textinput" name="passcode" type="text" placeholder="Say that Secret word" class="form-control input-md" required>
                           <span class="help-block time_help">請輸入passcode 才能建立唷! (請洽阿懋) </span>  
                           </div>
                         </div>
