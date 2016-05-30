@@ -3,6 +3,8 @@ $(function()
 {
     var featured_image_path = 'https://scontent-tpe1-1.xx.fbcdn.net/v/t1.0-9/12512641_10208470701592694_323433579423670011_n.jpg?oh=d1b8cb0176d62aea71c7efbf205db444&oe=57E240B6';
 
+    var raining_image_path = '/public/assets/stock/event_in_rain.jpg';
+
     var type = $('.the__name').data('type');
 
     switch(type)

@@ -17,6 +17,46 @@ $weekday['tw'] = ['周日', '周一','周二','周三','周四','周五','周六
         &nbsp;
     </div>
 
+
+
+
+        <!-- 天氣資訊 -->
+    <!-- 下雨 -->
+    <div class="status_container">
+
+        <div class="event_status in__rain">
+            <div class="row">
+                
+                <div class="small-12 columns text-center">
+                    活動地點正在下雨，請密切注意最新消息。
+                </div>
+
+            </div>
+        </div>
+
+        <a href="javascript:void(0)" class="current_degree for__attention">
+            <i class="icon o_hz s_xxlarg is__rain">&nbsp;</i>
+            <span class="the__degree">30</span>
+            <span class="the__unit">°C</span>
+        </a>
+
+    </div>
+
+    <!-- 晴天 -->
+    <!-- <div class="status_container">
+
+        <h6>目前氣溫</h6>
+
+        <a href="javascript:void(0)" class="current_degree text-center">
+            <span class="the__degree">30</span>
+            <span class="the__unit">°C</span>
+        </a>
+
+    </div> -->
+
+
+    
+
     <div class="the_event is__detail">
         <div class="row">
 
