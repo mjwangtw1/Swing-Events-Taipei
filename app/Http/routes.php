@@ -117,6 +117,20 @@ Route::get('/data', 'DataController@index');
 Route::get('/test1', 'TestController@iteration_q');
 Route::get('/test2', 'TestController@array_q');
 Route::get('/test3', 'TestController@array_q2');
+Route::get('/test4', 'TestController@frog_jump');
+Route::get('/test5', 'TestController@cal_permutation');
+
+Route::get('/test6', 'TestController@tape_equilibrium');
+Route::get('/test7', 'TestController@perm_missing_elem');
+Route::get('/test8', 'TestController@cal_permutation');
+Route::get('/test9', 'TestController@cal_permutation');
+Route::get('/test10', 'TestController@cal_permutation');
+
+Route::get('/test11', 'TestController@cal_permutation');
+Route::get('/test12', 'TestController@cal_permutation');
+Route::get('/test13', 'TestController@cal_permutation');
+Route::get('/test14', 'TestController@cal_permutation');
+
 
 //Just for Fun
 Route::get('/sam', 'DataController@sam');

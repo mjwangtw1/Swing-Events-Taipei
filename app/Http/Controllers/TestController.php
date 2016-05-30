@@ -98,8 +98,11 @@ class TestController extends Controller
 //===============================Resired Result
         $result =      [9,7,6,3,8]; //Desired Result;
        
-
         $count = count($A);
+        if ($K > $count)
+        {
+            $K = $K % $count;
+        }
 
         $loop = $count - $K;
 
@@ -151,8 +154,165 @@ class TestController extends Controller
         }
         $data = array_values($A);
 
+        //Plan C: Leo's solution
+        $return_array = [];
+        foreach($A as $value)
+        {
+            if(isset($return_array[$value]))
+            {
+                unset($return_array[$value]);
+            }
+            else
+            {
+                $return_array[] = $value;
+            }
+        }
+
+        return array_pop($return_array);
+
+
+
+
         return $data[0];
     }
+
+    public function frog_jump()
+    {
+        $X = 10; $Y = 85; $D = 30;
+  //===============================Sample Data Above.
+        
+        $dist = $Y - $X;
+
+        if ($dist == 0)
+        {
+            return 0;
+        }
+
+        $steps = ceil($dist / $D);
+
+        return $steps;
+    }
+
+
+    public function cal_permutation()
+    {
+        $A = [4,1,3,2]; //prem
+        //$A = [4,1,3];   //N-Prem
+
+        $A = [5,0,3,2]; //Antisum
+
+        //===============================Sample Data Above.
+
+        $total = 0;
+        $count = count($A);
+        $check_array = [];
+        $cal_total = (1 + $count) * $count /2;
+        foreach($A as $key => $value)
+        {
+            $total += $value;
+ 
+            if(isset($check_array[$value])) //考慮重複case
+            {
+                return 0;
+            }
+            else
+            {
+                $check_array[$value] = $value;
+            }
+
+            if($value > $count) //考慮過大值
+            {
+                return 0;
+            }            
+        }
+
+        //Not sum case
+        if ($total != $cal_total)
+        {
+            return 0;
+        }
+        
+        return 1;
+    }
+
+    public function tape_equilibrium()
+    {   
+        //$A = [3,1,5,4,3];
+        $A = [-1000, 1000];
+
+        //===============================Sample Data Above.
+        $total = array_sum($A);
+        $cnt = count($A);
+       
+        $record = 9999999;
+        $left = 0;
+
+        for($i = 0 ; $i < $cnt - 1 ; $i++)
+        {
+            $left = $left + $A[$i];
+            $total = $total - $A[$i];
+
+            $data = abs($total - $left);
+            $record = min($record, $data);
+        }
+
+        return $record;
+
+    }
+
+
+    public function perm_missing_elem()
+    {   
+        //echo 'perm miss';
+
+        $A = [2,3,1,5];
+      $ret = [2,3,1,5];
+ 
+        //===============================Sample Data Above.
+        $cnt = count($A);
+
+        for($i=1; $i<=$cnt+1; $i++)
+        {
+            $check = array_search($i, $A);
+            if(FALSE === $check)
+            {
+                return $i;
+            }
+            else
+            {
+                unset($A[$check]);
+            }
+
+        }
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }
