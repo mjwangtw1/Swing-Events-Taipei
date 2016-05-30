@@ -22,7 +22,7 @@ $weekday['tw'] = ['周日', '周一','周二','周三','周四','周五','周六
 
         <!-- 天氣資訊 -->
     <!-- 下雨 -->
-    <div class="status_container">
+ <!--    <div class="status_container">
 
         <div class="event_status in__rain">
             <div class="row">
@@ -40,7 +40,7 @@ $weekday['tw'] = ['周日', '周一','周二','周三','周四','周五','周六
             <span class="the__unit">°C</span>
         </a>
 
-    </div>
+    </div> -->
 
     <!-- 晴天 -->
     <!-- <div class="status_container">
