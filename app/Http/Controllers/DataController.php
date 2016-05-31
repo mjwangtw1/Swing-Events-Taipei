@@ -23,6 +23,8 @@ class DataController extends Controller
 
     const TAIPEI_TIMEZONE = 'Asia/Taipei';
 
+    const WEATHER_API_ID = 'F-C0032-001';
+
 
     private $_current_time = '';
     private $_date_today = '';
@@ -36,6 +38,9 @@ class DataController extends Controller
     private $_swing_file_path = '';
     private $_special_file_path = '';
 
+    private $_conf_data_path = '';
+    private $_conf_data = '';
+
     public function __construct()
     { 
         $this->_current_time = Carbon::now(); 
@@ -45,6 +50,15 @@ class DataController extends Controller
         $this->_blues_file_path = base_path() . '/_conf/blues_data.php';
         $this->_swing_file_path = base_path() . '/_conf/swing_data.php';
         $this->_special_file_path = base_path() . '/_conf/special_data.php';
+
+        $this->_conf_data_path = base_path() . '/_conf/conf_data.php';
+
+        if(file_exists($this->_conf_data_path))
+        {
+            include_once($this->_conf_data_path);
+            $this->_conf_data = $conf_data;
+        }
+
     }
 
     public function index()
@@ -338,9 +352,34 @@ class DataController extends Controller
 
     public function sam()
     {
-        $img_url = '<img border="0" src="http://2.bp.blogspot.com/-IU6NUe_3JRA/VlaQZXDDj6I/AAAAAAADOhw/ETH4ovfm8jo/s1600/8795400.gif">';
+        // $img_url = '<img border="0" src="http://2.bp.blogspot.com/-IU6NUe_3JRA/VlaQZXDDj6I/AAAAAAADOhw/ETH4ovfm8jo/s1600/8795400.gif">';
 
-        return $img_url;
+        $weather_call = "http://opendata.cwb.gov.tw/opendataapi?dataid=" . Self::WEATHER_API_ID . "&authorizationkey=" . $this->_conf_data['Weather_api_key']; 
+
+        // $weather_key = 'O-A0002-001'; //Checking Rain status.
+        // $weather_key = 'O-A0003-001'; //局屬氣象站-現在天氣觀測報告
+        // $weather_key = 'W-C0033-003'; //毫大雨特報
+
+        // $weather_call = "http://opendata.cwb.gov.tw/opendataapi?dataid=" .$weather_key . "&authorizationkey=" . $this->_conf_data['Weather_api_key']; 
+
+
+        $weather_info = file_get_contents($weather_call);
+
+        //Parse that fucking XML to array 
+        $xml_data = simplexml_load_string($weather_info);        
+        $json_info = json_encode($xml_data);
+        $weather_array = json_decode($json_info, TRUE);
+
+        echo '<pre>';
+        print_r($weather_array);
+
+        echo '</pre>';
+
+        // echo '<pre>';
+        // print_r($weather_array['dataset']['location'][0]);
+        // echo '</pre>';
+
+        //return $img_url;
     }
 
     public function log()

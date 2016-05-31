@@ -126,10 +126,17 @@ Route::get('/test8', 'TestController@frog_river_one');
 Route::get('/test9', 'TestController@missing_integer');
 Route::get('/test10', 'TestController@max_counter');
 
-Route::get('/test11', 'TestController@cal_permutation');
+Route::get('/test11', 'TestController@min_avg_two_slice');
 Route::get('/test12', 'TestController@cal_permutation');
 Route::get('/test13', 'TestController@cal_permutation');
 Route::get('/test14', 'TestController@cal_permutation');
+
+Route::get('/check1', 'TestController@check_1');
+Route::get('/check2', 'TestController@check_2');
+Route::get('/check3', 'TestController@check_3');
+Route::get('/check4', 'TestController@check_4');
+Route::get('/check5', 'TestController@check_5');
+
 
 
 //Just for Fun

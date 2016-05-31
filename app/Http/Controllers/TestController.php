@@ -409,10 +409,6 @@ class TestController extends Controller
         }
         return $ret;
 
-
-
-
-
         //===============================Leo's solution.
 
         if(FALSE)
@@ -450,14 +446,259 @@ class TestController extends Controller
 
 
 
+    public function min_avg_two_slice()
+    {
+        echo 'Min avg two slice';
+
+    }
+
+    public function check_1()
+    {
+        $Y = 2014; $A = 'April'; $B = 'May'; $W = 'Wednesday';
+        //================Sample Data Above
+        
+        $leap = ($Y % 4 == 0 ) ? 29 : 28; //Deal with Leap first.
+
+        //Set the data first.
+        $month['January'] = 31;
+        $month['February'] = $leap; //29 if leap
+        $month['March'] = 31;
+        $month['April'] = 30;
+        $month['May'] = 31;
+        $month['June'] = 30;
+        $month['July'] = 31;
+        $month['August'] = 31;
+        $month['September'] = 30;
+        $month['October'] = 31;
+        $month['November'] = 30;
+        $month['December'] = 31;
+
+        //Month_fetch
+        $month_order['January'] = 1;
+        $month_order['February'] = 2;
+        $month_order['March'] = 3;
+        $month_order['April'] = 4;
+        $month_order['May'] = 5;
+        $month_order['June'] = 6;
+        $month_order['July'] = 7;
+        $month_order['August'] = 8;
+        $month_order['September'] = 9;
+        $month_order['October'] = 10;
+        $month_order['November'] = 11;
+        $month_order['December'] = 12;    
+
+        $ref = array_keys($month_order);
+        // var_dump($ref);
+
+        $delta =         $ref[$month_order[$B]];
+        // var_dump($delta);
+
+        $start['month']= $month[$A];
+        $start['order'] = $month_order[$A];
+
+        $end['month']= $month[$B];
+        $end['order'] = $month_order[$B];
+
+        $sum = [];
+        $days_total = 0;
+        foreach($month as $month_name => $days_in_month)
+        {
+            $days_total += $days_in_month;
+            $sum[$month_name] = $days_total;
+            //$week_day[$month_name] = $days_total % 7;
+        }
+
+        $days_till_first = $sum[$A];
+
+        $extra_first = $days_till_first %7;
+
+        $actual_begin_date = $days_till_first + (7- $extra_first); //126
+
+
+
+        $days_till_end = $sum[$delta];
+
+        $extra_end = $days_till_end % 7;
+
+        $actual_end_date = $days_till_end - ( 7 - $extra_end );
+
+        $gap = ($actual_end_date - $actual_begin_date) / 7;
+
+        $actual_entire_weeks = floor($gap);
+
+
+        //var_dump($actual_entire_weeks);   
+
+        return (int) $actual_entire_weeks;
+
+    }
+
+    public function check_2()
+    {
+        $A = [ 1, 3,-3]; //ans = 6
+        $A = [-8, 4, 0, 5, -3, 6]; //ans = 14
+
+        // foreach($A as $index => $values)
+        // {   
+        //     if($values > $max)
+        //     {
+        //         $max = $values;
+        //         $ret[$index] = $values;
+        //     }
+        // }
+
+        //First Version //works but looped N**2, trying to simplify
+        $cnt = count($A);
+        $max = 0;
+        for($i=0; $i<$cnt ; $i++)
+        {
+            for($j=$i; $j<$cnt; $j++)
+            {
+                echo 'i: ' . $i . ', j:' . $j . '<br/>';
+
+                $result = $A[$i] + $A[$j] + abs($i - $j);
+                if($max <= $result)
+                {
+                    $max = $result;
+                }
+            }
+        }
+        return $max;
+
+
+        $cnt = count($A);
+        $sum = array_sum($A);
+        $max = 0;
+
+        return $sum;
+
+
+
+
+        var_dump($max);
+
+
+
+    }
+
+    public function check_3()
+    {
+        //$K, $L, $M, $N, $P, $Q, $R, $S
+        //Calculate if they cross each other.
+
+        //Cross: TRUE
+        $K = 0; $L = 1; //First  //p1
+        $M = 4; $N = 3; //Pair
+
+        $P = 1; $Q = 3; //Second 
+        $R = 2; $S = 1; //Pair   //p2
+
+        //Not cross: FALSE
+        // $K = 0; $L = 1; //First
+        // $M = 4; $N = 3; //Pair
+        // $P = 3; $Q = 2; //Second
+        // $R = 5; $S = 1; //Pair
+        //================Sample Data Above
+        
+        //Get formula first;
+        // $y = $a * $x + $b;
+
+        // $L = $a * $K + $b;
+        // $M = $a * $N + $b;
+
+        // $a = ($L - $b) / $K;
+        // $a = ($M - $b) / $N;
+
+        $a = ($L-$N) / ($K-$M) ;
+        $b = $L - ($a * $K);
+
+        //echo '$a' . $a .', b:' .$b . '<br/>';
+
+        //Here we got the data, a=0.5, b=1;
+        
+        $check_first = $a*$P + $b - $Q;
+        $check_second = $a*$R + $b - $S ;
+
+        //echo "First:" . $check_first . ', Second ' . $check_second;
+
+        $cross = ($check_first * $check_second > 0)? FALSE : TRUE;
+
+        return $cross;
+
+        var_dump($cross);
+        
+    }
+
+    public function check_4()
+    {
+        echo 'check_4';
+    }
+
+    public function check_5()
+    {
+        //Cross: TRUE
+        $K = -4; $L = 1; //First  //p1
+        $M = 2; $N = 6; //Pair
+
+        $P = 0; $Q = -1; //Second 
+        $R = 4; $S = 3; //Pair   //p2
+
+        $square_1 = ($M - $K) *($N - $L);
+        $square_2 = ($R - $P) *($S - $Q);
+
+        $intersect_square = 0; //default no intersect
+        if(($M-$P) * ($S-$L) > 0)
+        {
+            $intersect_square = ($M-$P) * ($S-$L);
+        }    
+
+        $final = ($square_1+$square_2 - $intersect_square);
+
+        if($final > 2147483647)
+        {
+            return -1;
+        }
+
+        return $final;
+        //var_dump($intersect_square);
+
+    }
 
 
 
 
 
+    public function equi()
+    {
+        $sum = array_sum($A) - $A[0];
+        $cnt = count($A);
+        $left = 0;
 
+        if(empty($A)) //fuck that empty array
+        {
+            return -1;
+        }
 
+        if($sum == 0) 
+        {
+            return 0;
+        }
 
+        for($i=1; $i<$cnt ;$i++)
+        {   
+            $left = $left + $A[$i-1];
+            $sum = $sum - $A[$i];
+
+            if($left == $sum)
+            {
+                return $i;
+            }
+
+        }
+
+        return -1;
+
+    }
 
 
 
