@@ -323,6 +323,8 @@ class TestController extends Controller
             $ret[$value] = 1;
         }
 
+        $LEO_rule = TRUE;
+
         if($LEO_rule)
         {
             $i = 0;
@@ -330,7 +332,7 @@ class TestController extends Controller
             {
                 $i++;
 
-                echo 'Now: ' . $ret[$i] . ' <br/>';
+                //echo 'Now: ' . $ret[$i] . ' <br/>';
 
             }while(isset($ret[$i])); 
         
@@ -355,66 +357,67 @@ class TestController extends Controller
 
     public function max_counter()
     {
-        echo 'wha tthe ';
-
         $A = [3,4,4,6,1,4,4];
         //$A = [1];
         //$A = [7,7,7,7,7];
         $N = 5;        
         //===============================Sample Data Above.
 
-        $cnt = count($A);
-        $res = [];
+        //===============================Leo's solution.
+        $ret = [];
+        $max = 0;
+        $low = 0;
 
-
-
-            // foreach($A as $id=> $values)
-            // {
-            //     if ($values > $N)
-            //     {
-            //         $counter 
-
-            //     }
-
-
-            // }
-
-
-            for($i=0;$i<$N;$i++)
+        foreach($A as $v)
+        {
+            if($v < $N )
             {
-                $res[$i] = 0; //Fill in the basic shit.
-            }
-
-            //$max = 0;
-
-            foreach($A as $id=> $values)
-            {      
-                if($values > $N)
+                if(isset($ret[$v-1]))
                 {
-                    $max = max($res);
-
+                    $ret[$v-1] ++;
                 }
                 else
                 {
-                    $res[$values -1] = $res[$values -1] +1;
+                    $ret[$v-1 ] = 1;
                 }
 
-                // for($i=0;$i<$N;$i++)
-                // {
-                //     $res[$i] = $max; //Fill in the basic shit.
-                //     unset($A[$id]);   
-                // }
+                if($ret[$v-1] > $max)
+                {
+                    $max = $ret[$v-1];                
+                }
 
             }
+            else
+            {
+                $low += $max;
+                $ret = [];
+                $max = 0;
+            }
+        }
 
-            return $res;
+        for ($i=0; $i <$N; $i++)
+        {
+            if(isset($ret[$i]))
+            {
+                $ret[$i] += $low;
+            }
+            else
+            {
+                $ret[$i] = $low;
+            }
+
+        }
+        return $ret;
 
 
 
 
+
+        //===============================Leo's solution.
 
         if(FALSE)
         {
+            $res = [];
             for($i=0;$i<$N;$i++)
             {
                 $res[$i] = 0; //Fill in the basic shit.
