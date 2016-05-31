@@ -75,7 +75,7 @@ class CalendarController extends Controller
         $pchome_price = $pchome_result['range']['min'];
 
         //Above this one works
-
+        array_push(array, var)
 
         //Data From MOMO
         //$momo_try = file_get_contents($momo_url);
@@ -91,13 +91,11 @@ class CalendarController extends Controller
 
         $momo_body = $momo_response->getBody()->getContents();
 
-        $special_patt = '(';
+        $special_patt = '';
         $result_momo = preg_replace($special_patt, '', $momo_body);
 
         //$momo_result = json_decode($momo_body);
         dd($result_momo);
-
-
 
 
 

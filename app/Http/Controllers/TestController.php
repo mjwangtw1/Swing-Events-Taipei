@@ -263,35 +263,187 @@ class TestController extends Controller
 
     public function perm_missing_elem()
     {   
-        //echo 'perm miss';
-
         $A = [2,3,1,5];
-      $ret = [2,3,1,5];
- 
         //===============================Sample Data Above.
-        $cnt = count($A);
+        $cnt = count($A);  
+        $area = (1 + $cnt + 1 ) * ($cnt +1) / 2 ; 
+        $total = array_sum($A);
 
-        for($i=1; $i<=$cnt+1; $i++)
-        {
-            $check = array_search($i, $A);
-            if(FALSE === $check)
-            {
-                return $i;
-            }
-            else
-            {
-                unset($A[$check]);
-            }
+        $result = $area - $total;
 
-        }
-
+        return $result;
 
     }
 
+    public function frog_river_one()
+    {
+        $n = 5;
+        $A = [1,3,1,4,2,3,5,4];
+        //===============================Sample Data Above.
+        
+        $cnt = count($A);
+
+        if ($n == 0)
+        {
+            return -1;
+        }
+
+        $ret = [];
+        for($i=1;$i<=$n;$i++)
+        {
+            $ret[$i] = $i;
+        }
+
+        foreach($A as $key=>$value)
+        {
+            if(isset($ret[$value]))
+            {
+                unset($ret[$value]);
+            }
+            if(empty($ret))
+            {
+                return $key;
+            }
+        }
+
+        return -1;
+
+    }
+
+    public function missing_integer()
+    {
+        $A = [1,3,6,4,1,2];
+        $A = [1];
+        //===============================Sample Data Above.
+        
+    
+        $ret = [];
+        foreach($A as $value)
+        {
+            $ret[$value] = 1;
+        }
+
+        if($LEO_rule)
+        {
+            $i = 0;
+            do
+            {
+                $i++;
+
+                echo 'Now: ' . $ret[$i] . ' <br/>';
+
+            }while(isset($ret[$i])); 
+        
+            return $i;
+
+        }
+        else
+        {
+            //Traditional
+            $cnt = count($A);
+            for($i=1; ; $i++)
+            {
+                if( ! isset($ret[$i]))
+                {
+                    return $i;
+                }
+            }
+
+        }
+    }
+
+
+    public function max_counter()
+    {
+        echo 'wha tthe ';
+
+        $A = [3,4,4,6,1,4,4];
+        //$A = [1];
+        //$A = [7,7,7,7,7];
+        $N = 5;        
+        //===============================Sample Data Above.
+
+        $cnt = count($A);
+        $res = [];
+
+
+
+            // foreach($A as $id=> $values)
+            // {
+            //     if ($values > $N)
+            //     {
+            //         $counter 
+
+            //     }
+
+
+            // }
+
+
+            for($i=0;$i<$N;$i++)
+            {
+                $res[$i] = 0; //Fill in the basic shit.
+            }
+
+            //$max = 0;
+
+            foreach($A as $id=> $values)
+            {      
+                if($values > $N)
+                {
+                    $max = max($res);
+
+                }
+                else
+                {
+                    $res[$values -1] = $res[$values -1] +1;
+                }
+
+                // for($i=0;$i<$N;$i++)
+                // {
+                //     $res[$i] = $max; //Fill in the basic shit.
+                //     unset($A[$id]);   
+                // }
+
+            }
+
+            return $res;
 
 
 
 
+
+        if(FALSE)
+        {
+            for($i=0;$i<$N;$i++)
+            {
+                $res[$i] = 0; //Fill in the basic shit.
+            }
+
+            foreach($A as $id=> $values)
+            {
+                
+                if($values > $N)
+                {
+                    $max = max($res);
+
+                    for($i=0;$i<$N;$i++)
+                    {
+                        $res[$i] = $max; //Fill in the basic shit.
+                        unset($A[$id]);   
+                    }
+                }
+                else
+                {
+       
+                    $res[$values -1] = $res[$values -1] +1;
+                }
+            }
+
+            return $res;
+        }
+        
+    }   
 
 
 

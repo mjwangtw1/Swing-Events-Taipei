@@ -2,12 +2,7 @@
 
 @section('content')
 
-<?php
 
-    echo 'test here';
-    
-
-?>
 
 
 

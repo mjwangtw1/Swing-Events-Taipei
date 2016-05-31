@@ -122,9 +122,9 @@ Route::get('/test5', 'TestController@cal_permutation');
 
 Route::get('/test6', 'TestController@tape_equilibrium');
 Route::get('/test7', 'TestController@perm_missing_elem');
-Route::get('/test8', 'TestController@cal_permutation');
-Route::get('/test9', 'TestController@cal_permutation');
-Route::get('/test10', 'TestController@cal_permutation');
+Route::get('/test8', 'TestController@frog_river_one');
+Route::get('/test9', 'TestController@missing_integer');
+Route::get('/test10', 'TestController@max_counter');
 
 Route::get('/test11', 'TestController@cal_permutation');
 Route::get('/test12', 'TestController@cal_permutation');

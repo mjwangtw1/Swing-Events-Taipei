@@ -64,7 +64,6 @@ class DataController extends Controller
         $calendarId = Self::SWING_TAIWAN_COURSE_CALENDAR_ID; //Swing Taiwan Courses.
         //$calendarId = TAIWAN_SWING_CALENDAR_REGULAR; //Swing Calendar.
 
-
         //1.This one work: get calendar.
         //$data['calendar_info'] = $calendar->get($calendarId);
 
@@ -86,8 +85,6 @@ class DataController extends Controller
         //$formatted_time = Carbon::createFromFormat('Y/m/d', $data['events'][0]['start']['dateTime'])->toDateTimeString();
         //$dt = Carbon::parse($data['events'][0]['start']['dateTime']);
     }
-
-
 
 
     public function course()
@@ -219,7 +216,7 @@ class DataController extends Controller
         $blues_data[2]['calendarId'] = Self::TAIPEI_BLUES_EVENTS_CALENDAR;
 
 
-        $optParams['maxResults'] = 1; //We just fetch ONE special events;
+        $optParams['maxResults'] = 2; //We just fetch ONE special events;
         $optParams['timeMax'] = $this->_current_time->addweeks(5)->format('c'); //Fetch the coming 3 weeks events.    
         //Swing Calendar - Special
         $calendarId = Self::TAIWAN_SWING_CALENDAR_SPECIAL; //Swing Calendar.
