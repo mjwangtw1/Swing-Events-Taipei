@@ -53,10 +53,21 @@ $(function()
     var controller = new ScrollMagic.Controller();
 
     // Timeline宣告
-    var tl_header_bg = new TimelineLite()
+    if (document.documentElement.clientWidth > 640) 
+    {
+        var tl_header_bg = new TimelineLite()
         .to(".the_logo_main", .5, { opacity: 0, marginBottom: '-1rem', ease: Power3.easeIn })
         .to(".header_bg", .5, { opacity: 1 })
         .to(".the_logo_side", .25, { opacity: 1 })
+    }
+    else 
+    {
+        var tl_header_bg = new TimelineLite()
+        .to(".the_logo_main", .5, { opacity: 0, marginBottom: '-6rem', ease: Power3.easeIn })
+        .to(".the_menu", .5, { marginTop: '1rem' }, '-=0.5')
+        .to(".header_bg", .5, { opacity: 1 })
+        .to(".the_logo_side", .25, { opacity: 1 })
+    }
 
     // ScrollMagic參數設定 (scene1)
     var scene1 = new ScrollMagic.Scene
