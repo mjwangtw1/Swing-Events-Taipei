@@ -36,9 +36,9 @@ $logo_class = ('swing' == $title_info) ? '' : 'is__blues'
 
                         <div class="the_logo_side small-12 columns">
                             <h1 class="logo_text">
-                                Swing Events
+                                <?php echo $logo_text; ?>
                             </h1>
-                            <div class="logo_taipei">
+                            <div class="logo_taipei <?php echo $logo_class?>">
                                 &nbsp;
                             </div>
                         </div>
