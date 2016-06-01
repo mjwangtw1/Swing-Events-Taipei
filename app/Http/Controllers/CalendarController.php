@@ -25,12 +25,11 @@ class CalendarController extends Controller
         return view('calendar');
     }
 
-    public function try_data()
+    public function try_data($data_string = '米森 蔓越莓麥片')
     {
-        echo 'Trying this shit now.';
+        //echo 'Trying this shit now.';
 
         //Now here is the sample:
-        $data_string = '米森 蔓越莓麥片';
         $data_string_momo = '%E7%B1%B3%E6%A3%AE-%E8%94%93%E8%B6%8A%E8%8E%93%E9%BA%A5%E7%89%87'; //Momo can't take chinese char.
 
         $momo_url   = Self::MOMO_SEARCH . $data_string; //MOMO site
@@ -75,7 +74,7 @@ class CalendarController extends Controller
         $pchome_price = $pchome_result['range']['min'];
 
         //Above this one works
-        array_push(array, var)
+        // array_push(array, var)
 
         //Data From MOMO
         //$momo_try = file_get_contents($momo_url);
@@ -91,14 +90,29 @@ class CalendarController extends Controller
 
         $momo_body = $momo_response->getBody()->getContents();
 
+        //dd($momo_body);
+
         $special_patt = '';
-        $result_momo = preg_replace($special_patt, '', $momo_body);
+        //$result_momo = preg_replace($special_patt, '', $momo_body);
 
         //$momo_result = json_decode($momo_body);
-        dd($result_momo);
+        //dd($result_momo);
 
 
+        //$data = 'this is shit man';
 
+        $data[0]['name'] = '博客來';
+        $data[0]['price'] = (int) $price_books;
+        
+        $data[1]['name'] = 'Yahoo';
+        $data[1]['price'] =  (int) $yahoo_price;
+
+        $data[2]['name'] = 'PCHOME';
+        $data[2]['price'] = (int) $pchome_price;
+
+        //$data[3]['name'] = 'MOMO';
+
+        return view('crawler_demo', compact('data'));
 
     }
 
