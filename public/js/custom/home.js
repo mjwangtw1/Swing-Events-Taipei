@@ -54,9 +54,10 @@ $(function()
 
     // Timeline宣告
     var tl_header_bg = new TimelineLite()
-        .to(".page__home", .5, {scaleX: .7, scaleY: .7, y: -15})
-        // .to(".for__language", .25, {opacity: 0})
-        .to(".header_bg", .5, {opacity: 1 }, "-=0.4")
+        .to(".the_logo_main", .5, { opacity: 0, marginBottom: '-6rem', ease: Power3.easeIn })
+        .to(".the_menu", .5, { marginTop: '1rem' }, '-=0.5')
+        .to(".header_bg", .5, { opacity: 1 }, "-=0.4")
+        .to(".the_logo_side", .5, { opacity: 1 }, "+=0.25")
 
     // var hide_lan = document.getElementsByClassName('for__language')
     //  hide_lan[0].style.display = "none";
