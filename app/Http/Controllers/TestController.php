@@ -708,7 +708,10 @@ class TestController extends Controller
 
 
 
-
+    public function grid()
+    {
+        return view('grid');
+    }
 
 
 }

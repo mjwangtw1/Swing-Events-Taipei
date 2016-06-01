@@ -138,6 +138,8 @@ Route::get('/check4', 'TestController@check_4');
 Route::get('/check5', 'TestController@check_5');
 
 
+Route::get('/grid', 'TestController@grid');
+
 
 //Just for Fun
 Route::get('/sam', 'DataController@sam');

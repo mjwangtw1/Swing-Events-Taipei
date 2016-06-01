@@ -1,6 +1,11 @@
 
 <h1>Change Logs by date.</h1>
 
+<h3> 2016.06.01 </h3>
+    <ol>
+        <li>[Feature & Layout Change] JS Dynamic Get photo Credits.</li>
+    </ol>
+
 <h3> 2016.05.27 </h3>
     <ol>
         <li>'2 Background Design' - 2 Dynamic background - Indoor/Outdoor - by MDFH</li>
