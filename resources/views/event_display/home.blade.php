@@ -59,7 +59,7 @@ $logo_class = ('swing' == $title_info) ? '' : 'is__blues'
                         <div>
                             <a href="javascript:void(0)" class="special_promo">
                                 <h6 class="photo_credit">photo credit</h6>
-                                <span>YM SWING</span>
+                                <span class="photo_source">YM SWING</span>
                             </a>
                         </div>
 

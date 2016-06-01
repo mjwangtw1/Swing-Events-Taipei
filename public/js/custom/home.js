@@ -1,8 +1,10 @@
 //Doc Ready
 $(function() 
 {
-    var featured_image_1_path = '/assets/stock/featured_cover_1.png';
-    var featured_image_2_path = '/assets/stock/featured_cover_2.png';
+    //var featured_image_1_path = '/assets/stock/featured_cover_1.png';
+    //var featured_image_2_path = '/assets/stock/featured_cover_2.png';
+    var featured_image_1_path = '/assets/stock/TAIPEI_LINDY_FESTIVAL_2014.png';
+    var featured_image_2_path = '/assets/stock/YM_SWING.png';
     //var featured_image_path = 'http://2.bp.blogspot.com/-IU6NUe_3JRA/VlaQZXDDj6I/AAAAAAADOhw/ETH4ovfm8jo/s1600/8795400.gif'; //Bird GIF
     //var featured_image_path = '/assets/stock/featured_cover.jpg'; //STOCK photo
 
@@ -47,6 +49,10 @@ $(function()
     // feature_event_image.sun_ss_sun_outdoor = 'https://scontent-tpe1-1.xx.fbcdn.net/v/t1.0-9/12512641_10208470701592694_323433579423670011_n.jpg?oh=d1b8cb0176d62aea71c7efbf205db444&oe=57E240B6';
 
     $('.featured_cover').css('background-image', 'url(' + featured_image_1_path + ')');
+    //var source_name = featured_image_1_path.files.name;
+
+    //console.log('source_name 2');
+    //console.log(source_name);
 
     // Gsap animation
     // 變數宣告
