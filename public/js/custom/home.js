@@ -48,11 +48,23 @@ $(function()
     // //Sun
     // feature_event_image.sun_ss_sun_outdoor = 'https://scontent-tpe1-1.xx.fbcdn.net/v/t1.0-9/12512641_10208470701592694_323433579423670011_n.jpg?oh=d1b8cb0176d62aea71c7efbf205db444&oe=57E240B6';
 
-    $('.featured_cover').css('background-image', 'url(' + featured_image_1_path + ')');
-    //var source_name = featured_image_1_path.files.name;
+    replace_photo(featured_image_1_path);
 
-    //console.log('source_name 2');
-    //console.log(source_name);
+    //This to Dynamic change Photo Credit by js
+    function replace_photo(file_path)
+    {
+        //Here trying to get the name out.
+        var image_source_name = ''; //reset
+        var filename = file_path.split('stock/').pop();
+        var source_name = filename.split('.png');    
+        image_source_name = source_name[0].replace(/\_/g, " ");
+
+        //Replace image
+        $('.featured_cover').css('background-image', 'url(' + file_path + ')');
+        
+        //Modify Photo Credit.
+        $('.photo_source').html(image_source_name);
+    }
 
     // Gsap animation
     // 變數宣告
@@ -119,7 +131,7 @@ $(function()
         (
             function()
             {
-                $('.featured_cover').css('background-image', 'url(' + featured_image_2_path + ')')
+                replace_photo(featured_image_2_path);
             }
         )
         // 
@@ -134,7 +146,7 @@ $(function()
         (
             function()
             {
-                $('.featured_cover').css('background-image', 'url(' + featured_image_1_path + ')')
+                replace_photo(featured_image_1_path);
             }
         )
         .to(".is__featured_2 .for__switch_layer", 1, {opacity: 1}, "-=0.5")
@@ -164,7 +176,7 @@ $(function()
         (
             function()
             {
-                $('.featured_cover').css('background-image', 'url(' + featured_image_2_path + ')')
+                replace_photo(featured_image_2_path);
             }
         )
         // 
@@ -179,7 +191,7 @@ $(function()
         (
             function()
             {
-                $('.featured_cover').css('background-image', 'url(' + featured_image_1_path + ')')
+                replace_photo(featured_image_1_path);
             }
         )
         .to(".is__featured_2 .for__switch_layer", 1, {opacity: 1}, "-=0.5")
