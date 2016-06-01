@@ -3,6 +3,7 @@
 <script src="{{ URL::asset('js/custom/grid.js') }}"></script>
 
 <h1>This is grid test</h1>
+<h4>最後一格故意選用錯誤的img_path(會讀不到圖)</h4>
 <head>
     <style>
         * {
@@ -57,12 +58,20 @@
             width: 50px;
             height: 50px;
         }
+        
+        .load
+        {
+            text-align:center;
+            line-height:50px;
+            background-color: lightblue;
+        }
+
 </style>
 </head>
 <body>
     <div class="row">
         <div class="col-1 image load" >
-            Click2Load
+            Click
         </div>
 
         <div class="col-1 image" >
