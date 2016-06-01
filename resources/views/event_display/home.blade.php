@@ -19,7 +19,7 @@ $logo_class = ('swing' == $title_info) ? '' : 'is__blues'
 
         <div class="row">
 
-            <div class="the_logo small-12 columns">
+            <div class="the_logo_main small-12 columns">
                 <h1 class="logo_text">
                     <?php echo $logo_text; ?>
                 </h1>
@@ -29,38 +29,55 @@ $logo_class = ('swing' == $title_info) ? '' : 'is__blues'
             </div>
             
             
-            <div class="the_menu small-12 columns hide-for-medium">
-                <div class="row align-center">
+            <div class="the_menu small-12 columns">
+                <div class="row">
             
-                    <!-- Cluster for Promo Events -->
-                    <div class="small-4 columns">
-                        <div class="special_promo">
-                        <!-- <a href="javascript:void(0)">
-                            <span>
-                                Taipei Lindy Festival 2016
-                            </span>
-                        </a> -->
+                    <div class="menu_c1 medium-8 large-9 columns hide-for-small show-for-medium">
+
+                        <div class="the_logo_side small-12 columns">
+                            <h1 class="logo_text">
+                                Swing Events
+                            </h1>
+                            <div class="logo_taipei">
+                                &nbsp;
+                            </div>
+                        </div>
+
                     </div>
-                </div>
 
-                <!-- For Language Switch -->
-                <div class="small-4 columns">
-                    <form method="post" action="/locale">
-                        <button name="locale" class="button small for__language" type="submit" value="{{ Session::get('locale') === "tw" ? "en" : "tw" }}">
-                            {{ Session::get('locale') === "tw" ? " English" : "中文" }}
-                        </button>
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                    </form>
-                </div>
 
-                <!-- For Menu -->
-                <div class="small-4 columns">
-                    <!-- <a href="javascript:void(0)">
-                        <i class="icon is__hamburger o_hz s_normal">&nbsp;</i>
-                        <h6>
-                            選單
-                        </h6>
-                    </a> -->
+                    <!-- Cluster for Promo Events -->
+                    <div class="menu_c2 small-6 medium-2 large-2 columns">
+
+                        <!-- <div class="special_promo">
+                            <a href="javascript:void(0)">
+                                <span>
+                                    Taipei Lindy Festival 2016
+                                </span>
+                            </a>
+                        </div> -->
+                        <div>
+                            <a href="javascript:void(0)" class="special_promo">
+                                <h6 class="photo_credit">photo credit</h6>
+                                <span>YM SWING</span>
+                            </a>
+                        </div>
+
+                    </div>
+
+
+                    <!-- For Language Switch -->
+                    <div class="menu_c3 small-6 medium-2 large-1 columns">
+
+                        <form method="post" action="/locale">
+                            <button name="locale" class="button small for__language" type="submit" value="{{ Session::get('locale') === "tw" ? "en" : "tw" }}">
+                                {{ Session::get('locale') === "tw" ? " English" : "中文" }}
+                            </button>
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        </form>
+
+                    </div>
+
                 </div>
             </div>
 
