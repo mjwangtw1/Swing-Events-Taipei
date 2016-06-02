@@ -7,6 +7,9 @@
     <meta name="description" content="Swing Events Taipei, providing lastest swing/blues dance event info in Taipei" />
     <title>Swing Events Taipei</title>
 
+    <!-- favicon -->
+    <link rel="icon" href="/assets/icon/favicon.ico" type="image/x-icon">
+    
     <!-- CSS -->
     <link rel="stylesheet" href="{{ URL::asset('css/swing.css') }}">
 
