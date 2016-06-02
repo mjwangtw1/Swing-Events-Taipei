@@ -28,6 +28,9 @@ class CalendarController extends Controller
     public function try_data($data_string = '米森 蔓越莓麥片')
     {
         //echo 'Trying this shit now.';
+        
+        $encoded_string = urlencode($data_string); //Only books use encoded string.
+
 
         //Now here is the sample:
         $data_string_momo = '%E7%B1%B3%E6%A3%AE-%E8%94%93%E8%B6%8A%E8%8E%93%E9%BA%A5%E7%89%87'; //Momo can't take chinese char.
@@ -35,9 +38,10 @@ class CalendarController extends Controller
         $momo_url   = Self::MOMO_SEARCH . $data_string; //MOMO site
         $pchome_url = Self::PCHOME_SEARCH . $data_string; //pchome_works
         $yahoo_url  = Self::YAHOO_SHOPPING . $data_string; //Yahoo also works.
-        $books_url  = Self::BOOKS_TW_SHOPPING . $data_string;  //Books.com also works
 
-        $books_url = 'http://search.books.com.tw/exep/prod_search.php?key=%E7%B1%B3%E6%A3%AE+%E8%94%93%E8%B6%8A%E8%8E%93%E9%BA%A5%E7%89%87&cat=all';
+        $books_url  = Self::BOOKS_TW_SHOPPING . $encoded_string;  //Books.com also works
+
+        //$books_url = "http://search.books.com.tw/exep/prod_search.php?key=%E7%B1%B3%E6%A3%AE+%E8%94%93%E8%B6%8A%E8%8E%93%E9%BA%A5%E7%89%87&cat=all";
 
         //Fetch the page content
         //$momo_content   = file_get_contents($momo_url);

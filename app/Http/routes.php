@@ -56,8 +56,8 @@ Route::get('/event_list', 'EventController@index'); //Post-login Class Controlle
 
 Route::post('/event/insert', 'EventController@insert'); //For ACTUAL inserting a new data.
 
+Route::get('/crawl_demo/{data_string}', 'CalendarController@try_data'); //This is the sample .
 Route::get('/crawl_demo', 'CalendarController@try_data'); //This is the sample .
-
 
 //OFFICIAL
 Route::get('/blues', 'DataController@blues'); //Sync file and create local files.
