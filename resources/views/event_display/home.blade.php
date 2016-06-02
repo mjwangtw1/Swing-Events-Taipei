@@ -32,7 +32,7 @@ $logo_class = ('swing' == $title_info) ? '' : 'is__blues'
             <div class="the_menu small-12 columns">
                 <div class="row">
             
-                    <div class="menu_c1 medium-8 large-9 columns hide-for-small show-for-medium">
+                    <div class="menu_c1 medium-8 columns hide-for-small show-for-medium">
 
                         <div class="the_logo_side small-12 columns">
                             <h1 class="logo_text">
@@ -47,7 +47,7 @@ $logo_class = ('swing' == $title_info) ? '' : 'is__blues'
 
 
                     <!-- Cluster for Promo Events -->
-                    <div class="menu_c2 small-6 medium-3 large-2 columns">
+                    <div class="menu_c2 small-6 medium-3 columns">
 
                         <!-- <div class="special_promo">
                             <a href="javascript:void(0)">
@@ -258,21 +258,25 @@ $logo_class = ('swing' == $title_info) ? '' : 'is__blues'
 
         </div>
 
-        <div class="swing_intro small-6 columns hide-for-small show-for-medium">
-            <h4>
-                哈囉！台北
-            </h4>
-            <hr>
-            <p>
-                Swing dance (搖擺舞)是一種復古舞蹈，源於 1930 年代的美國。它充滿了樂趣，而且保證跳完後你一定開心得闔不攏嘴！
-            </p>
-            <p>
-                如果你喜歡爵士音樂或復古文化，更或者只是想度過一段美好時光，都可以﻿免費參加各個團體的練習時間﻿。不用擔心你之前是否跳過，我相信一定會有舞者帶你入門的。
-            </p>
-            <p>
-                我們喜歡這個舞蹈，相信你們也會喜歡。來跟我們一起跳舞吧！
-            </p>
-        
+        <div class="small-6 columns hide-for-small show-for-medium">
+            <div class="row align-center small-collapse">
+                <div class="swing_intro small-10 columns">
+                    <h5 class="hello_title">
+                        <i class="hello_title_tp">&nbsp;</i>
+                    </h5>
+                    <section class="hello_text">
+                        <p>
+                            Swing dance (搖擺舞)是一種復古舞蹈，源於 1930 年代的美國。它充滿了樂趣，而且保證跳完後你一定開心得闔不攏嘴！
+                        </p>
+                        <p>
+                            如果你喜歡爵士音樂或復古文化，更或者只是想度過一段美好時光，都可以﻿免費參加各個團體的練習時間﻿。不用擔心你之前是否跳過，我相信一定會有舞者帶你入門的。
+                        </p>
+                        <p>
+                            我們喜歡這個舞蹈，相信你們也會喜歡。來跟我們一起跳舞吧！
+                        </p>
+                    </section>
+                </div>
+            </div>
         </div>
     
     </div>
