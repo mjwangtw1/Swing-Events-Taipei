@@ -59,7 +59,7 @@ $logo_class = ('swing' == $title_info) ? '' : 'is__blues'
                         <div>
                             <a href="javascript:void(0)" class="special_promo">
                                 <p class="photo_credit">photo credit</p>
-                                <span>TAIPEI LINDY FESTIVAL 2014</span>
+                                <span class="photo_source"></span>
                             </a>
                         </div>
 
