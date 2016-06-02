@@ -47,7 +47,7 @@ $logo_class = ('swing' == $title_info) ? '' : 'is__blues'
 
 
                     <!-- Cluster for Promo Events -->
-                    <div class="menu_c2 small-6 medium-2 large-2 columns">
+                    <div class="menu_c2 small-6 medium-3 large-2 columns">
 
                         <!-- <div class="special_promo">
                             <a href="javascript:void(0)">
@@ -58,8 +58,8 @@ $logo_class = ('swing' == $title_info) ? '' : 'is__blues'
                         </div> -->
                         <div>
                             <a href="javascript:void(0)" class="special_promo">
-                                <h6 class="photo_credit">photo credit</h6>
-                                <span class="photo_source">PHOTO CREDIT</span>
+                                <p class="photo_credit">photo credit</p>
+                                <span>TAIPEI LINDY FESTIVAL 2014</span>
                             </a>
                         </div>
 
@@ -67,7 +67,7 @@ $logo_class = ('swing' == $title_info) ? '' : 'is__blues'
 
 
                     <!-- For Language Switch -->
-                    <div class="menu_c3 small-6 medium-2 large-1 columns">
+                    <div class="menu_c3 small-6 medium-1 columns">
 
                         <form method="post" action="/locale">
                             <button name="locale" class="button small for__language" type="submit" value="{{ Session::get('locale') === "tw" ? "en" : "tw" }}">
