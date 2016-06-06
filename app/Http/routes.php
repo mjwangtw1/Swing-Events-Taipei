@@ -56,8 +56,8 @@ Route::get('/event_list', 'EventController@index'); //Post-login Class Controlle
 
 Route::post('/event/insert', 'EventController@insert'); //For ACTUAL inserting a new data.
 
-Route::get('/crawl_demo/{data_string}', 'CalendarController@try_data'); //This is the sample .
-Route::get('/crawl_demo', 'CalendarController@try_data'); //This is the sample .
+Route::get('/crawl_demo/{data_string}', 'DemoController@try_data'); //This is the sample .
+Route::get('/crawl_demo', 'DemoController@try_data'); //This is the sample .
 
 //OFFICIAL
 Route::get('/blues', 'DataController@blues'); //Sync file and create local files.
@@ -113,7 +113,8 @@ Route::get('/data', 'DataController@index');
 
 //Route::get('/now', 'DataController@calendar');
 // Route::get('/event', 'DataController@event');
-//Testing
+
+//Testing - For Codility Tests.
 Route::get('/test1', 'TestController@iteration_q');
 Route::get('/test2', 'TestController@array_q');
 Route::get('/test3', 'TestController@array_q2');
@@ -136,6 +137,7 @@ Route::get('/check2', 'TestController@check_2');
 Route::get('/check3', 'TestController@check_3');
 Route::get('/check4', 'TestController@check_4');
 Route::get('/check5', 'TestController@check_5');
+
 
 
 Route::get('/grid', 'TestController@grid');
