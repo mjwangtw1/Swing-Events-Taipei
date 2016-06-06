@@ -223,7 +223,7 @@ $logo_class = ('swing' == $title_info) ? '' : 'is__blues'
                                             else
                                             {
                                                 //Calculate the Difference.
-                                                $count = $dt->diffInDays($dt->parse($single_special_event['start']['dateTime'])) + 1; //Start from 0 so add 1
+                                                $count = $dt->diffInDays($dt->parse($single_special_event['start']['dateTime'])); //Start from 0 so add 1
                                                 echo trans('default.days_till', ['count' => $count]);
                                             }
                                         ?>
@@ -345,7 +345,7 @@ $logo_class = ('swing' == $title_info) ? '' : 'is__blues'
                                                 else
                                                 {
                                                     //Calculate the Difference.
-                                                    $count = $dt->diffInDays($dt->parse($single_event['start']['dateTime'])) + 1; //Start from 0 so add 1
+                                                    $count = $dt->diffInDays($dt->parse($single_event['start']['dateTime'])); //Start from 0 so add 1
                                                     echo trans('default.days_till', ['count' => $count]);
                                                 }
                                              }
