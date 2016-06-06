@@ -42,6 +42,7 @@ class EventController extends Controller
                 array('id' => 12,'name' => '中山堂','address' => '100台北市中正區延平南路98號'),
                 array('id' => 13,'name' => '西雅圖咖啡世貿旗艦店','address' => '110台北市信義區信義路五段6號'),
                 array('id' => 14,'name' => 'FUSE幸福人文會館','address' => '台北市中山區中山北路二段33號10樓'),
+                array('id' => 15,'name' => '卡市達創業加油站 圓山基地','address' => '台北市中山區中山北路二段33號10樓'),
 
                 array('id' => 99,'name' => '其他(請務必在說明中填寫)','address' => 'ELSE'),
         );

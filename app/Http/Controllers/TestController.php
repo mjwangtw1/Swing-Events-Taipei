@@ -444,11 +444,59 @@ class TestController extends Controller
         
     }   
 
+    //WTF don't get the question at all
+    public function passing_cars()
+    {
+        echo 'passing cars';
+        $A = [0,1,0,1,1];
+        //================Sample Data Above
+
+        $cnt = count($A);
+
+
+        $passingEastCount = 0;
+        $total_passing = 0;
+
+        foreach($A as $key => $value)
+        {
+            if(1 == $value)
+            {
+                $passingEastCount = $passingEastCount + $total_passing;
+            }
+            else
+            {
+                $passingEastCount ++;
+            }
+
+        }
+
+        if ($total_passing > 1000000000 || $total_passing < 0)
+        {
+            return -1;
+        }
+
+        return $total_passing;
+    }
+
+
+    public function count_div()
+    {
+        echo 'passing cars';
+        $A = [0,1,0,1,1];
+        //================Sample Data Above
+
+
+
+    }
+
 
 
     public function min_avg_two_slice()
     {
         echo 'Min avg two slice';
+
+
+
 
     }
 
