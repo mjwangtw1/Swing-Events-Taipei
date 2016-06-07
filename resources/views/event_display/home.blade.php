@@ -417,12 +417,12 @@ $logo_class = ('swing' == $title_info) ? '' : 'is__blues'
         </div>
 
         <div class="small-12 columns hide-for-medium">
-            <div class="photo_credit row small-collapse">
+            <div class="photo_credit row small-collapse align-center text-center">
                            
-                <div class="small-4 columns">
+                <div class="small-2 columns">
                     <h6>credit</h6>
                 </div>
-                <div class="small-8 columns">
+                <div class="small-4 columns">
                     <a href="javascript:void(0)">
                         <span class="photo_source"></span>
                     </a>
