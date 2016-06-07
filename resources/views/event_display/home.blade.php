@@ -74,9 +74,9 @@ $logo_class = ('swing' == $title_info) ? '' : 'is__blues'
 
                     <!-- Cluster for Promo Events -->
                     <div class="menu_c4 small-6 medium-3 columns medium-offset-9">
-                        <a href="javascript:void(0)" class="special_promo">
+                        <a href="http://www.taipeilindyfestival.com/" class="special_promo" target="_blank">
                             <span>
-                                Taipei Lindy Festival 2016
+                                * {{ trans('default.tlf2016') }}
                             </span>
                         </a>
                     </div>
