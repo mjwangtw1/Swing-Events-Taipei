@@ -30,10 +30,10 @@ $logo_class = ('swing' == $title_info) ? '' : 'is__blues'
             
             
             <div class="the_menu small-12 columns">
-                <div class="row">
+                <div class="row small-collapse">
             
-                    <div class="menu_c1 medium-7 columns hide-for-small show-for-medium">
 
+                    <div class="menu_c1 medium-9 columns hide-for-small show-for-medium">
                         <div class="the_logo_side small-12 columns">
                             <h1 class="logo_text">
                                 <?php echo $logo_text; ?>
@@ -42,52 +42,45 @@ $logo_class = ('swing' == $title_info) ? '' : 'is__blues'
                                 &nbsp;
                             </div>
                         </div>
-
-                    </div>
-
-
-                    <!-- Cluster for Promo Events -->
-                    <div class="menu_c2 small-6 medium-2 columns">
-
-                        <a href="javascript:void(0)" class="special_promo">
-                            <span>
-                                Taipei Lindy Festival 2016
-                            </span>
-                        </a>
-
                     </div>
 
 
                     <!-- Cluster for Credits -->
-                    <div class="menu_c3 small-6 medium-2 columns hide-for-small show-for-medium">
-                        <div class="photo_credit row small-collapse">
-                           
-                            <div class="small-4 columns">
+                    <div class="menu_c2 small-6 medium-2 columns hide-for-small show-for-medium">
+                        <div class="photo_credit row"> 
+                            <div class="small-5 columns">
                                 <h6>credit</h6>
                             </div>
-                            <div class="small-8 columns">
+                            <div class="small-7 columns">
                                 <a href="javascript:void(0)">
                                     <span class="photo_source"></span>
                                 </a>
                             </div>
-
                         </div>
                     </div>
 
 
 
-
                     <!-- For Language Switch -->
-                    <div class="menu_c4 small-6 medium-1 columns">
-
+                    <div class="menu_c3 small-6 medium-1 columns">
                         <form method="post" action="/locale">
                             <button name="locale" class="button small for__language" type="submit" value="{{ Session::get('locale') === "tw" ? "en" : "tw" }}">
                                 {{ Session::get('locale') === "tw" ? " English" : "中文" }}
                             </button>
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         </form>
-
                     </div>
+
+
+                    <!-- Cluster for Promo Events -->
+                    <div class="menu_c4 small-6 medium-3 columns medium-offset-9">
+                        <a href="javascript:void(0)" class="special_promo">
+                            <span>
+                                Taipei Lindy Festival 2016
+                            </span>
+                        </a>
+                    </div>
+
 
                 </div>
             </div>
