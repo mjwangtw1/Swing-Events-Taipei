@@ -32,7 +32,7 @@ $logo_class = ('swing' == $title_info) ? '' : 'is__blues'
             <div class="the_menu small-12 columns">
                 <div class="row">
             
-                    <div class="menu_c1 medium-8 columns hide-for-small show-for-medium">
+                    <div class="menu_c1 medium-7 columns hide-for-small show-for-medium">
 
                         <div class="the_logo_side small-12 columns">
                             <h1 class="logo_text">
@@ -47,27 +47,38 @@ $logo_class = ('swing' == $title_info) ? '' : 'is__blues'
 
 
                     <!-- Cluster for Promo Events -->
-                    <div class="menu_c2 small-6 medium-3 columns">
+                    <div class="menu_c2 small-6 medium-2 columns">
 
-                        <!-- <div class="special_promo">
-                            <a href="javascript:void(0)">
-                                <span>
-                                    Taipei Lindy Festival 2016
-                                </span>
-                            </a>
-                        </div> -->
-                        <div>
-                            <a href="javascript:void(0)" class="special_promo">
-                                <p class="photo_credit">photo credit</p>
-                                <span class="photo_source"></span>
-                            </a>
-                        </div>
+                        <a href="javascript:void(0)" class="special_promo">
+                            <span>
+                                Taipei Lindy Festival 2016
+                            </span>
+                        </a>
 
                     </div>
 
 
+                    <!-- Cluster for Credits -->
+                    <div class="menu_c3 small-6 medium-2 columns hide-for-small show-for-medium">
+                        <div class="photo_credit row small-collapse">
+                           
+                            <div class="small-4 columns">
+                                <h6>credit</h6>
+                            </div>
+                            <div class="small-8 columns">
+                                <a href="javascript:void(0)">
+                                    <span class="photo_source"></span>
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+
                     <!-- For Language Switch -->
-                    <div class="menu_c3 small-6 medium-1 columns">
+                    <div class="menu_c4 small-6 medium-1 columns">
 
                         <form method="post" action="/locale">
                             <button name="locale" class="button small for__language" type="submit" value="{{ Session::get('locale') === "tw" ? "en" : "tw" }}">
@@ -409,6 +420,26 @@ $logo_class = ('swing' == $title_info) ? '' : 'is__blues'
         </div>
 
         <div class="seperator small-12 columns">
+            <hr>
+        </div>
+
+        <div class="small-12 columns hide-for-medium">
+            <div class="photo_credit row small-collapse">
+                           
+                <div class="small-4 columns">
+                    <h6>credit</h6>
+                </div>
+                <div class="small-8 columns">
+                    <a href="javascript:void(0)">
+                        <span class="photo_source"></span>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="seperator small-12 columns hide-for-medium">
             <hr>
         </div>
 
