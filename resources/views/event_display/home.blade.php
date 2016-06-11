@@ -228,7 +228,16 @@ $logo_class = ('swing' == $title_info) ? '' : 'is__blues'
                                             {
                                                 //Calculate the Difference.
                                                 $count = $dt->diffInDays($dt->parse($single_special_event['start']['dateTime'])); //Start from 0 so add 1
-                                                echo trans('default.days_till', ['count' => $count]);
+                                                if (0 == $count OR 1 == $count)
+                                                {
+                                                    echo trans('default.tomorrow');
+                                                }
+                                                else
+                                                {
+                                                    echo trans('default.days_till', ['count' => $count]);
+                                                }
+
+                                                
                                             }
                                         ?>
                                 </span>
@@ -350,7 +359,15 @@ $logo_class = ('swing' == $title_info) ? '' : 'is__blues'
                                                 {
                                                     //Calculate the Difference.
                                                     $count = $dt->diffInDays($dt->parse($single_event['start']['dateTime'])); //Start from 0 so add 1
-                                                    echo trans('default.days_till', ['count' => $count]);
+                                                    if (0 == $count OR 1 == $count)
+                                                    {
+                                                        echo trans('default.tomorrow');
+                                                    }
+                                                    else
+                                                    {
+                                                        echo trans('default.days_till', ['count' => $count]);
+                                                    }
+                                                    
                                                 }
                                              }
                                             ?>
