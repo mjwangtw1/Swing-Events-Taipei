@@ -25,6 +25,7 @@ class DataController extends Controller
 
     const WEATHER_API_ID = 'F-C0032-001';
 
+    private $_cal; //Calendar Array;
 
     private $_current_time = '';
     private $_date_today = '';
@@ -52,6 +53,11 @@ class DataController extends Controller
         $this->_special_file_path = base_path() . '/_conf/special_data.php';
 
         $this->_conf_data_path = base_path() . '/_conf/conf_data.php';
+
+        //Init the Cal list.
+        $this->_cal['Special'] = Self::TAIWAN_SWING_CALENDAR_SPECIAL;
+        $this->_cal['Swing'] = Self::TAIWAN_SWING_CALENDAR_REGULAR;
+        $this->_cal['Blues'] = Self::TAIPEI_BLUES_EVENTS_CALENDAR;
 
         if(file_exists($this->_conf_data_path))
         {
@@ -121,8 +127,10 @@ class DataController extends Controller
     }
 
     //This one List specific Event with Detailed Info.
-    public function event($calendarId, $eventId, $typeId)
+    public function event($event_type, $eventId, $typeId)
     {   
+        $calendarId = $this->_cal[$event_type];
+
         //Event part
         $calendar = new GoogleCalendar;
         $event = $calendar->get_unique_event($calendarId, $eventId);

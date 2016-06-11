@@ -11,6 +11,7 @@
         'event_this_week' => 'Event This Week',
         'month' => '',
         'today' => 'Today',
+        'tomorrow' => 'Tomorrow',
         'days_till' =>  ':count days later',
         'featured' => 'FEATURED',
         'no_events' => 'Oops, No Events Today. Have some nice swing music and take a break!',
@@ -19,6 +20,7 @@
         'google_map'  => 'Google Map',
         'recommend_for_you' => 'Recommend For You',
         'event_link' => 'Event Link',
+
         'Mon' => 'Mon',
         'Tue' => 'Tue',
         'Wed' => 'Wed',

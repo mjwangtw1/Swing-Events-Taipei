@@ -11,6 +11,7 @@
         'event_this_week' => '本週活動',
         'month'    => '月',
         'today'    => '就在今天',
+        'tomorrow' => '明天',
         'days_till' =>  ':count 天後',
         'featured' => '特別推薦',
         'no_events' => '今天難得沒活動, 洗洗睡吧！',
