@@ -139,6 +139,26 @@ Route::get('/check4', 'TestController@check_4');
 Route::get('/check5', 'TestController@check_5');
 
 
+//X1 - 9 times 9
+Route::get('/square/{n}', 'AlgoController@square');
+Route::get('/square', 'AlgoController@square');
+
+//X2 - Fizzbuzz
+Route::get('/fizz/{n}', 'AlgoController@fizzbuzz');
+Route::get('/fizz', 'AlgoController@fizzbuzz');
+
+//X3 - GCD
+Route::get('/gcd/{a}/{b}', 'AlgoController@gcd');
+Route::get('/gcd', 'AlgoController@gcd');
+
+//X4 - LCM
+Route::get('/lcm/{a}/{b}', 'AlgoController@lcm');
+Route::get('/lcm', 'AlgoController@lcm');
+
+//X5 - isPrime
+Route::get('/isprime/{n}', 'AlgoController@is_prime');
+Route::get('/isprime', 'AlgoController@is_prime');
+
 
 Route::get('/grid', 'TestController@grid');
 
