@@ -115,5 +115,39 @@ class AlgoController extends Controller
         }
     }
 
+    public function print_square($n = 7)
+    {
+        //return 'this is a fucking square';
+
+        $total = $n + 2;
+
+        for($i=1; $i<=$total; $i++)
+        {
+            for($j=1; $j<=$total; $j++)
+            {
+                if(($j > 2 OR $j < $total) OR ($i >2 OR $i < $total))
+                {
+                    echo 'X';
+
+                    // if($j== 1 OR $j == $total)
+                    // {
+                        
+                    // }   
+                }
+                else
+                {
+                    echo '@';
+                }
+
+            }
+            // echo '@';
+            echo '<br/>';
+        }
+
+
+
+    }
+
+
 
 }

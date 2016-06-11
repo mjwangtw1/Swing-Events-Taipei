@@ -159,6 +159,10 @@ Route::get('/lcm', 'AlgoController@lcm');
 Route::get('/isprime/{n}', 'AlgoController@is_prime');
 Route::get('/isprime', 'AlgoController@is_prime');
 
+//X6 - Print Square
+Route::get('/print_sq/{n}', 'AlgoController@print_square');
+Route::get('/print_sq', 'AlgoController@print_square');
+
 
 Route::get('/grid', 'TestController@grid');
 
