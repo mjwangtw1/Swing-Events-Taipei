@@ -13,7 +13,12 @@ class ExampleTest extends TestCase
      */
     public function testBasicExample()
     {
-        $this->visit('/')
-             ->see('Laravel 5');
+        // $this->visit('/')
+        //      ->see('Laravel 5');
+
+
+        //Temp modify
+        $this->visit('/test_sample')
+             ->see('for Phpunit test');
     }
 }

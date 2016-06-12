@@ -114,6 +114,11 @@ Route::get('/data', 'DataController@index');
 //Route::get('/now', 'DataController@calendar');
 // Route::get('/event', 'DataController@event');
 
+Route::get('/test_sample', function(){
+    return 'for Phpunit test';
+});
+
+
 //Testing - For Codility Tests.
 Route::get('/test1', 'TestController@iteration_q');
 Route::get('/test2', 'TestController@array_q');
