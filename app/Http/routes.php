@@ -114,8 +114,14 @@ Route::get('/data', 'DataController@index');
 //Route::get('/now', 'DataController@calendar');
 // Route::get('/event', 'DataController@event');
 
-Route::get('/test_sample', function(){
-    return 'for Phpunit test';
+Route::get('/test_sample', function()
+{
+    return view('test_sample');
+});
+
+Route::get('/whazzup', function()
+{
+    return 'Whazzup bro';
 });
 
 

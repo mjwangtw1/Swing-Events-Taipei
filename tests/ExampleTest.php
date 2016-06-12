@@ -18,7 +18,21 @@ class ExampleTest extends TestCase
 
 
         //Temp modify
-        $this->visit('/test_sample')
-             ->see('for Phpunit test');
+        // $this->visit('/test_sample')
+        //      ->see('for Phpunit test');
+
+
+        //Laracast practice
+
+        //1. Visit the test_sample page
+        $this->visit('/test_sample');
+        //2. Click on the link 'Click Me'
+        $this->click('Click Me');
+        //3. See 'Whazzup bro'
+        $this->see('Whazzup bro');
+        //4. Verify the page /whazzup
+        $this->seePageIs('/whazzup');
+       
     }
+
 }
