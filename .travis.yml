@@ -3,7 +3,7 @@ php:
 - '5.5'
 - '5.6'
 
-install:
-- composer install --prefer-dist --no-dev --optimize-autoloader --quiet
+#install:
+#- composer install --prefer-dist --no-dev --optimize-autoloader --quiet
 
 script: phpunit 
