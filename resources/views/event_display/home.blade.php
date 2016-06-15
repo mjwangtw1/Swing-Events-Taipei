@@ -28,10 +28,8 @@ $logo_class = ('swing' == $title_info) ? '' : 'is__blues'
                 </div>
             </div>
             
-            
             <div class="the_menu small-12 columns">
                 <div class="row small-collapse">
-            
 
                     <div class="menu_c1 medium-9 columns hide-for-small show-for-medium">
                         <div class="the_logo_side small-12 columns">
@@ -234,6 +232,8 @@ $logo_class = ('swing' == $title_info) ? '' : 'is__blues'
                                                 }
                                                 else
                                                 {
+                                                    $count = $count + 1; //add 1 more day 
+                                                    
                                                     echo trans('default.days_till', ['count' => $count]);
                                                 }
 
@@ -365,6 +365,8 @@ $logo_class = ('swing' == $title_info) ? '' : 'is__blues'
                                                     }
                                                     else
                                                     {
+                                                        $count = $count + 1; //add 1 more day 
+
                                                         echo trans('default.days_till', ['count' => $count]);
                                                     }
                                                     

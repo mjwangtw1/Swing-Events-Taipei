@@ -149,6 +149,8 @@ $weekday['tw'] = ['周日', '周一','周二','周三','周四','周五','周六
                                                 }
                                                 else
                                                 {
+                                                    $count = $count + 1; //add 1 more day 
+
                                                     echo trans('default.days_till', ['count' => $count]);
                                                 }
                                                 
@@ -343,6 +345,8 @@ $weekday['tw'] = ['周日', '周一','周二','周三','周四','周五','周六
                                                             }
                                                             else
                                                             {
+                                                                $count = $count + 1; //add 1 more day 
+
                                                                 echo trans('default.days_till', ['count' => $count]);
                                                             }
                                                         }
