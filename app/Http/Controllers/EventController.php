@@ -29,6 +29,8 @@ class EventController extends Controller
     private $_cal; //Calendar Array.
 
     private $_location_list  = array(
+
+                //Keep Adding..
                 array('id' => 0,'name' => '華山木地板','address' => '100台北市中正區八德路一段1號'),
                 array('id' => 1,'name' => '松煙木地板','address' => ' 110台北市信義區光復南路133號'),
                 array('id' => 2,'name' => '國父紀念館走廊下','address' => '110台北市信義區仁愛路四段505號'),
@@ -37,7 +39,7 @@ class EventController extends Controller
                 array('id' => 5,'name' => '圓山 花博木地板','address' => '104台北市中山區玉門街1號'),
                 array('id' => 6,'name' => 'USR127玩藝工廠','address' => '103台北市大同區迪化街一段127號號'),
                 array('id' => 7,'name' => 'Sappho Live Jazz','address' => '106台北市大安區安和路一段102巷1號'),
-                array('id' => 8,'name' => 'TAV','address' => '100台北市中正區北平東路7號'),
+                array('id' => 8,'name' => 'TAV | 台北國際藝術村','address' => '100台北市中正區北平東路7號'),
                 array('id' => 9,'name' => 'Tangorismo','address' => '106台北市大安區忠孝東路四段169號之4'),
                 array('id' => 10,'name' => 'Corazon Tango','address' => '106復興南路一段92-9號'),
                 array('id' => 11,'name' => '台大滴咖啡','address' => ' 106台北市大安區羅斯福路四段1號台大體育館二樓'),
@@ -45,6 +47,9 @@ class EventController extends Controller
                 array('id' => 13,'name' => '西雅圖咖啡世貿旗艦店','address' => '110台北市信義區信義路五段6號'),
                 array('id' => 14,'name' => 'FUSE幸福人文會館','address' => '台北市中山區中山北路二段33號10樓'),
                 array('id' => 15,'name' => '卡市達創業加油站 圓山基地','address' => '台北市中山區中山北路二段33號10樓'),
+                array('id' => 16,'name' => '迪化街十連棟', 'address' => '臺北市大同區迪化街一段348號'),
+                array('id' => 17,'name' => 'Beer and Cheese', 'address' => '台北市信義區基隆路二段117號'),
+                array('id' => 18,'name' => 'Bobwundaye 無問題', 'address' => '台北市大安區和平東路3段77號'),
 
                 array('id' => 99,'name' => '其他(請務必在說明中填寫)','address' => 'ELSE'),
         );
@@ -161,13 +166,14 @@ class EventController extends Controller
         //Created ID
         $created_id = $result->id;
 
-        if ( ! empty($created_id))
+        if ( is_string($created_id) )
         {
           //Display Text now, later toss to view
           $event_link = "/event/$type/$created_id";
           
           $success_message = ' Event Created! <a href="' . $event_link . '"> Event Link </a><br/> <a href="/">Homepage</a>'; 
 
+          return $success_message;
         }
 
         return $result;
