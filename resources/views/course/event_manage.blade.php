@@ -36,9 +36,6 @@
                   </div>
                 </div>
 
-
-
-
                 <div class="panel panel-default">
                   <!-- Default panel contents -->
                   <div class="panel-heading">活動一覽表 (過期活動不會在此)   

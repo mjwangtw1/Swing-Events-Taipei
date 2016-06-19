@@ -68,7 +68,7 @@ Route::get('/event/{event_type}/{eventId}/{typeId}', 'DataController@event'); //
 
 //Try adding
 //Route::get('/try_add', 'DataController@insert_to_calendar'); //Sync file and create local files.
-Route::get('/try_del/{calendarId}/{eventId}', 'EventController@delete_event_from_calendar'); //Sync file and create local files. //Becareful with this one! 
+Route::get('/try_del/{calendarType}/{eventId}', 'EventController@delete_event_from_calendar'); //Sync file and create local files. //Becareful with this one! 
 
 
 

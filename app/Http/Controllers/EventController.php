@@ -26,6 +26,8 @@ class EventController extends Controller
     const TAIPEI_TIMEZONE = 'Asia/Taipei';
     const PASS_CODE = 'bibi';
 
+    private $_cal; //Calendar Array.
+
     private $_location_list  = array(
                 array('id' => 0,'name' => '華山木地板','address' => '100台北市中正區八德路一段1號'),
                 array('id' => 1,'name' => '松煙木地板','address' => ' 110台北市信義區光復南路133號'),
@@ -59,6 +61,12 @@ class EventController extends Controller
         //$this->middleware('admin');
         
         $this->_user = Auth::user();
+
+        //Init the Cal list.
+        $this->_cal['Special'] = Self::TAIWAN_SWING_CALENDAR_SPECIAL;
+        $this->_cal['Swing'] = Self::TAIWAN_SWING_CALENDAR_REGULAR;
+        $this->_cal['Blues'] = Self::TAIPEI_BLUES_EVENTS_CALENDAR;
+
     }
 
     public function index()
@@ -191,9 +199,11 @@ class EventController extends Controller
 
 
 
-    public function delete_event_from_calendar($calendarId, $eventId)
+    public function delete_event_from_calendar($calendarType, $eventId)
     {
         $calendar = new GoogleCalendar;
+
+        $calendarId = $this->_cal[$calendarType]; //Fetch by Type;
 
         $result = $calendar->delete($calendarId, $eventId);
 
