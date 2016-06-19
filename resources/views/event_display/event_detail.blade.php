@@ -143,7 +143,7 @@ $weekday['tw'] = ['周日', '周一','周二','周三','周四','周五','周六
                                                 //Calculate the Difference.
                                                 $count = $dt->diffInDays($dt->parse($event['modelData']['start']['dateTime'])); //Start from 0 so add 1
 
-                                                if (0 == $count OR 1 == $count)
+                                                if (0 == $count)
                                                 {
                                                     echo trans('default.tomorrow');
                                                 }
@@ -339,7 +339,7 @@ $weekday['tw'] = ['周日', '周一','周二','周三','周四','周五','周六
                                                             //Calculate the Difference.
                                                             $count = $dt->diffInDays($dt->parse($single_event['start']['dateTime'])); //Start from 0 so add 1
 
-                                                            if (0 == $count OR 1 == $count)
+                                                            if (0 == $count)
                                                             {
                                                                 echo trans('default.tomorrow');
                                                             }
