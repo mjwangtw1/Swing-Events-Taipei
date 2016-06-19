@@ -111,19 +111,19 @@ $logo_class = ('swing' == $title_info) ? '' : 'is__blues'
 
                 //First One use Swing events;
                 $special_event[0] = $data[0]['events'][0]; 
-                $special_event[0]['link'] = '/event/Swing/' . $special_event[0]['id'] . '/0';
+                $special_event[0]['link'] = '/event/Swing/' . $special_event[0]['id'];
                 $special_event[0]['type'] = 0;
                 
                 //2nd One use Blues
                 $special_event[2] = $data[2]['events'][0]; 
-                $special_event[2]['link'] = '/event/Blues/' . $special_event[2]['id'] . '/2';
+                $special_event[2]['link'] = '/event/Blues/' . $special_event[2]['id'];
                 $special_event[2]['type'] = 2;
 
                 break;
 
             case 1: //1st Special 2nd Swing
                 $special_event[0] = $special['events'][0];
-                $special_event[0]['link'] = '/event/Special/' . $special['events'][0]['id'] . '/1';
+                $special_event[0]['link'] = '/event/Special/' . $special['events'][0]['id'];
                 $special_event[0]['type'] = 1;
 
                 $random_guess = rand(1,2);
@@ -131,14 +131,14 @@ $logo_class = ('swing' == $title_info) ? '' : 'is__blues'
                 {
                     //Show Swing
                     $special_event[2] = $data[0]['events'][0]; 
-                    $special_event[2]['link'] = '/event/Swing/' . $special_event[2]['id'] . '/0';
+                    $special_event[2]['link'] = '/event/Swing/' . $special_event[2]['id'];
                     $special_event[2]['type'] = 0;
                 }
                 else
                 {   
                     //Show BLUES
                     $special_event[2] = $data[2]['events'][0]; 
-                    $special_event[2]['link'] = '/event/Blues/' . $special_event[2]['id'] . '/2';
+                    $special_event[2]['link'] = '/event/Blues/' . $special_event[2]['id'];
                     $special_event[2]['type'] = 2;
                 }
 
@@ -148,11 +148,11 @@ $logo_class = ('swing' == $title_info) ? '' : 'is__blues'
             case 2:   
             default:
                 $special_event[0] = $special['events'][0];
-                $special_event[0]['link'] = '/event/Special/' . $special['events'][0]['id'] . '/1';
+                $special_event[0]['link'] = '/event/Special/' . $special['events'][0]['id'];
                 $special_event[0]['type'] = 1;
 
                 $special_event[2] = $special['events'][1];
-                $special_event[2]['link'] = '/event/Special/' . $special['events'][1]['id'] . '/1';
+                $special_event[2]['link'] = '/event/Special/' . $special['events'][1]['id'];
                 $special_event[2]['type'] = 1;
 
                 break;
@@ -310,7 +310,7 @@ $logo_class = ('swing' == $title_info) ? '' : 'is__blues'
                 <!-- 信封封面 -->
                 <div class="envelop_body small-10 medium-8 columns">
                     <div class="row small-collapse align-right">
-                        <a href="/event/{{ $event_type[$type] }}/{{ $single_event['id']}}/{{$type}}" class="cover_box small-10 columns">
+                        <a href="/event/{{ $event_type[$type] }}/{{ $single_event['id']}}" class="cover_box small-10 columns">
                             <h5>
                                 {{ $single_event['summary'] }}
                             </h5>
