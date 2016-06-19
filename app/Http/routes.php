@@ -64,7 +64,7 @@ Route::get('/blues', 'DataController@blues'); //Sync file and create local files
 Route::get('/home', 'DataController@home'); // List Events within this week
 Route::get('/realtime', 'DataController@fetch_api_data'); // List Events within this week
 Route::get('/now', 'DataController@now');   // List whatever happened Today.
-Route::get('/event/{event_type}/{eventId}/{typeId}', 'DataController@event'); //List Specific Event with Detailed Info
+Route::get('/event/{event_type}/{eventId}', 'DataController@event'); //List Specific Event with Detailed Info
 
 //Try adding
 //Route::get('/try_add', 'DataController@insert_to_calendar'); //Sync file and create local files.

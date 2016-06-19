@@ -135,6 +135,7 @@ class EventController extends Controller
 
         $passcode = $request->input('passcode');
 
+        $type = 'Swing'; //For later toss back link.
         //Block this just avoid BOT injection.
         if (Self::PASS_CODE != $passcode)
         {
@@ -144,18 +145,32 @@ class EventController extends Controller
         if (2 == $data['dance_style'])
         {
             $calendarId = Self::TAIPEI_BLUES_EVENTS_CALENDAR;
+            $type = 'Blues';
         }
 
         //Switch calendar - Override if special event.
         if ( ! is_null($data['special_event_flag']) && 1 == $data['special_event_flag'])
         {
             $calendarId = Self::TAIWAN_SWING_CALENDAR_SPECIAL;
+            $type = 'Special';
         } 
 
         //Here call and write to Calendar API.
         $result = $this->insert_to_calendar($calendarId, $data);
 
-        return $result->id;
+        //Created ID
+        $created_id = $result->id;
+
+        if ( ! empty($created_id))
+        {
+          //Display Text now, later toss to view
+          $event_link = "/event/$type/$created_id";
+          
+          $success_message = ' Event Created! <a href="' . $event_link . '"> Event Link </a><br/> <a href="/">Homepage</a>'; 
+
+        }
+
+        return $result;
     }
 
     public function insert_to_calendar($calendarId = '', $data = '')

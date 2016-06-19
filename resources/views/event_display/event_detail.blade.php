@@ -299,7 +299,7 @@ $weekday['tw'] = ['周日', '周一','周二','周三','周四','周五','周六
                             <!-- 信封封面 -->
                             <div class="envelop_body small-10 columns">
                                 <div class="row small-collapse align-right">
-                                    <a href="/event/{{ $event_type[$type] }}/{{ $single_event['id']}}/{{$type}}" class="cover_box small-10 columns">
+                                    <a href="/event/{{ $event_type[$type] }}/{{ $single_event['id']}}" class="cover_box small-10 columns">
                                         <h5>
                                              {{ $single_event['summary'] }}
                                         </h5>

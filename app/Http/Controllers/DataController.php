@@ -96,7 +96,6 @@ class DataController extends Controller
 
         date_default_timezone_set($event_info->timeZone);
 
-
         //Toss to events view file.
         return view('event', compact('data'));
 
@@ -127,14 +126,26 @@ class DataController extends Controller
     }
 
     //This one List specific Event with Detailed Info.
-    public function event($event_type, $eventId, $typeId)
+    public function event($event_type, $eventId)
     {   
         $calendarId = $this->_cal[$event_type];
 
         //Event part
         $calendar = new GoogleCalendar;
         $event = $calendar->get_unique_event($calendarId, $eventId);
-        $event['type'] = $typeId;
+        
+        switch($event_type)
+        {
+            case 'Swing':
+                $event['type'] = 0;
+                break;
+            case 'Special':
+                $event['type'] = 1;
+                break;
+            case 'Blues':
+                $event['type'] = 2;
+                break;
+        }
 
         //List part
         $optParams = array(
