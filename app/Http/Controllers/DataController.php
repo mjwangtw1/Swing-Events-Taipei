@@ -147,37 +147,27 @@ class DataController extends Controller
                 break;
         }
 
-        //List part
-        $optParams = array(
-          'maxResults' => 2,
-          'orderBy' => 'startTime',
-          'singleEvents' => TRUE,
-          //'timeMin' => date('c'),
-          // 'timeMin' => $this->_current_time->subdays(3)->format('c'), //This One Remove later.
-          // 'timeMax' => $this->_current_time->adddays(1)->format('c'),
+        //New Method: Load File as well...0 -> TS Regular | 1 -> TS Special | 2 -> Blues Event
+        $event_num = 2;
 
-          'timeMin' => date('c'),
-          'timeMax' => $this->_date_next_week->format('c')
-        );
+        if ( ! (is_file($this->_swing_file_path) && file_exists($this->_swing_file_path)) ) 
+        {
+            $this->prepare_file();
+        }
 
-        //0 -> TS Regular | 1 -> TS Special | 2 -> Blues Event
-        //Swing Regular Calendar
-        $calendarId = Self::TAIWAN_SWING_CALENDAR_REGULAR; //Swing Calendar.
-        $taiwan_swing_regular_info = $calendar->get_events($calendarId, $optParams);
-        $data[0]['events']        = $taiwan_swing_regular_info['modelData']['items'];
-        $data[0]['calendarId'] = Self::TAIWAN_SWING_CALENDAR_REGULAR;
+        include_once($this->_swing_file_path); //this one has both Swing and blues 
+        
+        //Swing part
+        $data['0']['events'] = array_slice($data['0']['events'], 0, $event_num);
+        $data['0']['calendarId'] = $data['0']['calendarId'];
 
-        //Swing Calendar - Special
-        $calendarId = Self::TAIWAN_SWING_CALENDAR_SPECIAL; //Swing Calendar.
-        $taiwan_swing_special_info = $calendar->get_events($calendarId, $optParams);
-        $data[1]['events']        = $taiwan_swing_special_info['modelData']['items'];
-        $data[1]['calendarId'] = Self::TAIWAN_SWING_CALENDAR_SPECIAL;
+        //Blues part
+        $data['2']['events'] = array_slice($data['2']['events'], 0, $event_num);
+        $data['2']['calendarId'] = $data['2']['calendarId'];
 
-        //Blues Calendar
-        $calendarId = Self::TAIPEI_BLUES_EVENTS_CALENDAR; //Swing Calendar.
-        $taiwan_swing_special_info = $calendar->get_events($calendarId, $optParams);
-        $data[2]['events']        = $taiwan_swing_special_info['modelData']['items'];
-        $data[2]['calendarId'] = Self::TAIPEI_BLUES_EVENTS_CALENDAR;
+        //Special part
+        include_once($this->_special_file_path);
+        $data['1'] = $special;
 
         $api_key = self::GOOGLE_MAP_API_KEY;
 
@@ -192,8 +182,8 @@ class DataController extends Controller
             $this->prepare_file();
         }
 
-        include($this->_swing_file_path); //Read the file and use the $data array right away.
-        include($this->_special_file_path); //Read the special events
+        include_once($this->_swing_file_path); //Read the file and use the $data array right away.
+        include_once($this->_special_file_path); //Read the special events
 
         $title_info = 'swing';
 
@@ -202,12 +192,13 @@ class DataController extends Controller
 
     public function blues() //This one reads blues from file directly
     {
-        if ( !(is_file($this->_blues_file_path) && file_exists($this->_blues_file_path)))
+        if ( ! (is_file($this->_blues_file_path) && file_exists($this->_blues_file_path)))
         {
             $this->prepare_file();
         }
-        include($this->_blues_file_path); //Read the file and use the $data array right away.
-        include($this->_special_file_path); //Read the special events
+
+        include_once($this->_blues_file_path); //Read the file and use the $data array right away.
+        include_once($this->_special_file_path); //Read the special events
 
         $title_info = 'blues';
 
@@ -247,7 +238,6 @@ class DataController extends Controller
         //These 2 below are needed. just to export.
         $blues_data[2]['events']        = $taiwan_swing_special_info['modelData']['items'];
         $blues_data[2]['calendarId'] = Self::TAIPEI_BLUES_EVENTS_CALENDAR;
-
 
         $optParams['maxResults'] = 2; //We just fetch ONE special events;
         $optParams['timeMax'] = $this->_current_time->addweeks(5)->format('c'); //Fetch the coming 3 weeks events.    
