@@ -25,7 +25,7 @@ class DataController extends Controller
 
     const WEATHER_API_ID = 'F-C0032-001';
 
-    private $_cal; //Calendar Array;
+    private $_cal ; //Calendar Array;
 
     private $_current_time = '';
     private $_date_today = '';
@@ -38,6 +38,7 @@ class DataController extends Controller
     private $_blues_file_path = '';
     private $_swing_file_path = '';
     private $_special_file_path = '';
+    private $_event_file_path = '';
 
     private $_conf_data_path = '';
     private $_conf_data = '';
@@ -48,9 +49,11 @@ class DataController extends Controller
 
         $this->_date_today = Carbon::today();
         $this->_date_next_week = $this->_date_today->addweeks(1);
+
         $this->_blues_file_path = base_path() . '/_conf/blues_data.php';
         $this->_swing_file_path = base_path() . '/_conf/swing_data.php';
         $this->_special_file_path = base_path() . '/_conf/special_data.php';
+        $this->_event_file_path = base_path() . '/_conf/event_data.php';
 
         $this->_conf_data_path = base_path() . '/_conf/conf_data.php';
 
@@ -128,24 +131,13 @@ class DataController extends Controller
     //This one List specific Event with Detailed Info.
     public function event($event_type, $eventId)
     {   
-        $calendarId = $this->_cal[$event_type];
 
-        //Event part
-        $calendar = new GoogleCalendar;
-        $event = $calendar->get_unique_event($calendarId, $eventId);
+        $event[$eventId] = $this->_fetch_rebuild_event($event_type, $eventId);
         
-        switch($event_type)
-        {
-            case 'Swing':
-                $event['type'] = 0;
-                break;
-            case 'Special':
-                $event['type'] = 1;
-                break;
-            case 'Blues':
-                $event['type'] = 2;
-                break;
-        }
+        //Get exact event
+        $event_detail = $event[$eventId];
+
+        //We will deal with load file later.
 
         //New Method: Load File as well...0 -> TS Regular | 1 -> TS Special | 2 -> Blues Event
         $event_num = 2;
@@ -171,7 +163,7 @@ class DataController extends Controller
 
         $api_key = self::GOOGLE_MAP_API_KEY;
 
-        return view('event_display.event_detail', compact('event', 'data', 'api_key'));
+        return view('event_display.event_detail', compact('event_detail', 'data', 'api_key'));
     }
 
     public function home() //Loads from Swing file
@@ -327,6 +319,33 @@ class DataController extends Controller
     // PRIVATE FUNCTIONS ====================================================================================
     // PRIVATE FUNCTIONS ====================================================================================
     //Here Private Functions
+    private function _fetch_rebuild_event($event_type, $eventId)
+    {
+        $calendarId = $this->_cal[$event_type];
+        //Fetch API part
+        $calendar = new GoogleCalendar;
+        $event_object = $calendar->get_unique_event($calendarId, $eventId);
+
+        //Rebuild part
+        $event_data['event_object'] = $event_object;
+        $event_data['expire_time'] = $event_object['modelData']['start']['dateTime'];
+
+        switch($event_type)
+        {
+            case 'Swing':
+                $event_data['type'] = 0;
+                break;
+            case 'Special':
+                $event_data['type'] = 1;
+                break;
+            case 'Blues':
+                $event_data['type'] = 2;
+                break;
+        }
+
+        return $event_data;
+    }
+
     private function _check_and_delete_static_files()
     {
         if (is_file($this->_blues_file_path) && file_exists($this->_blues_file_path))

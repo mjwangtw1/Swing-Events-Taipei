@@ -62,12 +62,12 @@ $weekday['tw'] = ['周日', '周一','周二','周三','周四','周五','周六
 
                     <!-- 本次活動標題 -->
                     <div class="small-12 columns">
-                        <div class="the__name" data-type="{{$event['type']}}">
+                        <div class="the__name" data-type="{{$event_detail['type']}}">
                             <h4>
-                                {{ $event->summary }}
+                                {{ $event_detail['event_object']->summary }}
                         
-                                <span class="label {{$event_type_dom[$event['type']]}}">
-                                    {{$event_type[$event['type']]}}
+                                <span class="label {{$event_type_dom[$event_detail['type']]}}">
+                                    {{$event_type[$event_detail['type']]}}
                                 </span>
                             </h4>
                         </div>
@@ -85,11 +85,11 @@ $weekday['tw'] = ['周日', '周一','周二','周三','周四','周五','周六
                                         <div class="for__month">
                                             {{ 
                                             
-                                            isset($event['modelData']['start']['dateTime']) ? $dt->parse($event['modelData']['start']['dateTime'])->format('M') : '' }}  
+                                            isset($event_detail['event_object']['modelData']['start']['dateTime']) ? $dt->parse($event_detail['event_object']['modelData']['start']['dateTime'])->format('M') : '' }}  
                                         </div>
                                         <!-- 日期 -->
                                         <div class="for__day">
-                                            {{ isset($event['modelData']['start']['dateTime']) ? $dt->parse($event['modelData']['start']['dateTime'])->format('d') : '' }}
+                                            {{ isset($event_detail['event_object']['modelData']['start']['dateTime']) ? $dt->parse($event_detail['event_object']['modelData']['start']['dateTime'])->format('d') : '' }}
                                         </div>
                                     </div>
                                 </div>
@@ -101,9 +101,9 @@ $weekday['tw'] = ['周日', '周一','周二','周三','周四','周五','周六
 
                                          <?php
 
-                                            if(isset($event['modelData']['start']['dateTime']))
+                                            if(isset($event_detail['event_object']['modelData']['start']['dateTime']))
                                             {
-                                                $weekday_counter = $dt->parse($event['modelData']['start']['dateTime'])->format("w");
+                                                $weekday_counter = $dt->parse($event_detail['event_object']['modelData']['start']['dateTime'])->format("w");
                                                 $lang_type = (Session::get('locale') === "tw") ? 'tw' : 'en';
                                                 echo $weekday[$lang_type][$weekday_counter];
                                             }
@@ -115,7 +115,7 @@ $weekday['tw'] = ['周日', '周一','周二','周三','周四','周五','周六
                                         <!-- 時刻 -->
                                         <span>
 
-                                            {{ isset($event['modelData']['start']['dateTime']) ? $dt->parse($event['modelData']['start']['dateTime'])->format('H:i') : '' }} 
+                                            {{ isset($event_detail['event_object']['modelData']['start']['dateTime']) ? $dt->parse($event_detail['event_object']['modelData']['start']['dateTime'])->format('H:i') : '' }} 
 
                                         <!-- 16:30 -->
 
@@ -132,16 +132,16 @@ $weekday['tw'] = ['周日', '周一','周二','周三','周四','周五','周六
                                         <!-- 還有 999 天 -->
                                             
                                         <?php
-                                        if (isset($event['modelData']['start']['dateTime']))
+                                        if (isset($event_detail['event_object']['modelData']['start']['dateTime']))
                                         {
-                                             if($dt->parse($event['modelData']['start']['dateTime'])->isToday())
+                                             if($dt->parse($event_detail['event_object']['modelData']['start']['dateTime'])->isToday())
                                             {
                                                 echo trans('default.today'); 
                                             }
                                             else
                                             {
                                                 //Calculate the Difference.
-                                                $count = $dt->diffInDays($dt->parse($event['modelData']['start']['dateTime'])); //Start from 0 so add 1
+                                                $count = $dt->diffInDays($dt->parse($event_detail['event_object']['modelData']['start']['dateTime'])); //Start from 0 so add 1
 
                                                 if (0 == $count)
                                                 {
@@ -173,21 +173,21 @@ $weekday['tw'] = ['周日', '周一','周二','周三','周四','周五','周六
                                         <i class="icon is__pin_b o_vt s_normal">&nbsp;</i>
                                         <p>
                                            <!--  國父紀念館 SYS Memorial Hall -->
-                                            {{ isset($event->location) ? $event->location : '' }}
+                                            {{ isset($event_detail['event_object']->location) ? $event_detail['event_object']->location : '' }}
                                         </p>
                                     </div>
 
                                     <div class="to__external">
-                                        <a href="https://maps.google.com/maps?hl=zh-TW&amp;q={{ isset($event->location) ? $event->location : '' }}"  class="button small for__eventurl" target="_blank">
+                                        <a href="https://maps.google.com/maps?hl=zh-TW&amp;q={{ isset($event_detail['event_object']->location) ? $event_detail['event_object']->location : '' }}"  class="button small for__eventurl" target="_blank">
                                             {{ trans('default.google_map') }}
                                         </a> 
                                     
                                         <?php
                                             //Dynamic Gen a Link button if there is one! 
-                                            if ( ! is_null($event->description) && ! empty($event->description))
+                                            if ( ! is_null($event_detail['event_object']->description) && ! empty($event_detail['event_object']->description))
                                             {
                                                 $patt = "/https*:\/\/[a-zA-Z0-9\.\/_]+/";
-                                                preg_match($patt, $event->description, $output_array);
+                                                preg_match($patt, $event_detail['event_object']->description, $output_array);
 
                                                 if ( ! empty($output_array))
                                                 {
@@ -227,7 +227,7 @@ $weekday['tw'] = ['周日', '周一','周二','周三','周四','周五','周六
                         <div class="for__description">
                             <p>
                                 
-                                {{ is_null($event->description) ? '' : $event->description }}
+                                {{ is_null($event_detail['event_object']->description) ? '' : $event_detail['event_object']->description }}
 
                             </p>
                         </div>
@@ -245,10 +245,10 @@ $weekday['tw'] = ['周日', '周一','周二','周三','周四','周五','周六
 
                 <div class="row align-center">
                     <div class="event_map_display">
-                    @if(isset($event->location))
+                    @if(isset($event_detail['event_object']->location))
                     <iframe
                       src="https://www.google.com/maps/embed/v1/place?key={{$api_key}}
-                        &q={{$event->location}}" allowfullscreen>
+                        &q={{$event_detail['event_object']->location}}" allowfullscreen>
                     </iframe>
                     @endif
 
