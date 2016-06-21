@@ -218,6 +218,19 @@ class DataController extends Controller
         //Swing Regular Calendar
         $calendarId = Self::TAIWAN_SWING_CALENDAR_REGULAR; //Swing Calendar.
         $taiwan_swing_regular_info = $calendar->get_events($calendarId, $optParams);
+
+        // echo 'check data';
+        // //var_dump($taiwan_swing_regular_info['modelData']['items']);
+        // $new_shit = [];
+        // foreach($taiwan_swing_regular_info['modelData']['items'] as $single_event)
+        // {
+        //     $new_shit[$single_event['id']] = $single_event;
+        // }
+
+        // var_dump($new_shit);
+
+        // exit();
+
         $data[0]['events']        = $taiwan_swing_regular_info['modelData']['items'];
         $data[0]['calendarId'] = Self::TAIWAN_SWING_CALENDAR_REGULAR;
 
@@ -268,13 +281,15 @@ class DataController extends Controller
 
         //Blues Calendar
         $calendarId = Self::TAIPEI_BLUES_EVENTS_CALENDAR; //Swing Calendar.
-        $taiwan_swing_special_info = $calendar->get_events($calendarId, $optParams);
-        $data[2]['events']        = $taiwan_swing_special_info['modelData']['items'];
+        $blues_info = $calendar->get_events($calendarId, $optParams);
+        $data[2]['events']        = $blues_info['modelData']['items'];
         $data[2]['calendarId'] = Self::TAIPEI_BLUES_EVENTS_CALENDAR;
 
         //These 2 below are needed. just to export.
-        $blues_data[2]['events']        = $taiwan_swing_special_info['modelData']['items'];
+        $blues_data[2]['events']        = $blues_info['modelData']['items'];
         $blues_data[2]['calendarId'] = Self::TAIPEI_BLUES_EVENTS_CALENDAR;
+
+        // $this->_make_events_dict_file($taiwan_swing_regular_info['modelData']['items'],$taiwan_swing_special_info['modelData']['items'],  )
 
 
         $optParams['maxResults'] = 2; //We just fetch ONE special events;
