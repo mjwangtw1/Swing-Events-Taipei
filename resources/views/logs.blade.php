@@ -1,6 +1,12 @@
 
 <h1>Change Logs by date.</h1>
 
+
+<h3> 2016.06.21 </h3>
+    <ol>
+        <li>[Tune] Event_detail page use file load too. Speed up page load.</li>
+    </ol>
+
 <h3> 2016.06.01 </h3>
     <ol>
         <li>[Feature & Layout Change] JS Dynamic Get photo Credits.</li>
