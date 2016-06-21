@@ -132,12 +132,7 @@ class DataController extends Controller
     public function event($event_type, $eventId)
     {   
 
-        $event[$eventId] = $this->_fetch_rebuild_event($event_type, $eventId);
-        
-        //Get exact event
-        $event_detail = $event[$eventId];
-
-        //We will deal with load file later.
+        $event_detail = $this->_fetch_rebuild_event($event_type, $eventId);
 
         //New Method: Load File as well...0 -> TS Regular | 1 -> TS Special | 2 -> Blues Event
         $event_num = 2;
@@ -199,7 +194,6 @@ class DataController extends Controller
 
     // FEATURE FUNCTIONS ====================================================================================
     // FEATURE FUNCTIONS ====================================================================================
-    
     //Real time data fetching.
     public function fetch_api_data()
     {
@@ -218,18 +212,6 @@ class DataController extends Controller
         //Swing Regular Calendar
         $calendarId = Self::TAIWAN_SWING_CALENDAR_REGULAR; //Swing Calendar.
         $taiwan_swing_regular_info = $calendar->get_events($calendarId, $optParams);
-
-        // echo 'check data';
-        // //var_dump($taiwan_swing_regular_info['modelData']['items']);
-        // $new_shit = [];
-        // foreach($taiwan_swing_regular_info['modelData']['items'] as $single_event)
-        // {
-        //     $new_shit[$single_event['id']] = $single_event;
-        // }
-
-        // var_dump($new_shit);
-
-        // exit();
 
         $data[0]['events']        = $taiwan_swing_regular_info['modelData']['items'];
         $data[0]['calendarId'] = Self::TAIWAN_SWING_CALENDAR_REGULAR;
@@ -289,9 +271,6 @@ class DataController extends Controller
         $blues_data[2]['events']        = $blues_info['modelData']['items'];
         $blues_data[2]['calendarId'] = Self::TAIPEI_BLUES_EVENTS_CALENDAR;
 
-        // $this->_make_events_dict_file($taiwan_swing_regular_info['modelData']['items'],$taiwan_swing_special_info['modelData']['items'],  )
-
-
         $optParams['maxResults'] = 2; //We just fetch ONE special events;
         $optParams['timeMax'] = $this->_current_time->addweeks(5)->format('c'); //Fetch the coming 3 weeks events.    
         //Swing Calendar - Special
@@ -301,6 +280,10 @@ class DataController extends Controller
         $special['calendarId'] = Self::TAIWAN_SWING_CALENDAR_SPECIAL;
 
         $this->_check_and_delete_static_files();
+
+        //Make that event_file
+        $all_info = array_merge($taiwan_swing_special_info['modelData']['items'], $blues_info['modelData']['items'], $taiwan_swing_regular_info['modelData']['items']);
+        $this->_prepare_events_dict_file($all_info);
 
         date_default_timezone_set("Asia/Taipei");
         $gen_time = date("Y-m-d H:i:s");
@@ -336,14 +319,15 @@ class DataController extends Controller
     //Here Private Functions
     private function _fetch_rebuild_event($event_type, $eventId)
     {
-        $calendarId = $this->_cal[$event_type];
-        //Fetch API part
-        $calendar = new GoogleCalendar;
-        $event_object = $calendar->get_unique_event($calendarId, $eventId);
+        if ( ! is_file($this->_event_file_path) && ( ! file_exists($this->_event_file_path)))
+        {
+            $this->prepare_file(); //if no file found then recreate! 
+        }
 
-        //Rebuild part
-        $event_data['event_object'] = $event_object;
-        $event_data['expire_time'] = $event_object['modelData']['start']['dateTime'];
+        include_once($this->_event_file_path);
+
+        $event_data['event_info'] = $data[$eventId];
+        $event_data['expire_time'] = $event_data['event_info']['start']['dateTime'];
 
         switch($event_type)
         {
@@ -361,6 +345,28 @@ class DataController extends Controller
         return $event_data;
     }
 
+
+    //Here we prepare events file
+    private function _prepare_events_dict_file($all_info)
+    {
+        date_default_timezone_set("Asia/Taipei");
+        $gen_time = date("Y-m-d H:i:s");
+
+        $event_with_key = []; //Loop through and change key.
+
+        if ( is_array($all_info) && count($all_info) > 0 )
+        {   
+            foreach($all_info as $single_event)
+            {
+                $event_with_key[$single_event['id']] = $single_event;
+            }
+        }
+
+        file_put_contents($this->_event_file_path, '<!-- FILE GEN AT: ' . $gen_time .  ' --><?php $data = ' . var_export($event_with_key, true) . ';');
+        
+        return 'Event File written at [' . $gen_time . ']';
+    }
+
     private function _check_and_delete_static_files()
     {
         if (is_file($this->_blues_file_path) && file_exists($this->_blues_file_path))
@@ -372,6 +378,21 @@ class DataController extends Controller
         {
             unlink($this->_swing_file_path); 
         }
+
+        if (is_file($this->_event_file_path) && file_exists($this->_event_file_path))
+        {
+            unlink($this->_event_file_path); 
+        }
+    }
+
+    private function _fetch_event_by_id($calendarId, $eventId)
+    {
+        //Not used just save
+
+        //Fetch API part
+        $calendarId = $this->_cal[$event_type];
+        $calendar = new GoogleCalendar;
+        $event_object = $calendar->get_unique_event($calendarId, $eventId);
     }
 
     //MDFH use Testing::::
@@ -429,6 +450,5 @@ class DataController extends Controller
     {
         return view('logs');
     }
-
 
 }
