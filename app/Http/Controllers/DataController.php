@@ -154,7 +154,9 @@ class DataController extends Controller
 
         //Special part
         include_once($this->_special_file_path);
-        $data['1'] = $special;
+
+        $data['1']['events'] = array_slice($special['events'], 0, $event_num);
+        $data['1']['calendarId'] = $special['calendarId'];
 
         $api_key = self::GOOGLE_MAP_API_KEY;
 
@@ -226,7 +228,7 @@ class DataController extends Controller
         $blues_data[2]['events']        = $taiwan_swing_special_info['modelData']['items'];
         $blues_data[2]['calendarId'] = Self::TAIPEI_BLUES_EVENTS_CALENDAR;
 
-        $optParams['maxResults'] = 2; //We just fetch ONE special events;
+        $optParams['maxResults'] = 10; //We just fetch ONE special events;
         $optParams['timeMax'] = $this->_current_time->addweeks(5)->format('c'); //Fetch the coming 3 weeks events.    
         //Swing Calendar - Special
         $calendarId = Self::TAIWAN_SWING_CALENDAR_SPECIAL; //Swing Calendar.
@@ -271,7 +273,7 @@ class DataController extends Controller
         $blues_data[2]['events']        = $blues_info['modelData']['items'];
         $blues_data[2]['calendarId'] = Self::TAIPEI_BLUES_EVENTS_CALENDAR;
 
-        $optParams['maxResults'] = 2; //We just fetch ONE special events;
+        $optParams['maxResults'] = 10; //We just fetch ONE special events;
         $optParams['timeMax'] = $this->_current_time->addweeks(5)->format('c'); //Fetch the coming 3 weeks events.    
         //Swing Calendar - Special
         $calendarId = Self::TAIWAN_SWING_CALENDAR_SPECIAL; //Swing Calendar.
