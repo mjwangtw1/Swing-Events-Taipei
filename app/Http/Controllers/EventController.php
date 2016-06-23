@@ -50,6 +50,7 @@ class EventController extends Controller
                 array('id' => 16,'name' => '迪化街十連棟', 'address' => '臺北市大同區迪化街一段348號'),
                 array('id' => 17,'name' => 'Beer and Cheese', 'address' => '台北市信義區基隆路二段117號'),
                 array('id' => 18,'name' => 'Bobwundaye 無問題', 'address' => '台北市大安區和平東路3段77號'),
+                array('id' => 19,'name' => "Chen's Studio", 'address' => '忠孝東路4段128號4樓'),
 
                 array('id' => 99,'name' => '其他(請務必在說明中填寫)','address' => 'ELSE'),
         );
