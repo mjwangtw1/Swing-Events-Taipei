@@ -8,9 +8,10 @@
             <div class="panel panel-default">
                 <div class="panel-heading">About us.</div>
                 <div class="panel-body">
-                    Site code by Mou. Layout Design by MDFH.
-                    Framework: Laravel.
-                    Deploy: Heroku
+                    Layout Design by MDFH. <br/>
+                    Site code by Mou.      <br/>
+                    Framework: Laravel.    <br/>
+                    Deploy: Leo's Server   <br/>
                 </div>
             </div>
         </div>
