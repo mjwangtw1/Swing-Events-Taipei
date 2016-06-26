@@ -178,7 +178,7 @@ $weekday['tw'] = ['周日', '周一','周二','周三','周四','周五','周六
                                     </div>
 
                                     <div class="to__external">
-                                        <a href="https://maps.google.com/maps?hl=zh-TW&amp;q={{ isset($event_detail['event_info']->location) ? $event_detail['event_info']->location : '' }}"  class="button small for__eventurl" target="_blank">
+                                        <a href="https://maps.google.com/maps?hl=zh-TW&amp;q={{ isset($event_detail['event_info']['location']) ? $event_detail['event_info']['location'] : '' }}"  class="button small for__eventurl" target="_blank">
                                             {{ trans('default.google_map') }}
                                         </a> 
                                     
