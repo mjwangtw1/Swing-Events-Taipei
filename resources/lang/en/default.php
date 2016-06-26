@@ -27,5 +27,7 @@
         'Thu' => 'Thu',
         'Fri' => 'Fri',
         'Sat' => 'Sat',
-        'Sun' => 'Sun'
+        'Sun' => 'Sun',
+        'weather_might_rain' => 'Event venue might be raining, please check event page for any possible updates',
+        'current_temp' => 'Current Temperature'
     ];
