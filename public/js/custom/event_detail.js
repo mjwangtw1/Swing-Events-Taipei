@@ -14,7 +14,6 @@ $(function()
     //Weather_stuff - Daily Weather / will shift to hourly forecast soon
     var weather_api = 'http://api.openweathermap.org/data/2.5/weather?q=Taipei,%20TW&units=metric&APPID=c7d5f3891c1d17185cb20355e2a6177e';
 
-
     function get_weather_info()
     {
         $('#weather_rain').hide();
@@ -25,6 +24,8 @@ $(function()
  
           success: function(result)
           {
+            console.log(result);
+
             var temp_min = result.main.temp_min;
             var temp_max = result.main.temp_max;
 
