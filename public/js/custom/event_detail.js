@@ -10,6 +10,50 @@ $(function()
 
     var type = $('.the__name').data('type');
 
+
+    //Weather_stuff - Daily Weather / will shift to hourly forecast soon
+    var weather_api = 'http://api.openweathermap.org/data/2.5/weather?q=Taipei,%20TW&units=metric&APPID=c7d5f3891c1d17185cb20355e2a6177e';
+
+
+    function get_weather_info()
+    {
+        $('#weather_rain').hide();
+
+        $.ajax({
+          url: weather_api,
+          dataType: "json",
+ 
+          success: function(result)
+          {
+            var temp_min = result.main.temp_min;
+            var temp_max = result.main.temp_max;
+
+            var avg_tmp = (temp_min + temp_max) / 2;
+
+            //Update the weather
+            $('.the__degree').html(temp_min.toFixed(1)); 
+
+            //if it rains
+            var weather_type = result.weather[0].main;
+
+            // weather_type = 'Rain';
+
+            var check_if_rain = weather_type.match(/[Rr]ain/g);
+
+            if (check_if_rain)
+            {
+                $('#weather_temp').hide();
+                $('#weather_rain').show();
+
+                $('#weather_icon').show();
+                $('.current_degree').addClass('for__attention').removeClass('text_center');
+            }
+          }          
+        });
+    }
+
+
+
     // switch(type)
     // {
     //     //Special Event
@@ -32,5 +76,7 @@ $(function()
     featured_image_path = featured_image_2_path;
 
     $('.event_cover').css('background-image', 'url(' + featured_image_path + ')');
+
+    get_weather_info();
 
 });//end of Doc ready

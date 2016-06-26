@@ -17,12 +17,13 @@ $weekday['tw'] = ['周日', '周一','周二','周三','周四','周五','周六
         &nbsp;
     </div>
 
-
-        <!-- 天氣資訊 -->
+    <!-- 天氣資訊 -->
     <!-- 下雨 -->
-<!--     <div class="status_container">
+    <div class="status_container">
 
-        <div class="event_status in__rain">
+        <h6 id="weather_temp">{{ trans('default.current_temp') }}</h6>
+
+        <div class="event_status in__rain" id="weather_rain" style="display:none">
             <div class="row">
                 
                 <div class="small-12 columns text-center">
@@ -32,15 +33,15 @@ $weekday['tw'] = ['周日', '周一','周二','周三','周四','周五','周六
             </div>
         </div>
 
-        <a href="javascript:void(0)" class="current_degree for__attention">
-            <i class="icon o_hz s_xxlarg is__rain">&nbsp;</i>
+        <a href="javascript:void(0)" class="current_degree text-center">
+            <i class="icon o_hz s_xxlarg is__rain" id="weather_icon" style="display:none">&nbsp;</i> 
             <span class="the__degree">30</span>
             <span class="the__unit">°C</span>
         </a>
 
     </div>
 
-    <!-- 晴天 -->
+<!--     晴天
     <div class="status_container">
 
         <h6>{{ trans('default.current_temp') }}</h6>
