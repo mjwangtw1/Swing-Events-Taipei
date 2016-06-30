@@ -215,7 +215,7 @@ $weekday['tw'] = ['周日', '周一','周二','周三','周四','周五','周六
                         <div class="for__description">
                             <p>
                                 
-                                {{ is_null($event_detail['event_info']['description']) ? '' : $event_detail['event_info']['description'] }}
+                                {!! is_null($event_detail['event_info']['description']) ? '' : html_entity_decode($event_detail['event_info']['description']) !!}
 
                             </p>
                         </div>
