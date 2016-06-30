@@ -42,7 +42,7 @@
 
                     <button type="button" class="btn btn-warning" aria-label="Left Align">
                       <span class="glyphicon glyphicon-star" aria-hidden="true">
-                        <a href="/course/new">
+                        <a href="/new_event">
                           新增活動
                         </a>
                         </span>

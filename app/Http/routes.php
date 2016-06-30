@@ -96,11 +96,8 @@ Route::get('/sample', 'DataController@sample');
 //Calendar Feature
 Route::get('/calendar', 'CalendarController@index');
 
-
 //Create A new Event
 Route::post('/event/insert', 'EventController@insert'); //Insert New courses.
-
-
 
 
 //Course - Still working.
