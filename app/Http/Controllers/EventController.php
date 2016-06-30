@@ -172,9 +172,11 @@ class EventController extends Controller
           //Display Text now, later toss to view
           $event_link = "/event_n/$type/$created_id";
           
-          $success_message = ' Event Created! <a href="' . $event_link . '"> Event Link </a><br/> <a href="/">Homepage</a>'; 
+          $message['title'] = 'Event Created! ';
+          $message['content'] = ' Event Created! <a href="' . $event_link . '"> Event Link </a><br/> <a href="/">Homepage</a>'; 
 
-          return $success_message;
+          //return $message;
+          return view('event_display.message', compact('message'));
         }
 
         return $result;

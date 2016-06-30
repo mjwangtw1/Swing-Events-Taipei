@@ -8,7 +8,22 @@ $weekday['en'] = ['Sun', 'Mon','Tue','Wed','Thu','Fri','Sat'];
 $weekday['tw'] = ['周日', '周一','周二','周三','周四','周五','周六'];
 
 $logo_text = ('swing' == $title_info) ? 'Swing Events' : 'Blues Events';
-$logo_class = ('swing' == $title_info) ? '' : 'is__blues'
+$logo_class = ('swing' == $title_info) ? '' : 'is__blues';
+
+$type = Route::getCurrentRoute()->getPath(); //'blues' or 'home'
+
+//Hijack for blues event
+if ('blues' == $type)
+{
+    //a stupid reverse;
+    $rev_data[0] = $data[2];
+    $rev_data[2] = $data[0];
+    unset($data);
+    $data = $rev_data;
+
+    $event_type = ['Blues', 'Special', 'Swing'];
+    $event_type_dom = ['is__blues', 'is__special', 'is__swing'];
+}
 
 ?>
 
@@ -104,42 +119,49 @@ $logo_class = ('swing' == $title_info) ? '' : 'is__blues'
 
         $featured_flag = FALSE;
 
-        switch(count($special['events']))
-        {
-            
+        $event_counts = count($special['events']);
+
+        switch($event_counts)
+        {         
             case 0:  //No special events, then 1 blues 1 swing
 
                 //First One use Swing events;
                 $special_event[0] = $data[0]['events'][0]; 
-                $special_event[0]['link'] = '/event/Swing/' . $special_event[0]['id'];
                 $special_event[0]['type'] = 0;
+                $special_event[0]['link'] = '/event/' . $event_type[$special_event[0]['type']] .'/' . $special_event[0]['id'];
                 
+
                 //2nd One use Blues
                 $special_event[2] = $data[2]['events'][0]; 
-                $special_event[2]['link'] = '/event/Blues/' . $special_event[2]['id'];
                 $special_event[2]['type'] = 2;
+
+                $special_event[2]['link'] = '/event/'.$event_type[$special_event[2]['type']] .'/' . $special_event[2]['id'];
+                
 
                 break;
 
             case 1: //1st Special 2nd Swing
                 $special_event[0] = $special['events'][0];
-                $special_event[0]['link'] = '/event/Special/' . $special['events'][0]['id'];
                 $special_event[0]['type'] = 1;
 
+                $special_event[0]['link'] = '/event/' .$event_type[$special_event[0]['type']] .'/' . $special['events'][0]['id'];
+                
                 $random_guess = rand(1,2);
                 if(1 == $random_guess)
                 {
                     //Show Swing
                     $special_event[2] = $data[0]['events'][0]; 
-                    $special_event[2]['link'] = '/event/Swing/' . $special_event[2]['id'];
                     $special_event[2]['type'] = 0;
+                    $special_event[2]['link'] = '/event/' . $event_type[$special_event[0]['type']] .'/' . $special_event[0]['id'];
                 }
                 else
                 {   
                     //Show BLUES
                     $special_event[2] = $data[2]['events'][0]; 
-                    $special_event[2]['link'] = '/event/Blues/' . $special_event[2]['id'];
                     $special_event[2]['type'] = 2;
+
+                    $special_event[2]['link'] = '/event/'.$event_type[$special_event[2]['type']] .'/' . $special_event[2]['id'];
+                    
                 }
 
                 break;
@@ -156,7 +178,6 @@ $logo_class = ('swing' == $title_info) ? '' : 'is__blues'
                 $special_event[2]['type'] = 1;
 
                 break;
-
         }
 
             $special_event[0]['class'] = 'is__featured_1';

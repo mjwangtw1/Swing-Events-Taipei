@@ -130,7 +130,6 @@ class DataController extends Controller
 
     public function event_n($event_type, $eventId)
     {
-        //$this->_check_and_delete_static_files(); //Delete first
         $this->prepare_file(); //newly created event -> Force Refresh.
         return $this->event($event_type, $eventId);
     }
@@ -192,7 +191,8 @@ class DataController extends Controller
             $this->prepare_file();
         }
 
-        include_once($this->_blues_file_path); //Read the file and use the $data array right away.
+        //include_once($this->_blues_file_path); //Read the file and use the $data array right away.
+        include_once($this->_swing_file_path); //Read the file and use the $data array right away.
         include_once($this->_special_file_path); //Read the special events
 
         $title_info = 'blues';
