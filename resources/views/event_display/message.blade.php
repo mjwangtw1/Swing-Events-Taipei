@@ -9,7 +9,7 @@
                 <div class="panel-heading"> {{$message['title']}}</div>
                 <div class="panel-body">
                 
-                 {{ $message['content'] }}
+                 {!! html_entity_decode($message['content']) !!}
 
                 </div>
             </div>

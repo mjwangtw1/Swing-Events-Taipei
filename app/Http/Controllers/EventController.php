@@ -173,7 +173,7 @@ class EventController extends Controller
           $event_link = "/event_n/$type/$created_id";
           
           $message['title'] = 'Event Created! ';
-          $message['content'] = ' Event Created! <a href="' . $event_link . '"> Event Link </a><br/> <a href="/">Homepage</a>'; 
+          $message['content'] = ' Event Created! <br/><a href="' . $event_link . '"> Event Link </a><br/> <a href="/">Homepage</a>'; 
 
           //return $message;
           return view('event_display.message', compact('message'));
@@ -221,8 +221,6 @@ class EventController extends Controller
         return $calendar->insert($calendarId, $event_detail);
     }
 
-
-
     public function delete_event_from_calendar($calendarType, $eventId)
     {
         $calendar = new GoogleCalendar;
@@ -231,12 +229,14 @@ class EventController extends Controller
 
         $result = $calendar->delete($calendarId, $eventId);
 
-        //return $result;
-        return back();
+        //Toss to message And Display
+        $event_link = "/new_event";
+
+        $message['title'] = 'Event Deleted !';
+        $message['content'] = ' Event Deleted!<br/> <a href="' . $event_link . '">Create Event</a><br/><a href="/">Homepage</a>'; 
+
+        return view('event_display.message', compact('message'));
     }   
-
-
-
 
 
 
