@@ -21,27 +21,4 @@ class PageController extends Controller
     {
         return view('teacher');
     }
-
-    //Location
-    public function venue()
-    {
-        return view('venue');
-    }
-
-    //Group 
-    public function group()
-    {
-        return view('group');
-    }
-
-    public function event()
-    {
-        return view('event');
-    }
-
-    public function workshop()
-    {
-        return view('workshop');
-    }
-
 }

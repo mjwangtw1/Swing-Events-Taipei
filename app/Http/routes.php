@@ -65,11 +65,12 @@ Route::get('/home', 'DataController@home'); // List Events within this week
 Route::get('/realtime', 'DataController@fetch_api_data'); // List Events within this week
 Route::get('/now', 'DataController@now');   // List whatever happened Today.
 Route::get('/event/{event_type}/{eventId}', 'DataController@event'); //List Specific Event with Detailed Info
+Route::get('/event_n/{event_type}/{eventId}', 'DataController@event_n'); //List Specific Event with Detailed Info With FORCE Refresh
+
 
 //Try adding
 //Route::get('/try_add', 'DataController@insert_to_calendar'); //Sync file and create local files.
 Route::get('/try_del/{calendarType}/{eventId}', 'EventController@delete_event_from_calendar'); //Sync file and create local files. //Becareful with this one! 
-
 
 
 //Backend - for coding purpose

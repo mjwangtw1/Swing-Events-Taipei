@@ -170,7 +170,7 @@ class EventController extends Controller
         if ( is_string($created_id) )
         {
           //Display Text now, later toss to view
-          $event_link = "/event/$type/$created_id";
+          $event_link = "/event_n/$type/$created_id";
           
           $success_message = ' Event Created! <a href="' . $event_link . '"> Event Link </a><br/> <a href="/">Homepage</a>'; 
 
@@ -229,7 +229,8 @@ class EventController extends Controller
 
         $result = $calendar->delete($calendarId, $eventId);
 
-        return $result;
+        //return $result;
+        return back();
     }   
 
 

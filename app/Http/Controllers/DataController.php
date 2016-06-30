@@ -128,10 +128,16 @@ class DataController extends Controller
         return view('course', compact('data'));
     }
 
+    public function event_n($event_type, $eventId)
+    {
+        //$this->_check_and_delete_static_files(); //Delete first
+        $this->prepare_file(); //newly created event -> Force Refresh.
+        return $this->event($event_type, $eventId);
+    }
+
     //This one List specific Event with Detailed Info.
     public function event($event_type, $eventId)
     {   
-
         $event_detail = $this->_fetch_rebuild_event($event_type, $eventId);
 
         //New Method: Load File as well...0 -> TS Regular | 1 -> TS Special | 2 -> Blues Event
