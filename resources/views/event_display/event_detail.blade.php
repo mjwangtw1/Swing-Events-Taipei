@@ -29,7 +29,6 @@ $weekday['tw'] = ['周日', '周一','周二','周三','周四','周五','周六
                 <div class="small-12 columns text-center">
                     {{ trans('default.weather_might_rain') }}
                 </div>
-
             </div>
         </div>
 
@@ -171,8 +170,9 @@ $weekday['tw'] = ['周日', '周一','周二','周三','周四','周五','周六
                                         </a> 
                                     
                                         <?php
+                       
                                             //Dynamic Gen a Link button if there is one! 
-                                            if ( ! is_null($event_detail['event_info']['description']) && ! empty($event_detail['event_info']['description']))
+                                            if (isset($event_detail['event_info']['description']) && ! empty($event_detail['event_info']['description']))
                                             {
                                                 $patt = "/https*:\/\/[a-zA-Z0-9\.\/_]+/";
                                                 preg_match($patt, $event_detail['event_info']['description'], $output_array);
@@ -215,7 +215,7 @@ $weekday['tw'] = ['周日', '周一','周二','周三','周四','周五','周六
                         <div class="for__description">
                             <p>
                                 
-                                {!! is_null($event_detail['event_info']['description']) ? '' : html_entity_decode($event_detail['event_info']['description']) !!}
+                                {!! isset($event_detail['event_info']['description']) ? html_entity_decode($event_detail['event_info']['description']) : '' !!}
 
                             </p>
                         </div>
