@@ -66,6 +66,54 @@ $(function()
         $('.photo_source').html(image_source_name);
     }
 
+    var tag = document.createElement('script');
+        tag.src = 'https://www.youtube.com/player_api';
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    var tv,
+            playerDefaults = {autoplay: 0, autohide: 1, modestbranding: 0, rel: 0, showinfo: 0, controls: 0, disablekb: 1, enablejsapi: 0, iv_load_policy: 3};
+    var vid = [
+                {'videoId': '2b5QNj-BVhs', 'startSeconds': 20, 'endSeconds': 45, 'suggestedQuality': 'hd720'},
+                {'videoId': '9ge5PzHSS0Y', 'startSeconds': 60, 'endSeconds': 80, 'suggestedQuality': 'hd720'}
+            ],
+            randomvid = Math.floor(Math.random() * (vid.length - 1 + 1));
+
+    function onYouTubePlayerAPIReady(){
+      tv = new YT.Player('tv', {events: {'onReady': onPlayerReady, 'onStateChange': onPlayerStateChange}, playerVars: playerDefaults});
+    }
+
+    function onPlayerReady(){
+      tv.loadVideoById(vid[randomvid]);
+      tv.mute();
+    }
+
+    function onPlayerStateChange(e) {
+      if (e.data === 1){
+        $('#tv').addClass('active');
+      } else if (e.data === 0){
+        tv.seekTo(vid[randomvid].startSeconds)
+      }
+    }
+
+    function vidRescale(){
+
+      var w = $(window).width()+200,
+        h = $(window).height()+200;
+
+      if (w/h > 16/9){
+        tv.setSize(w, w/16*9);
+        $('.tv .screen').css({'left': '0px'});
+      } else {
+        tv.setSize(h/9*16, h);
+        $('.tv .screen').css({'left': -($('.tv .screen').outerWidth()-w)/2});
+      }
+    }
+
+    $(window).on('load resize', function(){
+      vidRescale();
+    });
+
+
     // Gsap animation
     // 變數宣告
     var controller = new ScrollMagic.Controller();
@@ -128,13 +176,13 @@ $(function()
         .to(feaS_1, 1, {zIndex: 50}, '-=1')
         .to(feaS_2, 1, {zIndex: 75}, '-=1')
         // Switch Background using callbacks
-        .add
-        (
-            function()
-            {
-                replace_photo(featured_image_2_path);
-            }
-        )
+        // .add
+        // (
+        //     function()
+        //     {
+        //         replace_photo(featured_image_2_path);
+        //     }
+        // )
         // 
         .to(".is__featured_2 .for__switch_layer", 1, {opacity: 0}, '-=0.5')
         .to(".is__featured_1 .for__switch_layer", 1, {opacity: 1}, '-=1')
@@ -143,13 +191,13 @@ $(function()
         .to(feaS_1, 1, {zIndex: 75}, '-=1')
         .to(feaS_2, 1, {zIndex: 50}, '-=1')
          // Switch Background using callbacks
-        .add
-        (
-            function()
-            {
-                replace_photo(featured_image_1_path);
-            }
-        )
+        // .add
+        // (
+        //     function()
+        //     {
+        //         replace_photo(featured_image_1_path);
+        //     }
+        // )
         .to(".is__featured_2 .for__switch_layer", 1, {opacity: 1}, "-=0.5")
         .to(".is__featured_1 .for__switch_layer", 1, {opacity: 0}, "-=1")
      
@@ -173,13 +221,13 @@ $(function()
         .to(feaS_1, 1, {zIndex: 50}, '-=1')
         .to(feaS_2, 1, {zIndex: 75}, '-=1')
         // Switch Background using callbacks
-        .add
-        (
-            function()
-            {
-                replace_photo(featured_image_2_path);
-            }
-        )
+        // .add
+        // (
+        //     function()
+        //     {
+        //         replace_photo(featured_image_2_path);
+        //     }
+        // )
         // 
         .to(".is__featured_2 .for__switch_layer", 1, {opacity: 0}, '-=0.5')
         .to(".is__featured_1 .for__switch_layer", 1, {opacity: 1}, '-=1')
@@ -188,13 +236,13 @@ $(function()
         .to(feaS_1, 1, {zIndex: 75}, '-=1')
         .to(feaS_2, 1, {zIndex: 50}, '-=1')
          // Switch Background using callbacks
-        .add
-        (
-            function()
-            {
-                replace_photo(featured_image_1_path);
-            }
-        )
+        // .add
+        // (
+        //     function()
+        //     {
+        //         replace_photo(featured_image_1_path);
+        //     }
+        // )
         .to(".is__featured_2 .for__switch_layer", 1, {opacity: 1}, "-=0.5")
         .to(".is__featured_1 .for__switch_layer", 1, {opacity: 0}, "-=1")
      
