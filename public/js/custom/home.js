@@ -12,7 +12,7 @@
 
         //Replace image
         // Temp comment for video background
-        // $('.featured_cover').css('background-image', 'url(' + file_path + ')');
+        $('.featured_cover').css('background-image', 'url(' + file_path + ')');
         
         //temp hijack
         image_source_name = 'NaughtySwing x TWSDA';
@@ -80,7 +80,32 @@
     {
         var player = $('.featured_cover').data('ytPlayer').player;
 
-        player.isMuted() ? player.unMute() : player.mute();
+        //player.isMuted() ? player.unMute() : player.mute();
+
+        //player.loadVideoById('MOD0pcKfVWY');
+
+        $('.featured_cover').css({"z-index": 1});
+
+
+        if(player.isMuted())
+        {
+            player.unMute();
+            $('.the_event').hide();
+            $('.swing_intro').hide();
+            $('footer').hide();
+        }
+        else
+        {
+            player.mute();
+            $('.the_event').show();
+            $('.swing_intro').show();
+            $('footer').show();
+        }
+        
+
+
+
+
     }
 
 
@@ -151,7 +176,7 @@ $(function()
 
     $('#ict').on('click', function(){
 
-        console.log('trigger full screen! 12355');
+        //console.log('trigger full screen! 12355');
 
         //pause_bg_player(); //pause current background player;
 
