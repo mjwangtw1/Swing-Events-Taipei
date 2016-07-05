@@ -7,7 +7,7 @@
         'event' => 'Events',
         'course' => 'Course&Workshops',
         'group' => 'Groups&Teachers',
-        'tlf2016'  => 'TLF 2016',
+        'tlf2016'  => 'Taipei Lindy Festival',
         'ichartp'  => 'I Charleston Taipei',
         'event_this_week' => 'Event This Week',
         'month' => '',

@@ -92,9 +92,10 @@ if ('blues' == $type)
                                 {{ trans('default.tlf2016') }}
                             </span>
                         </a>
-                        <a href="javascript:void(0)" class="special_promo">
+                        <a href="javascript:void(0)" class="special_promo" id="ict">
                             <span>
-                                {{ trans('default.ichartp') }}
+                        <!--         {{ trans('default.ichartp') }} -->
+                                Music 
                             </span>
                         </a>
                     </div>
@@ -491,6 +492,9 @@ if ('blues' == $type)
         </div>
 
     </footer>
+
+    <div id="tv"></div>
+
 
 @stop
 

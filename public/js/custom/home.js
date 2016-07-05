@@ -1,6 +1,93 @@
+    
+    //Hoist functions to the very top
+
+    //This to Dynamic change Photo Credit by js
+    function replace_photo(file_path)
+    {
+        //Here trying to get the name out.
+        var image_source_name = ''; //reset
+        var filename = file_path.split('stock/').pop();
+        var source_name = filename.split('.png');    
+        image_source_name = source_name[0].replace(/\_/g, " ");
+
+        //Replace image
+        // Temp comment for video background
+        // $('.featured_cover').css('background-image', 'url(' + file_path + ')');
+        
+        //temp hijack
+        image_source_name = 'NaughtySwing x TWSDA';
+
+        //Modify Photo Credit.
+        $('.photo_source').html(image_source_name);
+    }
+
+    function trigger_bg_teaser(player_id)
+    {
+        $('.featured_cover').YTPlayer
+        ({
+            fitToBackground: true,
+            videoId: player_id,
+            playerVars: {
+                start:0,
+              // start:52,
+              // end:75,
+              modestbranding : 1
+            },
+            repeat:false,
+            version: 3,
+
+        });
+    }
+
+    function trigger_full_player(player_id)
+    {
+        $('#tv').YTPlayer
+        ({
+            fitToBackground: true,
+            mute: false,
+            videoId: player_id,
+            playerVars: {
+              modestbranding : 1
+            },
+            repeat:false,
+            version: 3,
+        });
+
+        var full_video = $('#tv').data('ytPlayer').player;
+
+        //full_video.requestFullScreen();
+
+        // var requestFullScreen = full_video.requestFullScreen || full_video.mozRequestFullScreen || full_video.webkitRequestFullScreen;
+        //   if (requestFullScreen) {
+        //     requestFullScreen.bind(full_video)();
+        //   }
+
+    }
+
+    function pause_bg_player()
+    {
+        //Player_object
+        $('.featured_cover').data('ytPlayer').player.pauseVideo();  
+    }
+
+    function unpause_bg_player()
+    {
+        $('.featured_cover').data('ytPlayer').player.playVideo();
+    }
+
+    function toggle_mute_bg_player()
+    {
+        var player = $('.featured_cover').data('ytPlayer').player;
+
+        player.isMuted() ? player.unMute() : player.mute();
+    }
+
+
 //Doc Ready
 $(function() 
 {
+    console.log('new shit 113');
+
     //var featured_image_1_path = '/assets/stock/featured_cover_1.png';
     //var featured_image_2_path = '/assets/stock/featured_cover_2.png';
     var featured_image_1_path = '/assets/stock/TAIPEI_LINDY_FESTIVAL_2014.png';
@@ -51,42 +138,29 @@ $(function()
     // //Sun
     // feature_event_image.sun_ss_sun_outdoor = 'https://scontent-tpe1-1.xx.fbcdn.net/v/t1.0-9/12512641_10208470701592694_323433579423670011_n.jpg?oh=d1b8cb0176d62aea71c7efbf205db444&oe=57E240B6';
 
+    //Previous Dynamic change photo
     replace_photo(featured_image_1_path);
 
-    //This to Dynamic change Photo Credit by js
-    function replace_photo(file_path)
-    {
-        //Here trying to get the name out.
-        var image_source_name = ''; //reset
-        var filename = file_path.split('stock/').pop();
-        var source_name = filename.split('.png');    
-        image_source_name = source_name[0].replace(/\_/g, " ");
+    //Launch bg teaser
+    var ict_teaser_id = 'zTPCiyeEl3E';
 
-        //Replace image
-        // Temp comment for video background
-        // $('.featured_cover').css('background-image', 'url(' + file_path + ')');
-        
-        //temp hijack
-        image_source_name = 'NaughtySwing';
+    ict_teaser_id = 'MOD0pcKfVWY';
 
-        //Modify Photo Credit.
-        $('.photo_source').html(image_source_name);
-    }
+    trigger_bg_teaser(ict_teaser_id);
 
-    var ict_teaser_id = 'zTPCiyeEl3E'
+    $('#ict').on('click', function(){
 
-    $('.featured_cover').YTPlayer
-    ({
-        fitToBackground: true,
-        videoId: ict_teaser_id,
-        playerVars: {
-          start:52,
-          end:75,
-        },
-        repeat:true,
-        version: 3
+        console.log('trigger full screen! 12355');
+
+        //pause_bg_player(); //pause current background player;
+
+        //trigger_full_player('MOD0pcKfVWY');
+
+        //trigger_bg_teaser('MOD0pcKfVWY');
+
+        toggle_mute_bg_player();
+
     });
-
 
 
     // Gsap animation
