@@ -12,7 +12,7 @@
 
         //Replace image
         // Temp comment for video background
-        $('.featured_cover').css('background-image', 'url(' + file_path + ')');
+        // $('.featured_cover').css('background-image', 'url(' + file_path + ')');
         
         //temp hijack
         image_source_name = 'NaughtySwing x TWSDA';
@@ -190,8 +190,31 @@ $(function()
 
 
     // Gsap animation
-    // 變數宣告
-    var controller = new ScrollMagic.Controller();
+    // 0705: 特別動畫預告
+    var special_opacity = new ScrollMagic.Controller();
+
+    var tl_spcl_opct = new TimelineLite()
+    .to(".is__featured", .5, { opacity: 1 }, '+=12')
+    .to(".swing_intro", .5, { opacity: 1 }, '-=0.2');
+
+    // ScrollMagic參數設定 (scene1)
+    var scene_home_scroll = new ScrollMagic.Scene
+    ({
+        triggerElement: ".featured_cover",
+        triggerHook: 0,
+        reverse: true
+    })
+    
+    // 呼叫 Timeline
+    .setTween(tl_spcl_opct)
+    // Debug Mode
+    // .addIndicators({name: "tl_spcl_opct (duration: 0)"})
+    // 啟動 Scrollmagic
+    .addTo(special_opacity);
+
+
+    // 首頁捲動後的動畫 Controller
+    var home_scroll = new ScrollMagic.Controller();
 
     // Timeline宣告
     if (document.documentElement.clientWidth > 640) 
@@ -199,6 +222,9 @@ $(function()
         var tl_header_bg = new TimelineLite()
         .to(".the_logo_main", .25, { opacity: 0, marginBottom: '-1rem', ease: Power3.easeIn }, '-=0.5')
         .to(".header_bg", .36, { opacity: 1 }, '-=0.25')
+        // Special Event Opacity Switch
+        .to(".is__featured", .2, { opacity: 1 }, '-=0.2')
+        .to(".swing_intro", .2, { opacity: 1 }, '-=0.2')
         .to(".menu_c4", .36, { marginTop: 0 }, '-=0.25')
         // Switch Speical Event buttons to right
         .add
@@ -221,8 +247,8 @@ $(function()
         .to(".the_logo_side", .25, { opacity: 1 });
     }
 
-    // ScrollMagic參數設定 (scene1)
-    var scene1 = new ScrollMagic.Scene
+    // ScrollMagic參數設定 (home_scroll)
+    var scene_home_scroll = new ScrollMagic.Scene
     ({
         triggerElement: ".is__featured",
         triggerHook: 0.6,
@@ -234,7 +260,7 @@ $(function()
     // Debug Mode
     // .addIndicators({name: "1 (duration: 0)"})
     // 啟動 Scrollmagic
-    .addTo(controller);
+    .addTo(home_scroll);
 
 
     // Featured Events: Switch from for 5 seconds
