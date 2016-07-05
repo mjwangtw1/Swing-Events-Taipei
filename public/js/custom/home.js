@@ -15,6 +15,9 @@ $(function()
 
     var feature_title = $('.for__feature_title');
 
+    // Speical Event buttons
+    var feat_event_btn = document.querySelector('.menu_c4');
+
     // console.log(feature_title);
     // var feature_event_image = new Object;
 
@@ -85,7 +88,17 @@ $(function()
         var tl_header_bg = new TimelineLite()
         .to(".the_logo_main", .25, { opacity: 0, marginBottom: '-1rem', ease: Power3.easeIn }, '-=0.5')
         .to(".header_bg", .36, { opacity: 1 }, '-=0.25')
-        .to(".the_logo_side", .25, { opacity: 1 })
+        .to(".menu_c4", .36, { marginTop: 0 }, '-=0.25')
+        // Switch Speical Event buttons to right
+        .add
+        (
+            function()
+            {
+                feat_event_btn.classList.toggle('medium-offset-4');
+                feat_event_btn.classList.toggle('medium-offset-9');
+            }
+        )
+        .to(".the_logo_side", .25, { opacity: 1 });
         // .to(".featured_cover", 2, { y: -75 }, '-=2');
     }
     else 
