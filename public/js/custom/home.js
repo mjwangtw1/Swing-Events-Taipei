@@ -19,6 +19,7 @@
 
         //Modify Photo Credit.
         $('.photo_source').html(image_source_name);
+        $('.photo_source_link').attr('href', "https://www.facebook.com/nsintaiwan/?fref=ts");
     }
 
     function trigger_bg_teaser(player_id)

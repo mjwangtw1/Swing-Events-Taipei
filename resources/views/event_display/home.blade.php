@@ -65,7 +65,7 @@ if ('blues' == $type)
                                 <h6>credit</h6>
                             </div>
                             <div class="small-7 columns">
-                                <a href="javascript:void(0)">
+                                <a href="javascript:void(0)" class="photo_source_link" target="_blank">
                                     <span class="photo_source"></span>
                                 </a>
                             </div>
