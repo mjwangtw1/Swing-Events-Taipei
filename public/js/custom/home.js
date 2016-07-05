@@ -60,12 +60,18 @@ $(function()
         image_source_name = source_name[0].replace(/\_/g, " ");
 
         //Replace image
-        $('.featured_cover').css('background-image', 'url(' + file_path + ')');
+        // Temp comment for video background
+        // $('.featured_cover').css('background-image', 'url(' + file_path + ')');
         
         //Modify Photo Credit.
         $('.photo_source').html(image_source_name);
     }
 
+    $('.featured_cover').YTPlayer
+    ({
+        fitToBackground: true,
+        videoId: 'LSmgKRx5pBo'
+    });
 
 
 

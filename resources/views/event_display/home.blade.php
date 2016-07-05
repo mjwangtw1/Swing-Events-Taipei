@@ -75,7 +75,7 @@ if ('blues' == $type)
 
 
                     <!-- For Language Switch -->
-                    <div class="menu_c3 small-4 medium-1 columns">
+                    <div class="menu_c3 small-3 medium-1 columns">
                         <form method="post" action="/locale">
                             <button name="locale" class="button small for__language" type="submit" value="{{ Session::get('locale') === "tw" ? "en" : "tw" }}">
                                 {{ Session::get('locale') === "tw" ? " English" : "中文" }}
@@ -86,7 +86,7 @@ if ('blues' == $type)
 
 
                     <!-- Cluster for Promo Events -->
-                    <div class="menu_c4 small-8 medium-3 columns medium-offset-9">
+                    <div class="menu_c4 small-9 medium-3 columns medium-offset-9">
                         <a href="http://www.taipeilindyfestival.com/" class="special_promo" target="_blank">
                             <span>
                                 {{ trans('default.tlf2016') }}
@@ -509,6 +509,9 @@ if ('blues' == $type)
     
     <!-- Remodal -->
     <!-- <script src="{{ URL::asset('js/public/remodal.min.js') }}"></script> -->
+
+    <!-- Video BG -->
+    <script src="{{ URL::asset('js/public/jquery.youtubebackground.js') }}"></script>
 
     <script src="{{ URL::asset('js/custom/home.js') }}"></script>
 
