@@ -63,14 +63,25 @@ $(function()
         // Temp comment for video background
         // $('.featured_cover').css('background-image', 'url(' + file_path + ')');
         
+        //temp hijack
+        image_source_name = 'NaughtySwing';
+
         //Modify Photo Credit.
         $('.photo_source').html(image_source_name);
     }
 
+    var ict_teaser_id = 'zTPCiyeEl3E'
+
     $('.featured_cover').YTPlayer
     ({
         fitToBackground: true,
-        videoId: 'LSmgKRx5pBo'
+        videoId: ict_teaser_id,
+        playerVars: {
+          start:52,
+          end:75,
+        },
+        repeat:true,
+        version: 3
     });
 
 
