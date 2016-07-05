@@ -73,7 +73,7 @@ $(function()
     $('.featured_cover').YTPlayer
     ({
         fitToBackground: true,
-        videoId: 'LSmgKRx5pBo'
+        videoId: 'zTPCiyeEl3E'
     });
 
 
