@@ -86,7 +86,7 @@ if ('blues' == $type)
 
 
                     <!-- Cluster for Promo Events -->
-                    <div class="menu_c4 small-9 medium-3 columns medium-offset-9">
+                    <div class="menu_c4 small-9 medium-3 columns medium-offset-4">
                         <a href="http://www.taipeilindyfestival.com/" class="special_promo" target="_blank">
                             <span>
                                 {{ trans('default.tlf2016') }}
