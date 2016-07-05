@@ -75,7 +75,7 @@ if ('blues' == $type)
 
 
                     <!-- For Language Switch -->
-                    <div class="menu_c3 small-6 medium-1 columns">
+                    <div class="menu_c3 small-4 medium-1 columns">
                         <form method="post" action="/locale">
                             <button name="locale" class="button small for__language" type="submit" value="{{ Session::get('locale') === "tw" ? "en" : "tw" }}">
                                 {{ Session::get('locale') === "tw" ? " English" : "中文" }}
@@ -86,10 +86,15 @@ if ('blues' == $type)
 
 
                     <!-- Cluster for Promo Events -->
-                    <div class="menu_c4 small-6 medium-3 columns medium-offset-9">
+                    <div class="menu_c4 small-8 medium-3 columns medium-offset-9">
                         <a href="http://www.taipeilindyfestival.com/" class="special_promo" target="_blank">
                             <span>
-                                * {{ trans('default.tlf2016') }}
+                                {{ trans('default.tlf2016') }}
+                            </span>
+                        </a>
+                        <a href="javascript:void(0)" class="special_promo">
+                            <span>
+                                {{ trans('default.ichartp') }}
                             </span>
                         </a>
                     </div>
@@ -500,6 +505,10 @@ if ('blues' == $type)
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.2/easing/EasePack.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.2/TimelineLite.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.2/TweenLite.min.js"></script>
+
+    
+    <!-- Remodal -->
+    <!-- <script src="{{ URL::asset('js/public/remodal.min.js') }}"></script> -->
 
     <script src="{{ URL::asset('js/custom/home.js') }}"></script>
 
