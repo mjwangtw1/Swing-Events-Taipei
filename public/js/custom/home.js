@@ -1,4 +1,4 @@
-    
+
     //Hoist functions to the very top
 
     //This to Dynamic change Photo Credit by js
@@ -194,7 +194,7 @@ $(function()
     var special_opacity = new ScrollMagic.Controller();
 
     var tl_spcl_opct = new TimelineLite()
-    .to(".is__featured", .5, { opacity: 1 }, '+=12')
+    .to(".is__featured", .5, { opacity: 1 }, '+=16')
     .to(".swing_intro", .5, { opacity: 1 }, '-=0.2');
 
     // ScrollMagic參數設定 (scene1)
