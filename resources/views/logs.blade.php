@@ -1,6 +1,10 @@
 
 <h1>Change Logs by date.</h1>
 
+<h3> 2016.07.07</h3>
+    <ol>
+        <li>[New Feature] Integrate with 'I Charleston Taipei' and dynamic nback</li>
+    </ol>
 
 <h3> 2016.06.29 </h3>
     <ol>
