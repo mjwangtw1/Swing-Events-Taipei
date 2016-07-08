@@ -36,78 +36,34 @@
             },
             repeat:false,
             version: 3,
-
         });
     }
 
-    function trigger_full_player(player_id)
+    function toggle_bg_player(playObject)
     {
-        $('#tv').YTPlayer
-        ({
-            fitToBackground: true,
-            mute: false,
-            videoId: player_id,
-            playerVars: {
-              modestbranding : 1
-            },
-            repeat:false,
-            version: 3,
-        });
+        var playerIsMuted = playObject.isMuted();
 
-        var full_video = $('#tv').data('ytPlayer').player;
-
-        //full_video.requestFullScreen();
-
-        // var requestFullScreen = full_video.requestFullScreen || full_video.mozRequestFullScreen || full_video.webkitRequestFullScreen;
-        //   if (requestFullScreen) {
-        //     requestFullScreen.bind(full_video)();
-        //   }
-
-    }
-
-    function pause_bg_player()
-    {
-        //Player_object
-        $('.featured_cover').data('ytPlayer').player.pauseVideo();  
-    }
-
-    function unpause_bg_player()
-    {
-        $('.featured_cover').data('ytPlayer').player.playVideo();
-    }
-
-    function toggle_mute_bg_player()
-    {
-        var player = $('.featured_cover').data('ytPlayer').player;
-
-        //player.isMuted() ? player.unMute() : player.mute();
-
-        //player.loadVideoById('MOD0pcKfVWY');
-
-        $('.featured_cover').css({"z-index": 1});
-
-
-        if(player.isMuted())
+        if (playerIsMuted)
         {
-            player.unMute();
+            playObject.unMute();
             $('.the_event').hide();
             $('.swing_intro').hide();
             $('footer').hide();
         }
         else
-        {
-            player.mute();
+        {   
+            playObject.mute();
             $('.the_event').show();
             $('.swing_intro').show();
             $('footer').show();
         }
-        
-
-
-
-
     }
 
+    function bgloadVideoById(videoId)
+    {
+        var player = $('.featured_cover').data('ytPlayer').player;
+        player.loadVideoById('MOD0pcKfVWY');
+    }
 
 //Doc Ready
 $(function() 
@@ -184,7 +140,10 @@ $(function()
 
         //trigger_bg_teaser('MOD0pcKfVWY');
 
-        toggle_mute_bg_player();
+
+        var playerObject = $('.featured_cover').data('ytPlayer').player;
+
+        toggle_bg_player(playerObject);
 
     });
 
