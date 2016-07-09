@@ -149,7 +149,10 @@
     {
         var featured_image_1_path = '/assets/stock/TAIPEI_LINDY_FESTIVAL_2014.png';
         var featured_image_2_path = '/assets/stock/YM_SWING.png'; 
-        var opacity_secs = (mobile_device) ? '+=0' :  '+=14';
+
+        //This value sets the opacity seconds for Desktop Version.
+        //Mobile version we turned it off (Mobile version does not load video)
+        var opacity_secs = (mobile_device) ? '+=0' :  '+=13';
 
         var feature_title = $('.for__feature_title');
 
