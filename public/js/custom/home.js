@@ -1,5 +1,25 @@
 
     //Hoist functions to the very top
+    var isMobile = {
+        Android: function() {
+            return navigator.userAgent.match(/Android/i);
+        },
+        BlackBerry: function() {
+            return navigator.userAgent.match(/BlackBerry/i);
+        },
+        iOS: function() {
+            return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+        },
+        Opera: function() {
+            return navigator.userAgent.match(/Opera Mini/i);
+        },
+        Windows: function() {
+            return navigator.userAgent.match(/IEMobile/i) || navigator.userAgent.match(/WPDesktop/i);
+        },
+        any: function() {
+            return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+        }
+    };
 
     //This to Dynamic change Photo Credit by js
     function replace_photo(file_path)
@@ -316,30 +336,41 @@ $(function()
     var ict_teaser_id = 'zTPCiyeEl3E'; //This is teaser
         ict_teaser_id = 'MOD0pcKfVWY'; //This is Main ICT //We use this one now.
 
-    //Just launch when Page loaded
-    start_bg_video(ict_teaser_id);
+    if( ! isMobile.any())
+    {
+        //DESKTOP RULEs
+        //Just launch when Page loaded
+        start_bg_video(ict_teaser_id);
 
-    //Behavior when clicked 'Music'
-    $('#ict').on('click', function(){
+        //Behavior when clicked 'Music'
+        $('#ict').on('click', function(){
 
-        var now_status = $('#status').data('id');
-        console.log(now_status);
-        console.log(123);
+            var now_status = $('#status').data('id');
 
-        if('video' == now_status)
-        {
-            //enlarge video and unmute
-            var playerObject = $('.featured_cover').data('ytPlayer').player;
-            toggle_bg_player(playerObject);
-        }
-        else
-        {
-            //Restart the player
-            start_bg_video(ict_teaser_id);
-            $('#ict >span').html('Music');
-        }
-    });
+            if('video' == now_status)
+            {
+                //enlarge video and unmute
+                var playerObject = $('.featured_cover').data('ytPlayer').player;
+                toggle_bg_player(playerObject);
+            }
+            else
+            {
+                //Restart the player
+                start_bg_video(ict_teaser_id);
+                $('#ict >span').html('Music');
+            }
+        });
+        console.log(isMobile);
 
+    }
+    else
+    {
+        //Mobile
+        switch_back_to_background();
+        $('#ict').hid(); //Turn off Video button
+    }
+
+    
     trigger_event_animation();
 
 });//end of Doc ready
