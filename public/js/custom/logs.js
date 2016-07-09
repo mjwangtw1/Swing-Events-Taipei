@@ -1,9 +1,9 @@
-"use strict"
+"use strict";
 
 //Doc Ready
 $(function() 
 {
-    console.log('js for log page');
+    console.log('js for log page 11');
 
     var code_hour = 0;
     var design_hour = 0;
@@ -11,25 +11,21 @@ $(function()
     var hour_obj = $('li');
     var current_el;
 
-   console.log(hour_obj);
-
-   hour_obj.each(function(elements)
+   hour_obj.each(function(id, elements)
    {
-        //code_hour += parseInt($(elements).data('code'));
-
-        // console.log('this hour' + $(elements).data('code'));
-
-        // current_el = $(elements).data('code');
-
-        // if ( 'undefined' != current_el)
-        // {
-        //     code_hour += parseInt(current_el);
-        //     console.log(parseInt(current_el));
-        // }
-
-
-
+        if (undefined != $(elements).data('code'))
+        {
+            code_hour += parseInt($(elements).data('code'));
+        }
+  
+        if (undefined != $(elements).data('design'))
+        {
+            design_hour += parseInt($(elements).data('design'));
+        }
    });
 
-   console.log(code_hour);
+   $('#code_hour').html(' ' + code_hour + ' Hours');
+   $('#design_hour').html(' ' + design_hour + ' Hours');
+
+
 });

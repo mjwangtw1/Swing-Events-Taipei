@@ -26,7 +26,7 @@
 
 <h3> 2016.05.27 </h3>
     <ol>
-        <li>'2 Background Design' - 2 Dynamic background - Indoor/Outdoor - by MDFH</li>
+        <li data-design="6" data-code="3">'2 Background Design' - 2 Dynamic background - Indoor/Outdoor - by MDFH</li>
         <li>'2 Special Events' - Logic change so now will show 2 newest Special Events</li>
         <li>'2 Special Events' - JS Effects to rotate events - by MDFH</li>
     </ol>
