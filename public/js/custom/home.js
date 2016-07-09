@@ -60,7 +60,7 @@
             playerVars: {
                 start:0,
                 //start:52,
-                end:15,
+                end:13,
               modestbranding : 1
             },
             repeat:false,
@@ -139,7 +139,7 @@
         var special_opacity = new ScrollMagic.Controller();
 
         var tl_spcl_opct = new TimelineLite()
-        .to(".is__featured", .5, { opacity: 1 }, '+=16')
+        .to(".is__featured", .5, { opacity: 1 }, '+=14')
         .to(".swing_intro", .5, { opacity: 1 }, '-=0.2');
 
         // ScrollMagic參數設定 (scene1)
@@ -179,8 +179,8 @@
                     feat_event_btn.classList.toggle('medium-offset-9');
                 }
             )
-            .to(".the_logo_side", .25, { opacity: 1 });
-            // .to(".featured_cover", 2, { y: -75 }, '-=2');
+            .to(".the_logo_side", .25, { opacity: 1 })
+            .to(".featured_cover", 2, { y: -75 }, '-=2');
         }
         else 
         {
