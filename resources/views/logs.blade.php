@@ -1,14 +1,16 @@
 
 <h1>Change Logs by date.</h1>
+<h2>Total Estimated Work hour:<h2>
+<h2>Code:<span id="code_hour"></span> | Design : <span id="design_hour"></span></h2>
 
 <h3> 2016.07.07</h3>
     <ol>
-        <li>[New Feature] Integrate with 'I Charleston Taipei' and dynamic nback</li>
+        <li data-code="3">[New Feature] Integrate with 'I Charleston Taipei' and dynamic nback</li>
     </ol>
 
 <h3> 2016.06.29 </h3>
     <ol>
-        <li>[New Feature] Call Weather API and integrate with Event_details</li>
+        <li data-code="5">[New Feature] Call Weather API and integrate with Event_details</li>
     </ol>
 
 
@@ -48,3 +50,6 @@
         <li>RWD website Design</li>
         <li>Locale:Chinese/English</li>
     </ol>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
+    <script src="{{ URL::asset('js/custom/logs.js') }}"></script>
