@@ -62,7 +62,7 @@ if ('blues' == $type)
                     <div class="menu_c2 small-6 medium-2 columns hide-for-small show-for-medium">
                         <div class="photo_credit row"> 
                             <div class="small-5 columns">
-                                <h6>credit</h6>
+                                <h6 id="status" data-id>credit</h6>
                             </div>
                             <div class="small-7 columns">
                                 <a href="javascript:void(0)" class="photo_source_link" target="_blank">

@@ -32,13 +32,25 @@
         //$('.photo_source_link').attr('href', "https://www.facebook.com/nsintaiwan/?fref=ts");
     }
 
-    function trigger_bg_teaser(player_id)
+    function update_status(type)
+    {
+        var target = $('#status');
+
+        target.data('id', type);
+    }
+
+
+    function start_bg_video(player_id)
     {
         //Mount Credits for Video
         $('.photo_source').html('NaughtySwing x TWSDA');
         $('.photo_source').addClass('video_source').removeClass('photo_source');
 
         $('.photo_source_link').attr('href', "https://www.facebook.com/nsintaiwan/?fref=ts");
+
+        //indicate that we are playing 
+        //$('#status').data('id','video');
+        update_status('video');
 
         //Launch youtube player
         $('.featured_cover').YTPlayer
@@ -75,9 +87,14 @@
 
         $('.video_source').addClass('photo_source').removeClass('video_source');
 
-        var bg_file_path = '/assets/stock/TAIPEI_LINDY_FESTIVAL_2014.png'
+        update_status('photo');
+
+        var bg_file_path = '/assets/stock/TAIPEI_LINDY_FESTIVAL_2014.png';
         replace_photo(bg_file_path);
-        //$('.featured_cover').css('background-image', 'url(' + bg_file_path + ')');
+        
+        $('.the_event').show();
+        $('.swing_intro').show();
+        $('footer').show();
     }
 
     function toggle_bg_player(playObject)
@@ -110,7 +127,12 @@
     function trigger_event_animation()
     {
         var featured_image_1_path = '/assets/stock/TAIPEI_LINDY_FESTIVAL_2014.png';
-        var featured_image_2_path = '/assets/stock/YM_SWING.png';    
+        var featured_image_2_path = '/assets/stock/YM_SWING.png'; 
+
+        var feature_title = $('.for__feature_title');
+
+        // Speical Event buttons
+        var feat_event_btn = document.querySelector('.menu_c4');   
         
         // Gsap animation
         // 0705: 特別動畫預告
@@ -134,7 +156,6 @@
         // .addIndicators({name: "tl_spcl_opct (duration: 0)"})
         // 啟動 Scrollmagic
         .addTo(special_opacity);
-
 
         // 首頁捲動後的動畫 Controller
         var home_scroll = new ScrollMagic.Controller();
@@ -290,32 +311,33 @@
 //Doc Ready
 $(function() 
 {
-    //var featured_image_1_path = '/assets/stock/featured_cover_1.png';
-    //var featured_image_2_path = '/assets/stock/featured_cover_2.png';
-
-    //var featured_image_path = 'http://2.bp.blogspot.com/-IU6NUe_3JRA/VlaQZXDDj6I/AAAAAAADOhw/ETH4ovfm8jo/s1600/8795400.gif'; //Bird GIF
-    //var featured_image_path = '/assets/stock/featured_cover.jpg'; //STOCK photo
-
-    var out_door_swing ='https://scontent-tpe1-1.xx.fbcdn.net/v/t1.0-9/12036520_1043850722321767_815228896261137827_n.jpg?oh=9305c825779894b481afda78a5d6388a&oe=57D06B7E';
-
-    var feature_title = $('.for__feature_title');
-
-    // Speical Event buttons
-    var feat_event_btn = document.querySelector('.menu_c4');
-
     //Launch bg teaser
-    var ict_teaser_id = 'zTPCiyeEl3E';
+    var ict_teaser_id = 'zTPCiyeEl3E'; //This is teaser
+        ict_teaser_id = 'MOD0pcKfVWY'; //This is Main ICT //We use this one now.
 
-    ict_teaser_id = 'MOD0pcKfVWY';
+    //Just launch when Page loaded
+    start_bg_video(ict_teaser_id);
 
-    trigger_bg_teaser(ict_teaser_id);
-
+    //Behavior when clicked 'Music'
     $('#ict').on('click', function(){
 
-        var playerObject = $('.featured_cover').data('ytPlayer').player;
-        toggle_bg_player(playerObject);
+        var now_status = $('#status').data('id');
+        console.log(now_status);
+        console.log(123);
 
+        if('video' == now_status)
+        {
+            //enlarge video and unmute
+            var playerObject = $('.featured_cover').data('ytPlayer').player;
+            toggle_bg_player(playerObject);
+        }
+        else
+        {
+            //Restart the player
+            start_bg_video(ict_teaser_id);
+        }
     });
 
     trigger_event_animation();
+
 });//end of Doc ready
