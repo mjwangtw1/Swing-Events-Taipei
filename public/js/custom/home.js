@@ -145,10 +145,11 @@
     }
 
     //MDFH's animation part
-    function trigger_event_animation()
+    function trigger_event_animation(mobile_device)
     {
         var featured_image_1_path = '/assets/stock/TAIPEI_LINDY_FESTIVAL_2014.png';
         var featured_image_2_path = '/assets/stock/YM_SWING.png'; 
+        var opacity_secs = (mobile_device) ? '+=0' :  '+=14';
 
         var feature_title = $('.for__feature_title');
 
@@ -160,7 +161,7 @@
         var special_opacity = new ScrollMagic.Controller();
 
         var tl_spcl_opct = new TimelineLite()
-        .to(".is__featured", .5, { opacity: 1 }, '+=14')
+        .to(".is__featured", .5, { opacity: 1 }, opacity_secs)
         .to(".swing_intro", .5, { opacity: 1 }, '-=0.2');
 
         // ScrollMagic參數設定 (scene1)
@@ -336,10 +337,16 @@ $(function()
     var ict_teaser_id = 'zTPCiyeEl3E'; //This is teaser
         ict_teaser_id = 'MOD0pcKfVWY'; //This is Main ICT //We use this one now.
 
-    if( ! isMobile.any())
+    var mobile_device = isMobile.any();
+
+    if (mobile_device)
     {
-        //DESKTOP RULEs
-        //Just launch when Page loaded
+        //Mobile mode
+        switch_back_to_background();
+        $('#ict').hide(); //Turn off Video button
+    }
+    else
+    {
         start_bg_video(ict_teaser_id);
 
         //Behavior when clicked 'Music'
@@ -360,16 +367,9 @@ $(function()
                 $('#ict >span').html('Music');
             }
         });
-        console.log(isMobile);
 
     }
-    else
-    {
-        //Mobile
-        switch_back_to_background();
-        $('#ict').hide(); //Turn off Video button
-    }
     
-    trigger_event_animation();
+    trigger_event_animation(mobile_device);
 
 });//end of Doc ready
