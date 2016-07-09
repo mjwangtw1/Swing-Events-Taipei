@@ -60,7 +60,7 @@
             playerVars: {
                 start:0,
                 //start:52,
-                end:13,
+                //end:13,
               modestbranding : 1
             },
             repeat:false,
