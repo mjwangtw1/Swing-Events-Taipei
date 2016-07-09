@@ -6,9 +6,20 @@
     {
         //Here trying to get the name out.
         var image_source_name = ''; //reset
+        var group_url ='';
         var filename = file_path.split('stock/').pop();
         var source_name = filename.split('.png');    
         image_source_name = source_name[0].replace(/\_/g, " ");
+
+        switch(image_source_name)
+        {
+            case 'YM SWING':
+                group_url = 'https://www.facebook.com/YMSWING/?fref=ts';
+                break;
+            case 'TAIPEI LINDY FESTIVAL 2014':
+                group_url = 'http://www.taipeilindyfestival.com/';
+                break;
+        }
 
         //Replace image
         // Temp comment for video background
@@ -16,6 +27,8 @@
 
         //Modify Photo Credit.
         $('.photo_source').html(image_source_name);
+        $('.photo_source_link').attr('href', group_url);
+
         //$('.photo_source_link').attr('href', "https://www.facebook.com/nsintaiwan/?fref=ts");
     }
 
@@ -23,6 +36,8 @@
     {
         //Mount Credits for Video
         $('.photo_source').html('NaughtySwing x TWSDA');
+        $('.photo_source').addClass('video_source').removeClass('photo_source');
+
         $('.photo_source_link').attr('href', "https://www.facebook.com/nsintaiwan/?fref=ts");
 
         //Launch youtube player
@@ -33,7 +48,7 @@
             playerVars: {
                 start:0,
                 //start:52,
-                //end:15,
+                end:15,
               modestbranding : 1
             },
             repeat:false,
@@ -57,6 +72,8 @@
     {
         //Remove Player
         $('.ytplayer-container').hide();
+
+        $('.video_source').addClass('photo_source').removeClass('video_source');
 
         var bg_file_path = '/assets/stock/TAIPEI_LINDY_FESTIVAL_2014.png'
         replace_photo(bg_file_path);
@@ -143,7 +160,7 @@ $(function()
     // feature_event_image.sun_ss_sun_outdoor = 'https://scontent-tpe1-1.xx.fbcdn.net/v/t1.0-9/12512641_10208470701592694_323433579423670011_n.jpg?oh=d1b8cb0176d62aea71c7efbf205db444&oe=57E240B6';
 
     //Previous Dynamic change photo
-    replace_photo(featured_image_1_path);
+    //replace_photo(featured_image_1_path);
 
     //Launch bg teaser
     var ict_teaser_id = 'zTPCiyeEl3E';
@@ -154,17 +171,7 @@ $(function()
 
     $('#ict').on('click', function(){
 
-        //console.log('trigger full screen! 12355');
-
-        //pause_bg_player(); //pause current background player;
-
-        //trigger_full_player('MOD0pcKfVWY');
-
-        //trigger_bg_teaser('MOD0pcKfVWY');
-
-
         var playerObject = $('.featured_cover').data('ytPlayer').player;
-
         toggle_bg_player(playerObject);
 
     });
