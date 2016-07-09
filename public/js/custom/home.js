@@ -95,6 +95,7 @@
         $('.the_event').show();
         $('.swing_intro').show();
         $('footer').show();
+        $('#ict >span').html('Replay');
     }
 
     function toggle_bg_player(playObject)
@@ -335,6 +336,7 @@ $(function()
         {
             //Restart the player
             start_bg_video(ict_teaser_id);
+            $('#ict >span').html('Music');
         }
     });
 
