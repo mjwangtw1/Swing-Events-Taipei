@@ -12,31 +12,55 @@
 
         //Replace image
         // Temp comment for video background
-        // $('.featured_cover').css('background-image', 'url(' + file_path + ')');
-        
-        //temp hijack
-        image_source_name = 'NaughtySwing x TWSDA';
+        $('.featured_cover').css('background-image', 'url(' + file_path + ')');
 
         //Modify Photo Credit.
         $('.photo_source').html(image_source_name);
-        $('.photo_source_link').attr('href', "https://www.facebook.com/nsintaiwan/?fref=ts");
+        //$('.photo_source_link').attr('href', "https://www.facebook.com/nsintaiwan/?fref=ts");
     }
 
     function trigger_bg_teaser(player_id)
     {
+        //Mount Credits for Video
+        $('.photo_source').html('NaughtySwing x TWSDA');
+        $('.photo_source_link').attr('href', "https://www.facebook.com/nsintaiwan/?fref=ts");
+
+        //Launch youtube player
         $('.featured_cover').YTPlayer
         ({
             fitToBackground: true,
             videoId: player_id,
             playerVars: {
                 start:0,
-              // start:52,
-              // end:75,
+                //start:52,
+                //end:15,
               modestbranding : 1
             },
             repeat:false,
             version: 3,
+            events: {
+                'onStateChange': onPlayerStateChange
+            }
         });
+    }
+
+    function onPlayerStateChange(event)
+    {
+        //0: Done,
+        if (0 == event.data) //video playback finished
+        {
+            switch_back_to_background();
+        }
+    }
+
+    function switch_back_to_background()
+    {
+        //Remove Player
+        $('.ytplayer-container').hide();
+
+        var bg_file_path = '/assets/stock/TAIPEI_LINDY_FESTIVAL_2014.png'
+        replace_photo(bg_file_path);
+        //$('.featured_cover').css('background-image', 'url(' + bg_file_path + ')');
     }
 
     function toggle_bg_player(playObject)
@@ -68,8 +92,6 @@
 //Doc Ready
 $(function() 
 {
-    console.log('new shit 113');
-
     //var featured_image_1_path = '/assets/stock/featured_cover_1.png';
     //var featured_image_2_path = '/assets/stock/featured_cover_2.png';
     var featured_image_1_path = '/assets/stock/TAIPEI_LINDY_FESTIVAL_2014.png';
@@ -246,13 +268,13 @@ $(function()
         .to(feaS_1, 1, {zIndex: 50}, '-=1')
         .to(feaS_2, 1, {zIndex: 75}, '-=1')
         // Switch Background using callbacks
-        // .add
-        // (
-        //     function()
-        //     {
-        //         replace_photo(featured_image_2_path);
-        //     }
-        // )
+        .add
+        (
+            function()
+            {
+                replace_photo(featured_image_2_path);
+            }
+        )
         // 
         .to(".is__featured_2 .for__switch_layer", 1, {opacity: 0}, '-=0.5')
         .to(".is__featured_1 .for__switch_layer", 1, {opacity: 1}, '-=1')
@@ -261,13 +283,13 @@ $(function()
         .to(feaS_1, 1, {zIndex: 75}, '-=1')
         .to(feaS_2, 1, {zIndex: 50}, '-=1')
          // Switch Background using callbacks
-        // .add
-        // (
-        //     function()
-        //     {
-        //         replace_photo(featured_image_1_path);
-        //     }
-        // )
+        .add
+        (
+            function()
+            {
+                replace_photo(featured_image_1_path);
+            }
+        )
         .to(".is__featured_2 .for__switch_layer", 1, {opacity: 1}, "-=0.5")
         .to(".is__featured_1 .for__switch_layer", 1, {opacity: 0}, "-=1")
      
@@ -291,13 +313,13 @@ $(function()
         .to(feaS_1, 1, {zIndex: 50}, '-=1')
         .to(feaS_2, 1, {zIndex: 75}, '-=1')
         // Switch Background using callbacks
-        // .add
-        // (
-        //     function()
-        //     {
-        //         replace_photo(featured_image_2_path);
-        //     }
-        // )
+        .add
+        (
+            function()
+            {
+                replace_photo(featured_image_2_path);
+            }
+        )
         // 
         .to(".is__featured_2 .for__switch_layer", 1, {opacity: 0}, '-=0.5')
         .to(".is__featured_1 .for__switch_layer", 1, {opacity: 1}, '-=1')
@@ -306,13 +328,13 @@ $(function()
         .to(feaS_1, 1, {zIndex: 75}, '-=1')
         .to(feaS_2, 1, {zIndex: 50}, '-=1')
          // Switch Background using callbacks
-        // .add
-        // (
-        //     function()
-        //     {
-        //         replace_photo(featured_image_1_path);
-        //     }
-        // )
+        .add
+        (
+            function()
+            {
+                replace_photo(featured_image_1_path);
+            }
+        )
         .to(".is__featured_2 .for__switch_layer", 1, {opacity: 1}, "-=0.5")
         .to(".is__featured_1 .for__switch_layer", 1, {opacity: 0}, "-=1")
      
