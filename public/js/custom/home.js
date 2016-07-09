@@ -367,9 +367,8 @@ $(function()
     {
         //Mobile
         switch_back_to_background();
-        $('#ict').hid(); //Turn off Video button
+        $('#ict').hide(); //Turn off Video button
     }
-
     
     trigger_event_animation();
 
