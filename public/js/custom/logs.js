@@ -24,8 +24,7 @@ $(function()
         }
    });
 
-   $('#code_hour').html(' ' + code_hour + ' Hours');
-   $('#design_hour').html(' ' + design_hour + ' Hours');
-
-
+   $('#code_hour').animateNumber({ number: code_hour });
+   $('#design_hour').animateNumber({ number: design_hour });
+   
 });

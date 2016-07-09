@@ -1,11 +1,19 @@
 
 <h1>Change Logs by date.</h1>
 <h2>Total Estimated Work hour:<h2>
-<h2>Code:<span id="code_hour"></span> | Design : <span id="design_hour"></span></h2>
+<h2>Code : <span id="code_hour"></span> Hours | Design : <span id="design_hour"></span> Hours</h2>
+
+<h3> 2016.07.09</h3>
+    <ol>
+        <li data-code="3">[Fix Issue] Dynamic background player and switched to photo when done</li>
+        <li data-code="1">[Feature Udpate] Mobile Detect: do not load animation if Mobile device</li>
+        <li data-code="1">[New Feature] Log page add caluculate work hours feature</li>
+    </ol>
+
 
 <h3> 2016.07.07</h3>
     <ol>
-        <li data-code="3">[New Feature] Integrate with 'I Charleston Taipei' and dynamic nback</li>
+        <li data-code="3">[New Feature] Integrate with 'I Charleston Taipei' and dynamic back</li>
     </ol>
 
 <h3> 2016.06.29 </h3>
@@ -16,7 +24,7 @@
 
 <h3> 2016.06.21 </h3>
     <ol>
-        <li>[Tune] Event_detail page use file load too. Speed up page load.</li>
+        <li data-code="6">[Tune] Event_detail page use file load too. Speed up page load.</li>
     </ol>
 
 <h3> 2016.06.01 </h3>
@@ -52,4 +60,6 @@
     </ol>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
+
+    <script src="{{ URL::asset('js/public/jquery.animateNumber.min.js') }}"></script>
     <script src="{{ URL::asset('js/custom/logs.js') }}"></script>
