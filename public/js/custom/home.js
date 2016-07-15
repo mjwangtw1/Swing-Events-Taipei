@@ -204,8 +204,8 @@
                     feat_event_btn.classList.toggle('medium-offset-9');
                 }
             )
-            .to(".the_logo_side", .25, { opacity: 1 })
-            .to(".featured_cover", 2, { y: -75 }, '-=2');
+            .to(".the_logo_side", .25, { opacity: 1 });
+            // .to(".featured_cover", 2, { y: -75 }, '-=2');
         }
         else 
         {
