@@ -294,6 +294,12 @@ class DataController extends Controller
 
         $this->_check_and_delete_static_files();
 
+        //Shorten ID here.
+        $data[0]       = $this->_rebuild_data_with_shortened_id($data[0]);
+        $data[2]       = $this->_rebuild_data_with_shortened_id($data[2]);
+        $blues_data[2] = $this->_rebuild_data_with_shortened_id($blues_data[2]);
+        $special    = $this->_rebuild_data_with_shortened_id($special);
+
         //Make that event_file
         $all_info = array_merge($taiwan_swing_special_info['modelData']['items'], $blues_info['modelData']['items'], $taiwan_swing_regular_info['modelData']['items']);
         $this->_prepare_events_dict_file($all_info);
@@ -326,10 +332,21 @@ class DataController extends Controller
         }
     }
 
-    //
     // PRIVATE FUNCTIONS ====================================================================================
     // PRIVATE FUNCTIONS ====================================================================================
-    //Here Private Functions
+
+    private function _rebuild_data_with_shortened_id($data)
+    {
+        foreach($data['events'] as $info => $single_event)
+        {
+            //$single_event['IDX'] =  base_convert($single_event['id'], 10, 36);
+            $data['events'][$info]['id_ORIG'] = $single_event['id'];
+            $data['events'][$info]['id'] = base_convert($single_event['id'], 10, 36);
+        }
+
+        return $data;
+    }
+    
     private function _fetch_rebuild_event($event_type, $eventId)
     {
         if ( ! is_file($this->_event_file_path) && ( ! file_exists($this->_event_file_path)))
@@ -377,7 +394,13 @@ class DataController extends Controller
         {   
             foreach($all_info as $single_event)
             {
-                $event_with_key[$single_event['id']] = $single_event;
+                $orig_event_id = $single_event['id'];
+                $new_id = base_convert($orig_event_id, 10, 36);
+
+                //$event_with_key[$single_event['id']] = $single_event;
+                $event_with_key[$new_id] = $single_event;
+                $event_with_key[$new_id]['id_ORIG'] = $single_event['id'];
+                $event_with_key[$new_id]['id'] = $new_id;
             }
         }
 

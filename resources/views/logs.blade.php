@@ -6,6 +6,7 @@
 <h3> 2016.07.23</h3>
     <ol>
         <li data-code="1">[Fix Issue] Redirect to Main page when previous event expired.</li>
+        <li data-code="1">[Optimize] Shorten Url ID using base_convert.</li>
     </ol>
 
 <h3> 2016.07.09</h3>
