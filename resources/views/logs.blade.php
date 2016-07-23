@@ -3,6 +3,11 @@
 <h2>Total Estimated Work hour:<h2>
 <h2>Code : <span id="code_hour"></span> Hours | Design : <span id="design_hour"></span> Hours</h2>
 
+<h3> 2016.07.23</h3>
+    <ol>
+        <li data-code="1">[Fix Issue] Redirect to Main page when previous event expired.</li>
+    </ol>
+
 <h3> 2016.07.09</h3>
     <ol>
         <li data-code="3">[Fix Issue] Dynamic background player and switched to photo when done</li>

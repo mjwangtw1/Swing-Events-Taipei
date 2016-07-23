@@ -139,6 +139,11 @@ class DataController extends Controller
     {   
         $event_detail = $this->_fetch_rebuild_event($event_type, $eventId);
 
+        if ( ! $event_detail)
+        {
+            return redirect('home');
+        }
+
         //New Method: Load File as well...0 -> TS Regular | 1 -> TS Special | 2 -> Blues Event
         $event_num = 2;
 
@@ -333,6 +338,12 @@ class DataController extends Controller
         }
 
         include_once($this->_event_file_path);
+
+        //here adds update
+        if ( ! isset($data[$eventId]))
+        {
+            return FALSE;
+        }
 
         $event_data['event_info'] = $data[$eventId];
         $event_data['expire_time'] = $event_data['event_info']['start']['dateTime'];
