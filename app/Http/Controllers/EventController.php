@@ -26,6 +26,8 @@ class EventController extends Controller
     const TAIPEI_TIMEZONE = 'Asia/Taipei';
     const PASS_CODE = 'bibi';
 
+    private $_event_file_path = '';
+
     private $_cal; //Calendar Array.
 
     private $_location_list  = array(
@@ -73,6 +75,7 @@ class EventController extends Controller
         $this->_cal['Swing'] = Self::TAIWAN_SWING_CALENDAR_REGULAR;
         $this->_cal['Blues'] = Self::TAIPEI_BLUES_EVENTS_CALENDAR;
 
+        $this->_event_file_path = base_path() . '/_conf/event_data.php';
     }
 
     public function index()
@@ -227,7 +230,12 @@ class EventController extends Controller
 
         $calendarId = $this->_cal[$calendarType]; //Fetch by Type;
 
-        $result = $calendar->delete($calendarId, $eventId);
+        //Load event file
+        include_once($this->_event_file_path);
+
+        $orig_event_id = $data[$eventId]['id_ORIG'];
+
+        $result = $calendar->delete($calendarId, $orig_event_id);
 
         //Toss to message And Display
         $event_link = "/new_event";

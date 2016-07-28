@@ -340,8 +340,11 @@ class DataController extends Controller
         foreach($data['events'] as $info => $single_event)
         {
             //$single_event['IDX'] =  base_convert($single_event['id'], 10, 36);
+            $converted_id = base_convert($single_event['id'], 10, 36);
             $data['events'][$info]['id_ORIG'] = $single_event['id'];
-            $data['events'][$info]['id'] = base_convert($single_event['id'], 10, 36);
+            $data['events'][$info]['id'] = $converted_id;
+            //$data['events'][$info][$converted_id] = $single_event['id'];
+
         }
 
         return $data;
