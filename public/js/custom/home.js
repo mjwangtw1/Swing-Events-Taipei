@@ -160,14 +160,16 @@
         var feat_event_btn = document.querySelector('.menu_c4');   
         
         // Gsap animation
-        // 0705: 特別動畫預告
         var special_opacity = new ScrollMagic.Controller();
 
+        // Setup a new gsap timeline 
+        // 搭配影片背景，一開始半透明看影片，opacity_secs 秒後，恢復正常
         var tl_spcl_opct = new TimelineLite()
         .to(".is__featured", .5, { opacity: 1 }, opacity_secs)
         .to(".swing_intro", .5, { opacity: 1 }, '-=0.2');
 
-        // ScrollMagic參數設定 (scene1)
+        // ScrollMagic參數設定 (scene_home_scroll)
+        // 當 .featured_cover 碰到畫面最上方時啟動動畫: tl_spcl_opct 
         var scene_home_scroll = new ScrollMagic.Scene
         ({
             triggerElement: ".featured_cover",
@@ -185,7 +187,8 @@
         // 首頁捲動後的動畫 Controller
         var home_scroll = new ScrollMagic.Controller();
 
-        // Timeline宣告
+        // 首頁 Header Bar 顯示/隱藏動畫
+        //     -- 在桌面版顯示的動畫
         if (document.documentElement.clientWidth > 640) 
         {
             var tl_header_bg = new TimelineLite()
@@ -207,6 +210,7 @@
             .to(".the_logo_side", .25, { opacity: 1 });
             // .to(".featured_cover", 2, { y: -75 }, '-=2');
         }
+        //  -- 在手機版顯示的動畫
         else 
         {
             var tl_header_bg = new TimelineLite()
@@ -217,6 +221,7 @@
         }
 
         // ScrollMagic參數設定 (home_scroll)
+        // 當 .is__featured 碰觸到畫面的 60% 時啟動 Header 動畫: tl_header_bg
         var scene_home_scroll = new ScrollMagic.Scene
         ({
             triggerElement: ".is__featured",
@@ -238,12 +243,14 @@
         // var Ovrly_1 = feaS_1.getElementsByClassName("for__switch_layer");
         // var Ovrly_2 = feaS_2.getElementsByClassName("for__switch_layer");
 
-        // Timeline宣告
-
+        // 兩個 Special Events 的前後切換動畫
+        // 自動開始，沒有搭配 ScrollMagic
+        // 桌面版：左上與右下切換
         if (document.documentElement.clientWidth > 640) 
         {
         var tl_switch = new TimelineLite
         (
+            // 結束後重頭再來一次
             { onComplete:
                 function()
                 {
@@ -285,6 +292,7 @@
         // 呼叫 Timeline
         .setTween(tl_switch)
         }
+        // 手機版：垂直切換
         else 
         {
             var tl_switch = new TimelineLite
