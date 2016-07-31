@@ -4,7 +4,14 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Swing Events Taipei, providing lastest swing/blues dance event info in Taipei" />
+    <meta name="description" content="Swing Events Taipei, providing Current swing/blues dance event info in Taipei" />
+    <meta property="og:title" content="Swing Events Taipei"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="swing.mouchunwang.com"/>
+    <meta property="og:image" content="https://scontent-tpe1-1.xx.fbcdn.net/v/t1.0-9/13626548_1133817489974617_2983607581269085493_n.png?oh=9a7e69c4a2daa7ef7099e09ba02e74e8&oe=58115716"/>
+    <meta property="og:description" content="Swing Events Taipei, providing Current swing/blues dance event info in Taipei"/>
+    <meta property="og:site_name" content="Swing Events Taipei"/>
+
     <title>Swing Events Taipei</title>
 
     <!-- favicon -->

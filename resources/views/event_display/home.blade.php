@@ -57,7 +57,6 @@ if ('blues' == $type)
                         </div>
                     </div>
 
-
                     <!-- Cluster for Credits -->
                     <div class="menu_c2 small-6 medium-2 columns hide-for-small show-for-medium">
                         <div class="photo_credit row"> 
@@ -71,7 +70,6 @@ if ('blues' == $type)
                             </div>
                         </div>
                     </div>
-
 
 
                     <!-- For Language Switch -->
@@ -516,7 +514,6 @@ if ('blues' == $type)
 
     <!-- Video BG -->
     <script src="{{ URL::asset('js/public/jquery.youtubebackground.js') }}"></script>
-
     <script src="{{ URL::asset('js/custom/home.js') }}"></script>
 
 @stop

@@ -34,7 +34,7 @@
 
 <IfModule mod_headers.c>
 #Set Expires Time
-    <FilesMatch "\\.(ico|jpe?g|png|gif|swf|css|js)$">
+    <FilesMatch "\\.(ico|jpe?g|png|gif|swf|css|js|svg)$">
         Header set Cache-control "max-age=259200, public"
     </FilesMatch>
     <FilesMatch "\\.(x?html?|php)$">
@@ -59,6 +59,7 @@
 AddOutputFilterByType DEFLATE text/plain
 AddOutputFilterByType DEFLATE text/html
 AddOutputFilterByType DEFLATE text/xml
+AddOutputFilterByType DEFLATE image/svg+xml
 AddOutputFilterByType DEFLATE text/css
 AddOutputFilterByType DEFLATE application/xml
 AddOutputFilterByType DEFLATE application/xhtml+xml
