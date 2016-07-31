@@ -16,5 +16,31 @@
 
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
-    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}] 
+</IfModule>
+
+<IfModule mod_expires.c>
+#Try_0731
+#Set Expires Time
+    ExpiresActive On
+    ExpiresDefault "access plus 259200 seconds"
+    ExpiresByType image/jpeg "access plus 259200 seconds"
+    ExpiresByType image/png "access plus 259200 seconds"
+    ExpiresByType text/css "access plus 259200 seconds"
+    ExpiresByType text/javascript "access plus 259200 seconds"
+    ExpiresByType application/x-javascript "access plus 259200 seconds"
+    ExpiresByType text/html "access plus 259200 seconds"
+</IfModule>
+
+
+<IfModule mod_headers.c>
+#Set Expires Time
+    <FilesMatch "\\.(ico|jpe?g|png|gif|swf|css|js)$">
+        Header set Cache-control "max-age=259200, public"
+    </FilesMatch>
+    <FilesMatch "\\.(x?html?|php)$">
+        Header set Cache-control "max-age=600, private, must-revalidate"
+    </FilesMatch>
+        Header unset ETag
+        Header unset Last-Modified
 </IfModule>
