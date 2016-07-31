@@ -3,6 +3,12 @@
 <h2>Total Estimated Work hour:<h2>
 <h2>Code : <span id="code_hour"></span> Hours | Design : <span id="design_hour"></span> Hours</h2>
 
+
+<h3> 2016.07.29</h3>
+    <ol>
+        <li data-code="1">[Fix Issue] Fix manual delete function.</li>
+    </ol>
+
 <h3> 2016.07.23</h3>
     <ol>
         <li data-code="1">[Fix Issue] Redirect to Main page when previous event expired.</li>
