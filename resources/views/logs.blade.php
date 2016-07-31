@@ -4,6 +4,11 @@
 <h2>Code : <span id="code_hour"></span> Hours | Design : <span id="design_hour"></span> Hours</h2>
 
 
+<h3> 2016.07.31</h3>
+    <ol>
+        <li data-code="1">[Optimize] Use browser Cache and gzip compression.</li>
+    </ol>
+
 <h3> 2016.07.29</h3>
     <ol>
         <li data-code="1">[Fix Issue] Fix manual delete function.</li>
