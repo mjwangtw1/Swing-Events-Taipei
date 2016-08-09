@@ -25,7 +25,7 @@ class DataController extends Controller
 
     const WEATHER_API_ID = 'F-C0032-001';
 
-    private $_cal ; //Calendar Array;
+    private $_cal ; //Calendar Array;ˇˇ
 
     private $_current_time = '';
     private $_date_today = '';
@@ -366,7 +366,11 @@ class DataController extends Controller
         }
 
         $event_data['event_info'] = $data[$eventId];
-        $event_data['expire_time'] = $event_data['event_info']['start']['dateTime'];
+
+        if (isset($event_data['event_info']['start']['dateTime']))
+        {
+            $event_data['expire_time'] = $event_data['event_info']['start']['dateTime'];
+        }
 
         switch($event_type)
         {

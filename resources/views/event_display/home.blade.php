@@ -217,11 +217,11 @@ if ('blues' == $type)
                             <div class="date_calendar">
                                 <!-- 月份 -->
                                 <div class="for__month">
-                                  {{ $dt->parse($single_special_event['start']['dateTime'])->format('M') }}
+                                  {{ isset($single_special_event['start']['dateTime']) ? $dt->parse($single_special_event['start']['dateTime'])->format('M') : '' }}
                                 </div>
                                 <!-- 日期 -->
                                 <div class="for__day">
-                                    {{ $dt->parse($single_special_event['start']['dateTime'])->format('d') }} 
+                                    {{ isset($single_special_event['start']['dateTime']) ? $dt->parse($single_special_event['start']['dateTime'])->format('d') : ''}} 
                                 </div>
                             </div>
                         </div>
@@ -230,12 +230,16 @@ if ('blues' == $type)
                             <div class="date_clock">
                                
                                 <?php
-                        
-                                    $weekday_counter = $dt->parse($single_special_event["start"]["dateTime"])->format("w");
                                     
-                                    $lang_type = (Session::get('locale') === "tw") ? 'tw' : 'en';
-                                    
-                                    echo $weekday[$lang_type][$weekday_counter];
+                                    if(isset($single_special_event["start"]["dateTime"]))
+                                    {
+                                        $weekday_counter = $dt->parse($single_special_event["start"]["dateTime"])->format("w");
+                                        
+                                        $lang_type = (Session::get('locale') === "tw") ? 'tw' : 'en';
+                                        
+                                        echo $weekday[$lang_type][$weekday_counter]; 
+                                    }
+
                                 ?>
                                 <!-- 視覺分隔點(全型的點)-->
                                 ．
@@ -243,23 +247,29 @@ if ('blues' == $type)
                                 <span class="for__relateday">
                                 
                                         <?php
-                                            if($dt->parse($single_special_event['start']['dateTime'])->isToday())
+                                            if(isset($single_special_event['start']['dateTime']))
                                             {
-                                                echo trans('default.today'); 
-                                            }
-                                            else
-                                            {
-                                                //Calculate the Difference.
-                                                $count = $dt->diffInDays($dt->parse($single_special_event['start']['dateTime'])); //Start from 0 so add 1
-                                                if (0 == $count)
+                                                if($dt->parse($single_special_event['start']['dateTime'])->isToday())
                                                 {
-                                                    echo trans('default.tomorrow');
+                                                    echo trans('default.today'); 
                                                 }
                                                 else
                                                 {
-                                                    $count = $count + 1; //add 1 more day 
+                                                    //Calculate the Difference.
+                                                    $count = $dt->diffInDays($dt->parse($single_special_event['start']['dateTime'])); //Start from 0 so add 1
+                                                    if (0 == $count)
+                                                    {
+                                                        echo trans('default.tomorrow');
+                                                    }
+                                                    else
+                                                    {
+                                                        $count = $count + 1; //add 1 more day 
+                                                        
+                                                        echo trans('default.days_till', ['count' => $count]);
                                                     
-                                                    echo trans('default.days_till', ['count' => $count]);
+
+                                                    }
+
                                                 }
                                             }
                                         ?>
@@ -268,7 +278,7 @@ if ('blues' == $type)
                                 ．
                                 <!-- 當天時間 -->
                                 <span class="for__oclock">
-                                    {{ $dt->parse($single_special_event['start']['dateTime'])->format('H:i') }} 
+                                    {{ isset($single_special_event['start']['dateTime']) ? $dt->parse($single_special_event['start']['dateTime'])->format('H:i') : '' }} 
                                 </span>
                             </div>
                             <!-- 地點 -->
