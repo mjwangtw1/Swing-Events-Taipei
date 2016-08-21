@@ -523,8 +523,8 @@ if ('blues' == $type)
     <!-- <script src="{{ URL::asset('js/public/remodal.min.js') }}"></script> -->
 
     <!-- Video BG -->
-    <script src="{{ URL::asset('js/public/jquery.youtubebackground.js') }}"></script>
-    <script src="{{ URL::asset('js/custom/home.js') }}"></script>
+    <script src="{{ URL::asset('js/public/jquery.youtubebackground.js') }}" defer></script>
+    <script src="{{ URL::asset('js/custom/home.js') }}" defer></script>
 
 @stop
 
