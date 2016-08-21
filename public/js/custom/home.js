@@ -358,7 +358,10 @@ $(function()
     }
     else
     {
-        start_bg_video(ict_teaser_id);
+        //0821-update: we turn off Video Autoplay first.
+        //start_bg_video(ict_teaser_id);
+        switch_back_to_background();
+        $('#ict >span').html('PLAY');        
 
         //Behavior when clicked 'Music'
         $('#ict').on('click', function(){
