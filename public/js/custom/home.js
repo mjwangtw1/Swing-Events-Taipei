@@ -152,7 +152,7 @@
 
         //This value sets the opacity seconds for Desktop Version.
         //Mobile version we turned it off (Mobile version does not load video)
-        var opacity_secs = (mobile_device) ? '+=0' :  '+=13';
+        var opacity_secs = (mobile_device) ? '+=0' :  '+=0';
 
         var feature_title = $('.for__feature_title');
 
