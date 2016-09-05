@@ -63,10 +63,12 @@
     function start_bg_video(player_id)
     {
         //Mount Credits for Video
-        $('.photo_source').html('NaughtySwing x TWSDA');
+        //$('.photo_source').html('NaughtySwing x TWSDA');
+        $('.photo_source').html('TAIPEI LINDY FESTIVAL 2016');
+
         $('.photo_source').addClass('video_source').removeClass('photo_source');
 
-        $('.photo_source_link').attr('href', "https://www.facebook.com/nsintaiwan/?fref=ts");
+        $('.photo_source_link').attr('href', "http://www.taipeilindyfestival.com/");
 
         //indicate that we are playing 
         //$('#status').data('id','video');
@@ -140,8 +142,20 @@
 
     function bgloadVideoById(videoId)
     {
+        var video_id;
+           // video_id = 'MOD0pcKfVWY'; //I Charleston Taipei
+            video_id = 'zgJitM2-FZM';
+
         var player = $('.featured_cover').data('ytPlayer').player;
-        player.loadVideoById('MOD0pcKfVWY');
+        player.loadVideoById(video_id);
+
+        //player.loadVideoById('MOD0pcKfVWY'); //I Charleston Taipei
+
+        //TLF Promo zgJitM2-FZM
+        //player.loadVideoById('MOD0pcKfVWY'); 
+        //
+        
+        //Temp Hack
     }
 
     //MDFH's animation part
@@ -347,6 +361,7 @@ $(function()
     //Launch bg teaser
     var ict_teaser_id = 'zTPCiyeEl3E'; //This is teaser
         ict_teaser_id = 'MOD0pcKfVWY'; //This is Main ICT //We use this one now.
+        ict_teaser_id = 'zgJitM2-FZM'; // TLF 2014 video
 
     var mobile_device = isMobile.any();
 

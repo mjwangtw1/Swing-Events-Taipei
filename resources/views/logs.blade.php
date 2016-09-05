@@ -4,6 +4,12 @@
 <h2>Code : <span id="code_hour"></span> Hours | Design : <span id="design_hour"></span> Hours</h2>
 
 
+<h3> 2016.09.5</h3>
+    <ol>
+        <li data-code="1">[Modify] Update Video URL to promo Taipei Lindy Fest 2016</li>
+    </ol>
+
+
 <h3> 2016.07.31</h3>
     <ol>
         <li data-code="1">[Optimize] Use browser Cache and gzip compression.</li>
